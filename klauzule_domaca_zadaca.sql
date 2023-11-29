@@ -46,6 +46,19 @@ order by 3 desc;
 
 -- domaća zadaća pronaći najproduktivnijeg klijenta iz županije
 
+-- traženje igle u plastu sijena
+-- obrisati sve artikle koji nisu nikada nabavljeni
+select count(*) from artikli; 
+select distinct artikl from ArtikliNaPrimci;
 
+-- podupit
+
+select * from artikli where sifra 
+not in (select distinct artikl from ArtikliNaPrimci);
+
+delete from artikli where sifra 
+not in (select distinct artikl from ArtikliNaPrimci); 
+
+-- domaća zadaća update i delete pomoću spajanja tablica 
 
 
