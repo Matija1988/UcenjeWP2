@@ -1,3 +1,6 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
-Console.WriteLine("Hello, Matija!");
+﻿using UcenjeCS;
+
+//E01UlazIzlaz.izvedi();
+
+E02VarijableTipoviPodatakaOperatori.izvedi();
+

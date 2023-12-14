@@ -1,0 +1,10 @@
+C:\GitRepo\UcenjeWP2\csharp\calculator\calculator1\bin\Debug\calculator1.exe.config
+C:\GitRepo\UcenjeWP2\csharp\calculator\calculator1\bin\Debug\calculator1.exe
+C:\GitRepo\UcenjeWP2\csharp\calculator\calculator1\bin\Debug\calculator1.pdb
+C:\GitRepo\UcenjeWP2\csharp\calculator\calculator1\obj\Debug\calculator1.csproj.AssemblyReference.cache
+C:\GitRepo\UcenjeWP2\csharp\calculator\calculator1\obj\Debug\calculator1.Properties.Resources.resources
+C:\GitRepo\UcenjeWP2\csharp\calculator\calculator1\obj\Debug\calculator1.csproj.GenerateResource.cache
+C:\GitRepo\UcenjeWP2\csharp\calculator\calculator1\obj\Debug\calculator1.csproj.CoreCompileInputs.cache
+C:\GitRepo\UcenjeWP2\csharp\calculator\calculator1\obj\Debug\calculator1.exe
+C:\GitRepo\UcenjeWP2\csharp\calculator\calculator1\obj\Debug\calculator1.pdb
+C:\GitRepo\UcenjeWP2\csharp\calculator\calculator1\obj\Debug\calculator1.Calculator.resources
