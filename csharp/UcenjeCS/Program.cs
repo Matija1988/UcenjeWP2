@@ -4,5 +4,7 @@
 
 //E02VarijableTipoviPodatakaOperatori.izvedi();
 
-E03UvjetnaGrananja.Izvedi();
+//E03UvjetnaGrananja.Izvedi();
+
+E04Nizovi.Izvedi();
 
