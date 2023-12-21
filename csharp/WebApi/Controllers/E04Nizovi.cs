@@ -34,13 +34,12 @@ namespace WebApi.Controllers
         [HttpDelete]
         [Route("Zad3")]
 
-        private string BrojElemenataNiza(int[] data)
+        public string BrojElemenataNiza(int[] data)
         {
 
 
             return $"{data.Count()}"; 
         }
-        
 
     }
 }
