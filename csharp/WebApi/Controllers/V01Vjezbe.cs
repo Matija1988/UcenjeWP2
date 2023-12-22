@@ -33,15 +33,21 @@ namespace WebApi.Controllers
             }
              
         }
+
         //[HttpPost]
         //[Route("Vjezba2")]
 
-        //private int[] Vjezba2(double[] niz)
+        //public int Vjezba2(double[] niz)
         //{
-        //    string[] s = niz.ToString();
+        //    for(int i = 0; i < 5; i++)
+        //    {
+        //        string pretvorba = niz.ToString();
+        //        string[] skup = pretvorba.Split('.');
+        //        int puniBrojevi = int.Parse(skup[0]);
+        //        int izaDecimalne = int.Parse(skup[1]);
+        //    }
             
-
-        //    return null;
-        //}  
+        //    return 0;
+        //}
     }
 }
