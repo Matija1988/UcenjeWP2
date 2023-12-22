@@ -55,7 +55,7 @@ namespace UcenjeCS
                     
                 } else
                 {
-                    Console.WriteLine("Korisnik je pokusao " + counter + " puta!");
+                    Console.WriteLine("Korisnik je imao " + counter + " unosa");
                     break;
                 }
             }
