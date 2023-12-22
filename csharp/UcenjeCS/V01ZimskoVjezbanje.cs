@@ -42,9 +42,26 @@ namespace UcenjeCS
         public static void veciOd100()
         {
             Console.WriteLine("****************** veci od 100 **********");
-            int counter = 0;
-            int b = 100;
+            int counter = 1;
+            
+            
             Console.Write("Unesi broj: ");
+            for(; ; )
+            {
+                int n = int.Parse(Console.ReadLine());
+                if(n < 100)
+                {
+                    counter++;
+                    
+                } else
+                {
+                    Console.WriteLine("Korisnik je pokusao " + counter + " puta!");
+                    break;
+                }
+            }
+            
+            
+            
             
 
 
