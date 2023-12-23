@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using System.Diagnostics.CodeAnalysis;
 
 namespace WebApi.Controllers
 {
@@ -19,21 +21,47 @@ namespace WebApi.Controllers
         [HttpGet]
         [Route("Vjezba2")]
 
-        public int NizSParnimBrojevima()
+        public int[] NizSParnimBrojevima()
         {
+            
+            int[] niz = new int[100];
+            int a; 
 
-            for (int i = 1; i < 57; i++)
+            for(a = 1; a <= 57; a++)
             {
-                int a;
+                if(a % 2 == 0)
+                {
+                    niz[a] = a;
+                }
+                    
+
+            }
+
+            return niz;  
+            
+        }
+
+
+        [HttpGet]
+        [Route("Vjezba3")]
+
+        public int ZbrojBrojeva2Do18()
+        {
+            int suma;
+            int[] niz = new int[100];
+
+            for(int i = 2; i <= 18; i++)
+            {
                 if(i % 2 == 0)
                 {
-                    a = i;
+                    niz[i] = i;
                 }
             }
 
-            
+            suma = niz.Sum();
 
-            return 0; 
+            return suma;
         }
+
     }
 }
