@@ -63,5 +63,15 @@ namespace WebApi.Controllers
             return suma;
         }
 
+        [HttpGet]
+        [Route("Vjezba4")]
+
+        public int ZbrojOd1Do(int a) 
+        {
+
+           return a*(a+1); 
+        }
+
+
     }
 }
