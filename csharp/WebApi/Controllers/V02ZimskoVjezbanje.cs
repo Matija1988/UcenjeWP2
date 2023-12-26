@@ -299,10 +299,15 @@ namespace WebApi.Controllers
         [HttpGet]
         [Route("Vjezba 10")] 
         
-        public void Matrica2d(int a, int b)
+        public string Matrica2d(int a, int b)
         {
             int[,] matrica = new int[a,b];
-          
+
+            for(int i = a; i < b; i++ ) 
+            {  
+            for(int j = b; s)
+            }
+            return matrica.ToString();
         }
         
     }
