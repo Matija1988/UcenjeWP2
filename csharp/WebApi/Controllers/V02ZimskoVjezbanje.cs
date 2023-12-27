@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Swashbuckle.AspNetCore.Annotations;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 
 namespace WebApi.Controllers
 {
@@ -91,23 +93,23 @@ namespace WebApi.Controllers
 
             int[] niz = new int[velicinaNiza / 2];
             int broj = 0;
-       
-            if(b > a)
-            { 
-            for (int i = a; i <= b; i++)
+
+            if (b > a)
             {
-                if (i % 2 == 0)
+                for (int i = a; i <= b; i++)
                 {
-                    niz[broj++] = i;
+                    if (i % 2 == 0)
+                    {
+                        niz[broj++] = i;
+                    }
                 }
-            }
             } else
             {
-                for(int i = b; i <= a; i++)
+                for (int i = b; i <= a; i++)
                 {
-                    if(i % 2 == 0)
+                    if (i % 2 == 0)
                     {
-                        niz[broj++] = i; 
+                        niz[broj++] = i;
                     }
                 }
             }
@@ -121,12 +123,12 @@ namespace WebApi.Controllers
         public int[] NizNeparnihBrojevaIzmedu(int a, int b)
         {
             int velicinaNiza = 0;
-            if(a > b)
+            if (a > b)
             {
                 velicinaNiza = a;
             } else
             {
-                velicinaNiza = b; 
+                velicinaNiza = b;
             }
 
             int[] niz = new int[velicinaNiza / 2];
@@ -153,7 +155,7 @@ namespace WebApi.Controllers
 
                 }
 
-               
+
             }
             return niz;
         }
@@ -163,16 +165,16 @@ namespace WebApi.Controllers
 
         public int ZbrojIzmedu(int a, int b)
         {
-            
-            if(b > a)
+
+            if (b > a)
             {
                 int c = b;
                 b = a;
-                
-                return  ((b-c) *(-1)) * (((b - c) * (-1)) + 1) /2;
+
+                return ((b - c) * (-1)) * (((b - c) * (-1)) + 1) / 2;
             }
 
-            return (a - b) * (a-b+1)/2; 
+            return (a - b) * (a - b + 1) / 2;
         }
 
         [HttpGet]
@@ -181,7 +183,7 @@ namespace WebApi.Controllers
         public int ZbrojModulo3Izmedu(int a, int b)
         {
             int velicinaNiza = 0;
-            if (a  > b)
+            if (a > b)
             {
                 velicinaNiza = a;
             } else
@@ -192,30 +194,30 @@ namespace WebApi.Controllers
             int broj = 0;
             int suma = 0;
 
-            if(b > a)
+            if (b > a)
             {
-               
+
                 for (int i = a; i < b; i++)
                 {
-                    if(i % 3 == 0)
+                    if (i % 3 == 0)
                     {
-                        niz[broj++] = i; 
+                        niz[broj++] = i;
                     }
                 }
-               
-            } 
-            if(a > b)
+
+            }
+            if (a > b)
             {
- 
-                for (int i = b; i < a; i++) 
-                { 
-                if((i % 3) == 0) 
-                    { 
+
+                for (int i = b; i < a; i++)
+                {
+                    if ((i % 3) == 0)
+                    {
                         niz[broj++] = i;
                     }
 
                 }
-                
+
             }
             suma = niz.Sum();
             return suma;
@@ -252,20 +254,20 @@ namespace WebApi.Controllers
             int sumaMod3 = 0;
             int sumaMod5 = 0;
 
-            if(b > a)
+            if (b > a)
             {
-                for(int i = a; i < b;i++)
+                for (int i = a; i < b; i++)
                 {
-                    if(i %3 == 0)
+                    if (i % 3 == 0)
                     {
                         nizMod3[brojMod3++] = i;
                     }
                 }
             } else
             {
-                for(int i = b; i < a;i++)
+                for (int i = b; i < a; i++)
                 {
-                    if(i % 3 == 0)
+                    if (i % 3 == 0)
                     {
                         nizMod3[brojMod3++] = i;
                     }
@@ -273,11 +275,11 @@ namespace WebApi.Controllers
             }
             sumaMod3 = nizMod3.Sum();
 
-            if(b > a)
+            if (b > a)
             {
-                for( int i = a; i < b; i++)
+                for (int i = a; i < b; i++)
                 {
-                    if(i % 5 == 0)
+                    if (i % 5 == 0)
                     {
                         nizMod5[brojMod5++] = i;
                     }
@@ -286,9 +288,9 @@ namespace WebApi.Controllers
             {
                 for (int i = b; i < a; i++)
                 {
-                    if(i % 5 == 0)
+                    if (i % 5 == 0)
                     {
-                        nizMod5[brojMod5++] = i;    
+                        nizMod5[brojMod5++] = i;
                     }
                 }
             }
@@ -297,18 +299,66 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("Vjezba 10")] 
-        
+        [Route("Vjezba 10")]
+        [SwaggerResponse(200, "Successful operation", typeof(int[,]))]
+        [SwaggerResponse(400, "Invalid size", null)]
+
         public string Matrica2d(int a, int b)
         {
-            int[,] matrica = new int[a,b];
+            int[] matricaA = new int[10];
+            int[] matricaB = new int[10];
 
-            for(int i = a; i < b; i++ ) 
-            {  
-            for(int j = b; s)
+            for (int i = 0; i < 10; i++)
+            {
+                matricaA[i] = (i + 1) * a;
             }
-            return matrica.ToString();
+
+            for (int i = 0; i < 10; i++)
+            {
+                matricaB[i] = (i + 1) * b;
+            }
+
+            return string.Join("\t", matricaA) + "\n" + string.Join("\t", matricaB);
         }
-        
+
+        [HttpGet]
+        [Route("Vjezba 11")]
+
+        public int[] OdBrojaDo1(int a)
+        {
+            int broj = 0;
+            int[] niz = new int[a];
+            for (int i = a; i >= 1; i--)
+            {
+                niz[broj++] = i;
+            }
+
+            return niz;
+        }
+
+        [HttpGet]
+        [Route("Vjezba 12")]
+
+        public bool IsItAPrime(int a)
+        {
+            for (int i = 2; i < a; i++)
+            {
+                if (a % i == 0)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        [HttpGet]
+        [Route("Vjezba 13")]
+
+        public int[][] CiklicnaMatrica(int a, int b)
+        {
+            return null; 
+        }
+ 
     }
 }
