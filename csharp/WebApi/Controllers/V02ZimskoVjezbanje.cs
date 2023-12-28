@@ -317,6 +317,7 @@ namespace WebApi.Controllers
             {
                 matricaB[i] = (i + 1) * b;
             }
+             
 
             return string.Join("\t", matricaA) + "\n" + string.Join("\t", matricaB);
         }
@@ -357,6 +358,7 @@ namespace WebApi.Controllers
 
         public int[][] CiklicnaMatrica(int a, int b)
         {
+
             return null; 
         }
  

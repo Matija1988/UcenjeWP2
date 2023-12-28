@@ -55,22 +55,57 @@ namespace UcenjeCS
             Console.WriteLine();
             Console.WriteLine();
 
-            int[] matricaC = new int[10];
+            int[,] matricaC = new int[a,b];
 
-            for (int i = 0; i < 10;i++)
+
+            for(int i = 0; i < a;i++)
             {
-                matricaC[i] = i;
-                Console.Write(matricaC[i] + "\t");
-                matricaA[i] = (i+1) * a;
-                Console.Write(matricaA[i] + "\t");
-                for(int j = 0; j < 10;j++)
+                matricaA[i] = ((i + 1) * a);
+                 
+                for (int j = 0; j < b;j++)
                 {
-                    matricaB[j] = (j+1) * b;
-                    Console.Write(matricaB[i] + "\t");
+                    matricaC[i,j] = matricaB[j];
+                    Console.Write(i +  j + 
+                        "array :"+ matrica[i, j] + "\t");
+
                 }
-                Console.WriteLine();
             }
 
+            Console.WriteLine();
+            Console.WriteLine();
+
+
+
+        }
+
+        public static void CiklicnaMatrica()
+        {
+        //    Console.WriteLine("Unesi broj redaka: ");
+        //    int a = int.Parse(Console.ReadLine());
+        //    Console.WriteLine("Unesi broj stupaca: ");
+        //    int b = int.Parse(Console.ReadLine());
+
+            //int number = a * b;
+
+            //int[][] matrica = new int[a][];
+            
+            //for(int i = 0; i < a;  i++)
+            //{
+            //    matrica[i] = new int[i+1];
+
+            //    for(int j = 0;j < b; j++)
+            //    {
+            //        matrica[j] = new int[j+1];
+            //        Console.Write(matrica[i][j] + "\t");
+            //    }
+            //}
+            //matrica[0] = new int[b];
+
+
+            
+
+            
+            
         }
     }
 }

@@ -16,4 +16,6 @@
 //V01ZimskoVjezbanje.veciOd100();
 
 TestiranjeUKonzoli.Izvedi();
+TestiranjeUKonzoli.CiklicnaMatrica();
+
 
