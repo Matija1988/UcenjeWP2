@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
+using System.Text;
 
 namespace WebApi.Controllers
 {
@@ -72,7 +73,7 @@ namespace WebApi.Controllers
         public int ZbrojOd1Do(int a)
         {
 
-            return a * (a + 1);
+            return (a * (a + 1))/2;
         }
 
 
@@ -120,18 +121,10 @@ namespace WebApi.Controllers
         [HttpGet]
         [Route("Vjezba6")]
 
-        public int[] NizNeparnihBrojevaIzmedu(int a, int b)
+        public string NizNeparnihBrojevaIzmedu(int a, int b)
         {
-            int velicinaNiza = 0;
-            if (a > b)
-            {
-                velicinaNiza = a;
-            } else
-            {
-                velicinaNiza = b;
-            }
-
-            int[] niz = new int[velicinaNiza / 2];
+            
+            int[] niz = new int[b-a / 2];
             int broj = 0;
 
             if (b > a)
@@ -157,7 +150,7 @@ namespace WebApi.Controllers
 
 
             }
-            return niz;
+            return string.Join(", ", niz);
         }
 
         [HttpGet]
@@ -256,7 +249,7 @@ namespace WebApi.Controllers
 
             if (b > a)
             {
-                for (int i = a; i < b; i++)
+                for (int i = a; i <= b; i++)
                 {
                     if (i % 3 == 0)
                     {
@@ -265,7 +258,7 @@ namespace WebApi.Controllers
                 }
             } else
             {
-                for (int i = b; i < a; i++)
+                for (int i = b; i <= a; i++)
                 {
                     if (i % 3 == 0)
                     {
@@ -277,7 +270,7 @@ namespace WebApi.Controllers
 
             if (b > a)
             {
-                for (int i = a; i < b; i++)
+                for (int i = a; i <= b; i++)
                 {
                     if (i % 5 == 0)
                     {
@@ -286,7 +279,7 @@ namespace WebApi.Controllers
                 }
             } else
             {
-                for (int i = b; i < a; i++)
+                for (int i = b; i <= a; i++)
                 {
                     if (i % 5 == 0)
                     {
@@ -317,9 +310,29 @@ namespace WebApi.Controllers
             {
                 matricaB[i] = (i + 1) * b;
             }
-             
 
-            return string.Join("\t", matricaA) + "\n" + string.Join("\t", matricaB);
+            string[,] tablica = new string[a, b];
+
+            for(int i = 0; i < a;i++)
+            {
+                for (int j = 0; j < b; j++)
+                {
+                    tablica[i,j] = ((i+1) * (j+1)).ToString();  
+                }
+            }
+
+            StringBuilder matricaNiz = new StringBuilder();
+             
+            for(int i = 0; i < a; i++)
+            {
+                for(int j = 0; j < b; j++)
+                {
+                    matricaNiz.Append(tablica[i,j] + "\t");
+                }
+                matricaNiz.AppendLine();
+            }
+            return "Tablica množenja za dva broja" + "\n" + string.Join("\t", matricaA) 
+                + "\n" + string.Join("\t", matricaB) + "\n" + "Tablica množenja do dva broja" + "\n" + matricaNiz.ToString();
         }
 
         [HttpGet]
@@ -356,10 +369,12 @@ namespace WebApi.Controllers
         [HttpGet]
         [Route("Vjezba 13")]
 
-        public int[][] CiklicnaMatrica(int a, int b)
+        public string CiklicnaMatrica(int a, int b)
         {
 
-            return null; 
+
+
+            return "Could be worse, could be raining!" ; 
         }
  
     }
