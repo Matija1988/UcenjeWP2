@@ -78,34 +78,72 @@ namespace UcenjeCS
 
         }
 
+
         public static void CiklicnaMatrica()
         {
-        //    Console.WriteLine("Unesi broj redaka: ");
-        //    int a = int.Parse(Console.ReadLine());
-        //    Console.WriteLine("Unesi broj stupaca: ");
-        //    int b = int.Parse(Console.ReadLine());
-
-            //int number = a * b;
-
-            //int[][] matrica = new int[a][];
+            Console.WriteLine("Unesi broj redaka: ");
+            int a = int.Parse(Console.ReadLine());
+            Console.WriteLine("Unesi broj stupaca: ");
+            int b = int.Parse(Console.ReadLine());
+            int[,] matrica = new int[a, b];
+            SpiralFill(a, b, matrica); 
             
-            //for(int i = 0; i < a;  i++)
-            //{
-            //    matrica[i] = new int[i+1];
-
-            //    for(int j = 0;j < b; j++)
-            //    {
-            //        matrica[j] = new int[j+1];
-            //        Console.Write(matrica[i][j] + "\t");
-            //    }
-            //}
-            //matrica[0] = new int[b];
+            for(int i = 0; i < a;i++)
+            {
+                for(int j = 0;j < b;j++)
+                {
+                    Console.WriteLine(matrica[i,j] + " ");
+                }
+               
+            }
 
 
             
 
-            
-            
+        }
+
+        public static void SpiralFill(int a, int b, int[,] matrica)
+        {
+
+            int number = a * b;
+
+           
+
+            int k = 0, l = 0;
+
+
+            while (k < a && l < b)
+            {
+                for (int i = l; i < b; i++)
+                {
+                    matrica[k, i] = number--;
+
+                }
+                k++;
+
+                for (int i = k; i < a; i++)
+                {
+                    matrica[i, a - 1] = number--;
+                }
+                b--;
+
+                if (k < a)
+                {
+                    for (int i = b - 1; i >= 1; i--)
+                    {
+                        matrica[b - 1, i] = number--;
+                    }
+                    b--;
+                }
+                if (l < b)
+                {
+                    for (int i = b - 1; i >= k; i--)
+                    {
+                        matrica[i, l] = number--;
+                    }
+                    l++;
+                }
+            }
         }
     }
 }

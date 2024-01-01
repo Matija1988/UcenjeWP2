@@ -293,9 +293,7 @@ namespace WebApi.Controllers
 
         [HttpGet]
         [Route("Vjezba 10")]
-        [SwaggerResponse(200, "Successful operation", typeof(int[,]))]
-        [SwaggerResponse(400, "Invalid size", null)]
-
+        
         public string Matrica2d(int a, int b)
         {
             int[] matricaA = new int[10];
@@ -371,10 +369,34 @@ namespace WebApi.Controllers
 
         public string CiklicnaMatrica(int a, int b)
         {
+            StringBuilder matricaNiz = new StringBuilder();
+            int[,] niz = new int[a, b];
+            int broj = a*b; 
 
 
+            int xOs = 0, yOs = 0;
 
-            return "Could be worse, could be raining!" ; 
+            for (int i = 0; i < a; i++)
+            {
+                for (int j = 0; j < b; j++)
+                {
+                    niz[i, j] = broj--;
+                    
+                }
+
+            }
+
+            for (int i = 0; i < a; i++)
+            {
+                for (int j = 0; j < b; j++)
+                {
+                    matricaNiz.Append(niz[i, j] + "\t");
+                }
+                matricaNiz.AppendLine();
+            }
+
+
+            return matricaNiz.ToString() ; 
         }
  
     }
