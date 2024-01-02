@@ -86,15 +86,17 @@ namespace UcenjeCS
             Console.WriteLine("Unesi broj stupaca: ");
             int b = int.Parse(Console.ReadLine());
             int[,] matrica = new int[a, b];
-            SpiralFill(a, b, matrica); 
-            
+            SpiralFill(a, b, matrica);
+
+            int number = a * b;
+
             for(int i = 0; i < a;i++)
             {
                 for(int j = 0;j < b;j++)
                 {
-                    Console.WriteLine(matrica[i,j] + " ");
+                    Console.Write(matrica[i,j] + "\t ");
                 }
-               
+                Console.WriteLine("\n");
             }
 
 
@@ -106,7 +108,7 @@ namespace UcenjeCS
         {
 
             int number = a * b;
-
+            int val = 1; 
            
 
             int k = 0, l = 0;
@@ -114,32 +116,32 @@ namespace UcenjeCS
 
             while (k < a && l < b)
             {
-                for (int i = l; i < b; i++)
+                for (int i = l; i < b; ++i)
                 {
-                    matrica[k, i] = number--;
+                    matrica[k, i] = val++;
 
                 }
                 k++;
 
-                for (int i = k; i < a; i++)
+                for (int i = k; i < a; ++i)
                 {
-                    matrica[i, a - 1] = number--;
+                    matrica[i, b - 1] = val++;
                 }
                 b--;
 
                 if (k < a)
                 {
-                    for (int i = b - 1; i >= 1; i--)
+                    for (int i = b - 1; i >= 1; --i)
                     {
-                        matrica[b - 1, i] = number--;
+                        matrica[a-1, i] = val++;
                     }
-                    b--;
+                    a--;
                 }
                 if (l < b)
                 {
                     for (int i = b - 1; i >= k; i--)
                     {
-                        matrica[i, l] = number--;
+                        matrica[i, l] = val++;
                     }
                     l++;
                 }

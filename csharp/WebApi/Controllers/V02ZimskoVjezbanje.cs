@@ -376,15 +376,16 @@ namespace WebApi.Controllers
 
             int xOs = 0, yOs = 0;
 
-            for (int i = 0; i < a; i++)
+            for (int i = xOs; i < a; i++)
             {
-                for (int j = 0; j < b; j++)
+                for (int j = yOs; j < b; j++)
                 {
                     niz[i, j] = broj--;
-                    
+                   
                 }
-
+                
             }
+
 
             for (int i = 0; i < a; i++)
             {

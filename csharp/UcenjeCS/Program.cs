@@ -15,7 +15,7 @@
 //V01ZimskoVjezbanje.modulo();
 //V01ZimskoVjezbanje.veciOd100();
 
-TestiranjeUKonzoli.Izvedi();
+//TestiranjeUKonzoli.Izvedi();
 TestiranjeUKonzoli.CiklicnaMatrica();
 
 
