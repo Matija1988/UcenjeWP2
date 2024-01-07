@@ -18,4 +18,6 @@
 //TestiranjeUKonzoli.Izvedi();
 TestiranjeUKonzoli.CiklicnaMatrica();
 
+TestiranjeUKonzoli.CiklicnaMatricaV2();
+
 

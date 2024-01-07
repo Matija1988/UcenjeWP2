@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.Design;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -17,15 +19,15 @@ namespace UcenjeCS
             Console.WriteLine("Unesi drugi broj: ");
             int b = int.Parse(Console.ReadLine());
 
-            int[,] matrica = new int[10, 10]; 
+            int[,] matrica = new int[10, 10];
 
             // pravilno formatira i unosi tablicu mnozenja
-            for(int i = 0; i < 10;i++)
+            for (int i = 0; i < 10; i++)
             {
-                for(int j = 0;j < 10;j++)
+                for (int j = 0; j < 10; j++)
                 {
-                    matrica[i, j] = (i+1) * (j+1);
-                    Console.Write(matrica[i,j] + "\t");
+                    matrica[i, j] = (i + 1) * (j + 1);
+                    Console.Write(matrica[i, j] + "\t");
                 }
                 Console.WriteLine();
             }
@@ -38,7 +40,7 @@ namespace UcenjeCS
 
             int[] matricaA = new int[10];
 
-            for (int i = 0; i < 10;i++)
+            for (int i = 0; i < 10; i++)
             {
                 matricaA[i] = (i + 1) * a;
                 Console.Write(matricaA[i] + "\t");
@@ -46,27 +48,27 @@ namespace UcenjeCS
             Console.WriteLine();
 
             int[] matricaB = new int[10];
-            
-            for(int i = 0; i < 10; i++)
+
+            for (int i = 0; i < 10; i++)
             {
-                matricaB[i] = (i+1) * b;
+                matricaB[i] = (i + 1) * b;
                 Console.Write(matricaB[i] + "\t");
             }
             Console.WriteLine();
             Console.WriteLine();
 
-            int[,] matricaC = new int[a,b];
+            int[,] matricaC = new int[a, b];
 
 
-            for(int i = 0; i < a;i++)
+            for (int i = 0; i < a; i++)
             {
                 matricaA[i] = ((i + 1) * a);
-                 
-                for (int j = 0; j < b;j++)
+
+                for (int j = 0; j < b; j++)
                 {
-                    matricaC[i,j] = matricaB[j];
-                    Console.Write(i +  j + 
-                        "array :"+ matrica[i, j] + "\t");
+                    matricaC[i, j] = matricaB[j];
+                    Console.Write(i + j +
+                        "array :" + matrica[i, j] + "\t");
 
                 }
             }
@@ -88,30 +90,29 @@ namespace UcenjeCS
             int[,] matrica = new int[a, b];
             SpiralFill(a, b, matrica);
 
-            int number = a * b;
 
-            for(int i = 0; i < a;i++)
+
+            for (int i = 0; i < a; i++)
             {
-                for(int j = 0;j < b;j++)
+                for (int j = 0; j < b; j++)
                 {
-                    Console.Write(matrica[i,j] + "\t ");
+                    Console.Write(matrica[i, j] + "\t ");
                 }
                 Console.WriteLine("\n");
             }
 
-
-            
 
         }
 
         public static void SpiralFill(int a, int b, int[,] matrica)
         {
 
-            int number = a * b;
-            int val = 1; 
-           
 
-            int k = 0, l = 0;
+            int val = 1;
+
+
+            int k = 0;
+            int l = 0;
 
 
             while (k < a && l < b)
@@ -133,13 +134,13 @@ namespace UcenjeCS
                 {
                     for (int i = b - 1; i >= 1; --i)
                     {
-                        matrica[a-1, i] = val++;
+                        matrica[a - 1, i] = val++;
                     }
                     a--;
                 }
                 if (l < b)
                 {
-                    for (int i = b - 1; i >= k; i--)
+                    for (int i = a - 1; i >= k; --i)
                     {
                         matrica[i, l] = val++;
                     }
@@ -147,5 +148,9 @@ namespace UcenjeCS
                 }
             }
         }
+
+        
     }
 }
+
+
