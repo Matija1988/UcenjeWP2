@@ -370,8 +370,10 @@ namespace WebApi.Controllers
         public string CiklicnaMatrica(int redovi, int kolone)
         {
 
-            // moj neuspjesan pokusaj
+            // moj neuspjesan pokusaj ... ne radi u slucaju neparnih broja redova npr 3x7
+            // ideja je stvoriti ispravnu matricu pa je ispisati unazad
             int[,] niz = new int[redovi, kolone];
+            
             int broj = redovi * kolone;
 
 
@@ -402,6 +404,7 @@ namespace WebApi.Controllers
 
             }
 
+            // ispravno. Rjesenje sa interneta.
 
             //int[,] matrica = new int[redovi, kolone];
             //int brojac = 1;
@@ -438,8 +441,8 @@ namespace WebApi.Controllers
             //    }
             //}
             StringBuilder sb = new StringBuilder();
-
-            for(int i = 0; i < redovi; i++)
+            
+            for (int i = 0; i < redovi; i++)
             {
                 for(int j =  0; j < kolone; j++)
                 {
@@ -448,7 +451,7 @@ namespace WebApi.Controllers
                 sb.AppendLine();
             }
 
-            return sb.ToString() ; 
+          return sb.ToString(); 
         }
  
     }
