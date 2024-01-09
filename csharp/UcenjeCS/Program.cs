@@ -16,8 +16,12 @@
 //V01ZimskoVjezbanje.veciOd100();
 
 //TestiranjeUKonzoli.Izvedi();
-TestiranjeUKonzoli.CiklicnaMatrica();
+//TestiranjeUKonzoli.CiklicnaMatrica();
 
-TestiranjeUKonzoli.CiklicnaMatricaV2();
+E06WhilePetlja.Izvedi();
+
+
+
+
 
 
