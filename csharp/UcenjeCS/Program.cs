@@ -18,10 +18,10 @@
 //TestiranjeUKonzoli.Izvedi();
 //TestiranjeUKonzoli.CiklicnaMatrica();
 
-E06WhilePetlja.Izvedi();
+//E06WhilePetlja.Izvedi();
+//E07DoWhile.Izvedi();
 
-
-
+E08ForEach.Izvedi();
 
 
 
