@@ -372,81 +372,81 @@ namespace WebApi.Controllers
 
             // moj neuspjesan pokusaj ... ne radi u slucaju neparnih broja redova npr 3x7
             // ideja je stvoriti ispravnu matricu pa je ispisati unazad
-            int[,] niz = new int[redovi, kolone];
+            //int[,] niz = new int[redovi, kolone];
             
-            int broj = redovi * kolone;
+            //int broj = redovi * kolone;
 
 
-            int min = 0;
-            int kolona = 0, red = 0;
-            int maxRed = redovi - 1;
-            int maxKolona = kolone - 1;
+            //int min = 0;
+            //int kolona = 0, red = 0;
+            //int maxRed = redovi - 1;
+            //int maxKolona = kolone - 1;
 
 
-            for (int i = 1; i <= broj; i++)
-            {
-                niz[red, kolona] = i;
-                if (red == maxRed && kolona != min)
-                    kolona--;
-                else if (kolona == maxKolona)
-                    red++;
-                else if (red == min)
-                    kolona++;
-                else if (kolona == min && red != min + 1)
-                    red--;
-                else
-                {
-                    maxKolona -= 1;
-                    maxRed -= 1;
-                    min += 1;
-                    kolona++;
-                }
+            //for (int i = 1; i <= broj; i++)
+            //{
+            //    niz[red, kolona] = i;
+            //    if (red == maxRed && kolona != min)
+            //        kolona--;
+            //    else if (kolona == maxKolona)
+            //        red++;
+            //    else if (red == min)
+            //        kolona++;
+            //    else if (kolona == min && red != min + 1)
+            //        red--;
+            //    else
+            //    {
+            //        maxKolona -= 1;
+            //        maxRed -= 1;
+            //        min += 1;
+            //        kolona++;
+            //    }
 
-            }
+            //}
 
             // ispravno. Rjesenje sa interneta.
 
-            //int[,] matrica = new int[redovi, kolone];
-            //int brojac = 1;
-            //int redPocetak = 0, redKraj = redovi - 1;
-            //int kolPocetak = 0, kolKraj = kolone - 1;
+            int[,] matrica = new int[redovi, kolone];
+            int brojac = 1;
+            int redPocetak = 0, redKraj = redovi - 1;
+            int kolPocetak = 0, kolKraj = kolone - 1;
 
-            //while (redPocetak <= redKraj && kolPocetak <= kolKraj)
-            //{
-            //    for(int i = kolKraj; i >= kolPocetak;i--)
-            //    {
-            //        matrica[redKraj, i] = brojac++;
-            //    }
-            //    redKraj--;
-            //    for(int i = redKraj; i >= redPocetak; i--)
-            //    {
-            //        matrica[i, kolPocetak] = brojac++; 
-            //    }
-            //    kolPocetak++;
-            //    if(redPocetak <= redKraj)
-            //    {
-            //        for(int j = kolPocetak; j <= kolKraj; j++)
-            //        {
-            //            matrica[redPocetak, j] = brojac++;
-            //        }
-            //        redPocetak++;
-            //    }
-            //    if(kolPocetak <= kolKraj)
-            //    {
-            //        for(int i = redPocetak; i <= redKraj; i++)
-            //        {
-            //            matrica[i, kolKraj] = brojac++;
-            //        }
-            //        kolKraj--;
-            //    }
-            //}
+            while (redPocetak <= redKraj && kolPocetak <= kolKraj)
+            {
+                for (int i = kolKraj; i >= kolPocetak; i--)
+                {
+                    matrica[redKraj, i] = brojac++;
+                }
+                redKraj--;
+                for (int i = redKraj; i >= redPocetak; i--)
+                {
+                    matrica[i, kolPocetak] = brojac++;
+                }
+                kolPocetak++;
+                if (redPocetak <= redKraj)
+                {
+                    for (int j = kolPocetak; j <= kolKraj; j++)
+                    {
+                        matrica[redPocetak, j] = brojac++;
+                    }
+                    redPocetak++;
+                }
+                if (kolPocetak <= kolKraj)
+                {
+                    for (int i = redPocetak; i <= redKraj; i++)
+                    {
+                        matrica[i, kolKraj] = brojac++;
+                    }
+                    kolKraj--;
+                }
+            }
             StringBuilder sb = new StringBuilder();
             
             for (int i = 0; i < redovi; i++)
             {
                 for(int j =  0; j < kolone; j++)
                 {
-                    sb.Append(niz[i, j] + "\t");
+                    sb.Append(matrica[i, j] + "\t");
                 }
                 sb.AppendLine();
             }

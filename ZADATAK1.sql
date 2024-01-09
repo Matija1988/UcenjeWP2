@@ -77,3 +77,4 @@ SELECT * FROM MJESTA;
 delete from opcine where sifra = 4; 
 SELECT * FROM OPCINE;
 delete from opcine where sifra = 6;
+
