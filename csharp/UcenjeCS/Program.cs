@@ -21,7 +21,9 @@
 //E06WhilePetlja.Izvedi();
 //E07DoWhile.Izvedi();
 
-E08ForEach.Izvedi();
+//E08ForEach.Izvedi();
+
+E09Metode.Izvedi();
 
 
 
