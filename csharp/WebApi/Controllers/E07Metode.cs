@@ -16,7 +16,7 @@ namespace WebApi.Controllers
             return Zbroj(PrviBroj, DrugiBroj); 
         }
 
-         int Zbroj(int a, int b)
+        private int Zbroj(int a, int b)
         {
                return a + b;
 
