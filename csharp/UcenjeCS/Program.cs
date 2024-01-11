@@ -23,7 +23,15 @@
 
 //E08ForEach.Izvedi();
 
-E09Metode.Izvedi();
+//E09Metode.Izvedi();
+
+Z01Metode.Izvedi();
+
+Console.WriteLine(Z01Metode.CijeliDioZbroja(2.7f, 3.7f));
+
+Console.WriteLine(Z01Metode.CijeliDioZbroja(3.4, 5.8)); 
+
+Console.WriteLine(Z01Metode.CijeliDioZbroja(2.8, 3.2, 3.9));
 
 
 

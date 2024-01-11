@@ -14,14 +14,35 @@ namespace UcenjeCS
         {
             // do OPP-a sve metode ce biti static u ovom projektu Ucenje CS
             // Poziv metode 
+
             Tip1();
             Tip2(2, 12);
+          
             
             // kljucna rijec var uzima tip podatka s desne strane
+
             var i = ImeRacunala();  // tip 3
             Console.WriteLine(i);
+
+
             // bolje
             Console.WriteLine(ImeRacunala());
+
+            Console.WriteLine(PrimBroj(131) ? "PRIM" : "NIJE");
+            SviPrimBrojevi(27, 99);
+        }
+
+        private static void SviPrimBrojevi(int Od, int Do)
+        {
+
+            for(int i = Od; i <= Do; i++)
+            {
+                if(PrimBroj(i))
+                {
+                    Console.WriteLine(i);
+                }
+            } 
+
         }
 
         // 1. vrsta tipa void, ne prima vrijednost, prima praznu listu parametara
@@ -66,9 +87,25 @@ namespace UcenjeCS
             return System.Net.Dns.GetHostName(); 
         } 
 
+        // 4. vrsta - najkorisnija - odredenog tipa koja vraca pozivatlju i prima parametre 
 
+        static bool PrimBroj(int broj)
+        {
+            for(int i = 2; i < broj; i++)
+            {
+                if(broj % i == 0)
+                {
+                    return false;  // shortcuirciting 
+                }
+                
+            }
+            return true; 
+        }
+
+        // ispisi sve prim brojeve izmedu 2 broja
+
+       
     }
-
 
 }
 
