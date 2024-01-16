@@ -29,7 +29,7 @@ namespace WebApi.Controllers
 
         public int Zad2(int a, int b, int c, int d) 
         {
-
+            S
             return Zbroj(a, b) - Zbroj(c, d); 
         }
 
