@@ -18,7 +18,7 @@ namespace UcenjeCS
 
             // Koristiti metode i broadu iznimki
 
-            int PrviBroj = UcitajBroj("Unesi  broj: ");
+            //int PrviBroj = UcitajBroj("Unesi  broj: ");
             
 
             //int Zbroj = ZbrojBrojeva(PrviBroj, DrugiBroj);
@@ -37,9 +37,9 @@ namespace UcenjeCS
 
 
 
-        private static int UcitajBroj(string v)
-        {
+        //private static int UcitajBroj(string v)
+        //{
 
-        }
+        //}
         }
 }

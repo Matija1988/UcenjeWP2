@@ -1,5 +1,6 @@
 ﻿using UcenjeCS;
 
+
 //E01UlazIzlaz.izvedi();
 
 //E02VarijableTipoviPodatakaOperatori.izvedi();
@@ -39,7 +40,9 @@
 
 //V02LjubavniKalkulator.Izvedi();
 
-Z02Vjezba.Izvedi(); 
+//Z02Vjezba.Izvedi(); 
+
+UcenjeCS.E12KlasaObjekt.Program.Izvedi(); 
 
 
 
