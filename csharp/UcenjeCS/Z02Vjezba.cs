@@ -20,19 +20,8 @@ namespace UcenjeCS
 
             // Koristiti metode i broadu iznimki
 
-            UcitajBroj("Unesi broj: "); 
             
-
-            //int Zbroj = ZbrojBrojeva(PrviBroj, DrugiBroj);
-            //Console.WriteLine("Zbroj je " + Zbroj);
-
-            //int Najmanji = NajmanjiBroj(PrviBroj, DrugiBroj);
-            //Console.WriteLine("Najmanji broj je: " + Najmanji);
-
-            //int Najveci = NajveciBroj(PrviBroj, DrugiBroj);
-            //Console.WriteLine("Najveci broj je " + Najveci);
-
-
+            VratiZbroj(UcitajBroj("Unesi broj: "));
 
 
         }
@@ -49,24 +38,33 @@ namespace UcenjeCS
 
             while (true)
             {
-                int a = int.Parse(Console.ReadLine());
+                if(int.TryParse(Console.ReadLine(), out int a)) { 
+                
 
-                if(a == -1)
+                if (a <= -1)
                 {
-                    break; 
+                    
+                    break;
                 }
 
                 niz = JNizuM(niz, niz.Length + 1);
-                
+             
                 niz[niz.Length - 1] = a;
                               
-                sum = niz.Sum();
-              
-                Console.WriteLine("Suma: " + sum.ToString());
+               
                 Console.WriteLine("Brojevi u nizu: " + string.Join(" ", niz));
+                
+                
+                
+                }
             }
+            Console.WriteLine(VratiZbroj(niz));
+            Console.WriteLine(NajmanjiBroj(niz));
+            Console.WriteLine(NajveciBroj(niz));
+            Console.WriteLine(Prosjek(niz));
 
-            return niz; 
+            return niz;
+
         }
 
         private static int[] JNizuM(int[] stari, int novaVelicina)
@@ -75,6 +73,50 @@ namespace UcenjeCS
             Array.Copy(stari, noviNiz, Math.Min(stari.Length, novaVelicina));
 
             return noviNiz;
+        }
+        private static string VratiZbroj(int[] ints)
+        {
+            int sum = ints.Sum();
+
+            return "Suma: " + sum.ToString();
+        }
+
+        private static string NajmanjiBroj(int[] ints)
+        {
+            int najmanji = ints[0];
+
+            for (int i = 0; i < ints.Length; i++)
+            {
+                if (ints[i] < najmanji)
+                {
+                    najmanji = ints[i];
+                }
+            } 
+
+            return "Najmanji broj u nizu je: " + najmanji.ToString(); 
+        }
+
+        private static string NajveciBroj(int[] ints)
+        {
+            int najveci = ints[0];
+
+            for (int i = 0; i < ints.Length; i++)
+            {
+                if (ints[i] > najveci)
+                {
+                    najveci = ints[i];
+                }
+            }
+
+            return "Najveci broj u nizu je: " + najveci.ToString();
+        }
+
+        private static string Prosjek(int[] ints)
+        {
+
+            double prosjek = Queryable.Average(ints.AsQueryable()); 
+           
+            return "Prosjek: " + prosjek.ToString();
         }
 
     }
