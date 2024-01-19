@@ -65,7 +65,7 @@ namespace UcenjeCS
                 int desni = ints[max - 1];
                
 
-                for (int i = min; i < max ; i++)
+                for (int i = min; i < max; i++)
                 {
                  
                   
@@ -75,12 +75,17 @@ namespace UcenjeCS
                 }
                 min++;
                 max--;
+
+                
             }
 
 
             return string.Join(" ", rezultat);
 
-
         }
+
+
+
+
     }
 }

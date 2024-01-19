@@ -38,9 +38,9 @@
 
 //E11Rekurzija.Izvedi(); 
 
-V02LjubavniKalkulator.Izvedi();
+//V02LjubavniKalkulator.Izvedi();
 
-//Z02Vjezba.Izvedi(); 
+Z02Vjezba.Izvedi(); 
 
 //UcenjeCS.E12KlasaObjekt.Program.Izvedi(); 
 
