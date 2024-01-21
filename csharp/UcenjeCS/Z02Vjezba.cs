@@ -21,7 +21,7 @@ namespace UcenjeCS
             // Koristiti metode i broadu iznimki
 
             
-            VratiZbroj(UcitajBroj("Unesi broj: "));
+            UcitajBroj("Unesi broj: ");
 
 
         }
@@ -38,30 +38,35 @@ namespace UcenjeCS
 
             while (true)
             {
-                if(int.TryParse(Console.ReadLine(), out int a)) { 
-                
+                if(int.TryParse(Console.ReadLine(), out int a)) {
 
-                if (a <= -1)
-                {
-                    
-                    break;
-                }
+                    if (a <= -1)
+                    {
+                        break;
+                    }
 
-                niz = JNizuM(niz, niz.Length + 1);
+
+                    niz = JNizuM(niz, niz.Length + 1);
              
-                niz[niz.Length - 1] = a;
-                              
+                    niz[niz.Length - 1] = a;
+                            
                
-                Console.WriteLine("Brojevi u nizu: " + string.Join(" ", niz));
+                   Console.WriteLine("Brojevi u nizu: " + string.Join(" ", niz));
                 
-                
-                
+
+
                 }
+                
             }
+
+           
+
             Console.WriteLine(VratiZbroj(niz));
             Console.WriteLine(NajmanjiBroj(niz));
             Console.WriteLine(NajveciBroj(niz));
             Console.WriteLine(Prosjek(niz));
+            Console.ReadKey();
+          
 
             return niz;
 

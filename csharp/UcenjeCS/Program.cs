@@ -40,7 +40,9 @@
 
 //V02LjubavniKalkulator.Izvedi();
 
-Z02Vjezba.Izvedi(); 
+TestiranjeUKonzoli2.Izvedi(); 
+
+//Z02Vjezba.Izvedi(); 
 
 //UcenjeCS.E12KlasaObjekt.Program.Izvedi(); 
 

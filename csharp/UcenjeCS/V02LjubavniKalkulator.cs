@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Win32.SafeHandles;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
@@ -19,7 +21,7 @@ namespace UcenjeCS
             string DrugoIme = Console.ReadLine();
 
             Console.WriteLine(Kalkulacija(VratiNiz(PrvoIme, DrugoIme)));
-            ;
+            Console.ReadKey();
         }
 
        
@@ -56,33 +58,43 @@ namespace UcenjeCS
             int max = (ints.Length);
             int brojac = 0;
             int rez;
-            string a = null; 
+            string a = null;
             int[] rezultat = new int[max];
 
-            while (min < max) {
+            while (min < max)
+            {
 
                 int lijevi = ints[min];
                 int desni = ints[max - 1];
-               
+
 
                 for (int i = min; i < max; i++)
                 {
-                 
-                  
-                        rezultat[i] = lijevi + desni;
-                    
+
+
+                    rezultat[i] = lijevi + desni;
+
 
                 }
                 min++;
                 max--;
 
-                
+
             }
 
 
             return string.Join(" ", rezultat);
-
         }
+
+        private static int[] JNizuM(int[] stari, int novaVelicina)
+        {
+            int[] noviNiz = new int[novaVelicina];
+            Array.Copy(stari, noviNiz, Math.Min(stari.Length, novaVelicina));
+
+            return noviNiz;
+        }
+
+
 
 
 
