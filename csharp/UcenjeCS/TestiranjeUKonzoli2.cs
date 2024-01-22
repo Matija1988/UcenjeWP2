@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace UcenjeCS
 {
@@ -18,9 +19,10 @@ namespace UcenjeCS
             string PrvoIme = Console.ReadLine();
             Console.WriteLine("Unesi drugo ime: ");
             string DrugoIme = Console.ReadLine();
-           
+
             string a = string.Join(" ", JNizuM(VratiNiz(PrvoIme, DrugoIme)));
             Console.WriteLine(a);
+            
             Console.ReadKey();
         }
 
@@ -54,14 +56,17 @@ namespace UcenjeCS
         private static int[] JNizuM(int[] stari)
         {
             int novaVelicina = stari.Length / 2 + stari.Length % 2;
-                        
+
             int[] noviNiz = new int[novaVelicina];
-            KaklulacijeUNizu(stari);
+          
+          KaklulacijeUNizu(stari);
+            
+
+
+
             Array.Copy(stari, noviNiz, Math.Min(stari.Length, novaVelicina));
 
-           
-
-           if(noviNiz.Length < 3)
+            if (noviNiz.Length == 2)
             {
                 return noviNiz;
             }
@@ -71,32 +76,33 @@ namespace UcenjeCS
             return JNizuM(noviNiz);
         }
 
+
+
         private static int[] KaklulacijeUNizu(int[] stari)
         {
-            int min = stari.Length - stari.Length;
+            int min = 0;
             int max = stari.Length;
 
-            for(int i = min; i < max; i++)
+            int[] novi = new int[stari.Length / 2];
+
+            for (int i = min; i < novi.Length; i++)
             {
-                int lijevi = stari[min];
-                int desni = stari[max - 1];
-
-                if (i == max)
-                {
-                    continue;
-                }
-                stari[i] = lijevi + desni;
-
+                
+                int suma = stari[min] + stari[max -1];
+                           
+                stari[i] = suma;
+             
                 min++;
                 max--;
             }
 
-            return stari; 
+
+
+            return stari;
         }
+        
 
     }
-
-
 }
 
 
