@@ -38,9 +38,14 @@
 
 //E11Rekurzija.Izvedi(); 
 
-//V02LjubavniKalkulator.Izvedi();
+V02LjubavniKalkulator.Izvedi();
 
-TestiranjeUKonzoli2.Izvedi(); 
+//TestiranjeUKonzoli2.Izvedi();
+
+//TestiranjeUKonzoli3.Izvedi(); 
+
+//TestiranjeRazdvajanjaBrojeva.Izvedi();
+
 
 //Z02Vjezba.Izvedi(); 
 

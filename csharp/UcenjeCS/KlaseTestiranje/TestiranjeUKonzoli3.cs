@@ -1,17 +1,15 @@
-﻿using Microsoft.Win32.SafeHandles;
-using System;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
-using System.Threading.Channels;
 using System.Threading.Tasks;
 
-namespace UcenjeCS
+namespace UcenjeCS.KlaseTestiranje
 {
-    internal class V02LjubavniKalkulator
+    internal class TestiranjeUKonzoli3
     {
+
         public static void Izvedi()
         {
             Console.Write("Unesi prvo ime: ");
@@ -25,7 +23,6 @@ namespace UcenjeCS
 
         }
 
-        // Metoda uzima dva stringa i vraca int[] duzine spojenih slova i vrijednosti zbroja individualnih slova
         private static int[] VratiNiz(string PrvoIme, string DrugoIme)
         {
             string spojenaImena = PrvoIme.ToLower() + DrugoIme.ToLower();
@@ -50,8 +47,6 @@ namespace UcenjeCS
             return niz;
 
         }
-
-        // Ova metoda uzima niz, reze ga na novu velicinu, obavlja izracune te stvara novi niz u rekurziji dok ne ostanu 2 clana niza
 
         private static int[] IzracunNiz(int[] niz)
         {
@@ -78,8 +73,6 @@ namespace UcenjeCS
             return IzracunNiz(RazdvanjanjeBrojeva(noviNiz));
         }
 
-
-        // Ova metoda zbraja prvi i zadnji broj u primljenom nizu
         private static int[] KalkulacijeUNizu(int[] stari)
         {
             int min = 0;
@@ -104,7 +97,7 @@ namespace UcenjeCS
 
             return stari;
         }
-        // Ova metoda razdvaja dvoznamenkaste brojeve te pomice niz udesno te vraca novi niz jednoznamenkastih brojeva 
+
         private static int[] RazdvanjanjeBrojeva(int[] stari)
         {
             int dvoznambroj = Array.FindIndex(stari, n => n >= 10 && n <= 99);

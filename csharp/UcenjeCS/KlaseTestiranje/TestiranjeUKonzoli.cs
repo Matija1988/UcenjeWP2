@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UcenjeCS
+namespace UcenjeCS.KlaseTestiranje
 {
     internal class TestiranjeUKonzoli
     {
@@ -62,7 +62,7 @@ namespace UcenjeCS
 
             for (int i = 0; i < a; i++)
             {
-                matricaA[i] = ((i + 1) * a);
+                matricaA[i] = (i + 1) * a;
 
                 for (int j = 0; j < b; j++)
                 {
@@ -149,7 +149,7 @@ namespace UcenjeCS
             }
         }
 
-        
+
     }
 }
 
