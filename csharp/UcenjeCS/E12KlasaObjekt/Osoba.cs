@@ -23,5 +23,6 @@ namespace UcenjeCS.E12KlasaObjekt
             return Ime + " " + Prezime; // postoje bolje solucije
         }
 
+
     }
 }
