@@ -14,22 +14,25 @@ namespace UcenjeCS.E12KlasaObjekt
             // Objekt je pojavnost (istanca) klase
             // najcesci nacin deklaracije
             // umjesto Osoba osoba = new Osoba();
-            
-            Osoba o = new Osoba();
 
-            Grad g = new()
-            {
-                //Naziv= "Osijek",
-                BrojStanovnika = 100000
-            };
+            //Osoba o = new Osoba();
 
-            o.Grad = g;
+            //Grad g = new()
+            //{
+            //    //Naziv= "Osijek",
+            //    BrojStanovnika = 100000
+            //};
 
-            Console.WriteLine(o.Grad?.Naziv);
+            //o.Grad = g;
+
+            //Console.WriteLine(o.Grad?.Naziv);
+
+    
+
 
         }
 
-        private static void E04LjubavniPoziv()
+        public static void E04LjubavniPoziv()
         {
             Ljubav ljubav = new(); // s new se poziva konstruktor
 
@@ -39,7 +42,7 @@ namespace UcenjeCS.E12KlasaObjekt
 
             Console.WriteLine(ljubav.Rezultat());
 
-            Console.WriteLine(new Ljubav(Unos("PI"), Unos("DI")).Rezultat());
+            
         }
 
         private static string Unos(string poruka)

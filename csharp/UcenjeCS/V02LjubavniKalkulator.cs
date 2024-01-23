@@ -23,6 +23,9 @@ namespace UcenjeCS
 
             Console.WriteLine(a);
 
+          
+
+
         }
 
         // Metoda uzima dva stringa i vraca int[] duzine spojenih slova i vrijednosti zbroja individualnih slova
@@ -45,7 +48,7 @@ namespace UcenjeCS
                 niz[i++] = brojac;
             }
 
-            Console.WriteLine(spojenaImena + "\n " + string.Join(" ", niz));
+            Console.WriteLine(spojenaImena + "\n" + string.Join(" ", niz));
 
             return niz;
 
@@ -65,13 +68,9 @@ namespace UcenjeCS
                 return niz;
             }
 
-
-
             KalkulacijeUNizu(niz);
 
             Array.Copy(niz, noviNiz, Math.Min(niz.Length, novaVelicina));
-
-
 
             Console.WriteLine(string.Join(" ", noviNiz));
 
@@ -87,11 +86,9 @@ namespace UcenjeCS
 
             int[] novi = new int[stari.Length / 2];
 
-
             for (int i = min; i < novi.Length; i++)
             {
-
-
+             
                 int suma = stari[min] + stari[max];
 
                 stari[i] = suma;
@@ -99,8 +96,6 @@ namespace UcenjeCS
                 min++;
                 max--;
             }
-
-
 
             return stari;
         }
@@ -137,9 +132,10 @@ namespace UcenjeCS
 
             }
 
+          //  Console.WriteLine(string.Join(" ",  noviNiz));
+
             return RazdvanjanjeBrojeva(noviNiz);
         }
-
-
+       
     }
 }

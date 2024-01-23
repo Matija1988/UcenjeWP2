@@ -46,10 +46,13 @@ V02LjubavniKalkulator.Izvedi();
 
 //TestiranjeRazdvajanjaBrojeva.Izvedi();
 
+//UcenjeCS.KlaseTestiranje.TestiranjeNizUIntUUvjet.Izvedi();
 
 //Z02Vjezba.Izvedi(); 
 
 //UcenjeCS.E12KlasaObjekt.Program.Izvedi(); 
+
+//UcenjeCS.E12KlasaObjekt.Program.E04LjubavniPoziv(); 
 
 
 
