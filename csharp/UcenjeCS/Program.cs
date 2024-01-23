@@ -52,7 +52,7 @@
 
 //UcenjeCS.E12KlasaObjekt.Program.Izvedi(); 
 
-//UcenjeCS.E12KlasaObjekt.Program.E04LjubavniPoziv(); 
+UcenjeCS.E12KlasaObjekt.Program.E04LjubavniPoziv(); 
 
-UcenjeCS.E13Nasljedivanje.Program.Izvedi(); 
+//UcenjeCS.E13Nasljedivanje.Program.Izvedi(); 
 

@@ -10,6 +10,11 @@ namespace UcenjeCS.E13Nasljedivanje
     {
         public int Sifra { get; set; }
 
+        public Entitet()
+        {
+            Console.WriteLine("Konstruktor Entitet");
+        }
+
         public Entitet(int sifra)
         {
             Sifra = sifra;
