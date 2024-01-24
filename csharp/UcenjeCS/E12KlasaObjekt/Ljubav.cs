@@ -58,7 +58,7 @@ namespace UcenjeCS.E12KlasaObjekt
 
             Console.WriteLine(string.Join(" ", niz));
 
-            Console.ReadKey();
+            
 
             return niz;
         }
@@ -142,11 +142,11 @@ namespace UcenjeCS.E12KlasaObjekt
                 }
 
             }
-            Console.WriteLine("Novi > " + string.Join(" ", novi));
-            Console.WriteLine("Rastavljeni niz > " + string.Join(" ", nizRazdavjanjeBrojeva));
+           
+            Console.WriteLine(string.Join(" ", nizRazdavjanjeBrojeva));
 
             //uzima broj na indeksu 0 mnozi ga sa 10 te zbraja sa brojem na indeksu 1
-            SpojeniBroj = nizRazdavjanjeBrojeva[0] * 10 + nizRazdavjanjeBrojeva[1];
+           SpojeniBroj = nizRazdavjanjeBrojeva[0] * 10 + nizRazdavjanjeBrojeva[1];
 
             //ako je niz velicine dva vraca spojeni broj
             if (nizRazdavjanjeBrojeva.Length == 2)
@@ -156,7 +156,6 @@ namespace UcenjeCS.E12KlasaObjekt
 
             return Izracunaj(nizRazdavjanjeBrojeva); // privremeno
         }
-
 
     }
 }
