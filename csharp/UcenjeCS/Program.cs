@@ -38,7 +38,7 @@
 
 //E11Rekurzija.Izvedi(); 
 
-//V02LjubavniKalkulator.Izvedi();
+
 
 //TestiranjeUKonzoli2.Izvedi();
 
@@ -52,7 +52,14 @@
 
 //UcenjeCS.E12KlasaObjekt.Program.Izvedi(); 
 
+
+
+
+//V02LjubavniKalkulator.Izvedi();
+
 UcenjeCS.E12KlasaObjekt.Program.E04LjubavniPoziv(); 
+
+
 
 //UcenjeCS.E13Nasljedivanje.Program.Izvedi(); 
 

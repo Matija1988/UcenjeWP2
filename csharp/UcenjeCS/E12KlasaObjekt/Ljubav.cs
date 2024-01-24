@@ -16,35 +16,36 @@ namespace UcenjeCS.E12KlasaObjekt
         public string DrugoIme { get; set; }
 
         //ovo je konstruktor - 5. vrsta metoda
-        public Ljubav() {
-        // ovdje se dolazi kada se izvodi kljucna rijec new 
+        public Ljubav()
+        {
+            // ovdje se dolazi kada se izvodi kljucna rijec new 
 
         }
-        
-        public Ljubav(string prvoIme, string drugoIme) 
-        { 
+
+        public Ljubav(string prvoIme, string drugoIme)
+        {
             PrvoIme = prvoIme;
             DrugoIme = drugoIme;
-        
+
         }
 
 
         public string Rezultat()
         {
-            return string.Join(" ", Izracunaj(SlovaUNiz(PrvoIme + DrugoIme))) + " %";
+            return string.Join(" ", Izracunaj(SlovaUNiz(PrvoIme.ToLower() + DrugoIme.ToLower()))) + " %";
         }
 
         private int[] SlovaUNiz(string Imena)
         {
-       
             
+
             int[] niz = new int[Imena.Length];
             int i = 0;
 
-            foreach(char c in Imena)
+            foreach (char c in Imena)
             {
                 int brojac = 0;
-                foreach(char c2 in Imena)
+                foreach (char c2 in Imena)
                 {
                     if (c == c2)
                     {
@@ -54,103 +55,107 @@ namespace UcenjeCS.E12KlasaObjekt
 
                 niz[i++] = brojac;
             }
-            
+
             Console.WriteLine(string.Join(" ", niz));
 
             Console.ReadKey();
 
-            return niz;  
+            return niz;
         }
 
         private int Izracunaj(int[] brojevi)
         {
-           
             int suma;
-
             // dolazi rekurzivni algoritam
-            int modifikator2 = 0;
 
-         
-
-            int[] nizRazdavjanjeBrojeva = new int[brojevi.Length + 1];
-
-
-
-          
-
-            int modifikator = 0;
-           
             int SpojeniBroj;
-
-           
-            // brojim brojeve vece od 10 u primljenom nizu, ako ih ima razdvajam, ako ih nema upisujem broj iz primljenog niza
-            foreach (int a in brojevi)
-            {
-
-                if (a >= 10)
-                {
-                    int dvoznam = a / 10;
-                    int jedno = a % 10;
-
-                    nizRazdavjanjeBrojeva[modifikator++] = dvoznam;
-                    nizRazdavjanjeBrojeva[modifikator++] = jedno;
-                               
-
-                } else
-                {
-                    nizRazdavjanjeBrojeva[modifikator++] = a; 
-                }
-
-            }
-            Console.WriteLine("Rastavljeni niz > " + string.Join(" ", nizRazdavjanjeBrojeva));
-
+            
             int min = 0;
             int max = brojevi.Length - 1;
 
+            int[] novi = new int[brojevi.Length / 2 + brojevi.Length % 2];
 
+            if (brojevi.Length > 2)
+            {
 
-            int[] novi = new int[nizRazdavjanjeBrojeva.Length / 2 + nizRazdavjanjeBrojeva.Length % 2];
-
-            for (int i = min; i < nizRazdavjanjeBrojeva.Length / 2; i++) {
-
-                if (min == max)
+                for (int i = 0; i < novi.Length; i++)
+           
                 {
 
-                    novi[i] = brojevi[i];
+                    if (min == max)
+              
+                    {
 
+                        novi[i] = brojevi[i];
+              
+                    }
+              
+                    else
+               
+                    {
+                
+                        suma = brojevi[i] + brojevi[max];
+                 
+                        novi[i] = suma;
+                                 
+                 
+                        max--;
+                        min++;
+
+                    }
+          
                 }
-                else {
 
-                    suma = nizRazdavjanjeBrojeva[min] + nizRazdavjanjeBrojeva[max];
+        }
+        // brojim brojeve vece od 10 u primljenom nizu, ako ih ima razdvajam, ako ih nema upisujem broj iz primljenog niza
+        int modifikator = 0;
+            int brojac = 0;
+            int[] nizRazdavjanjeBrojeva = new int[novi.Length + brojac];
 
-                    novi[i] = suma;
-                     
-                    min++;
-                    max--;
+           
+            foreach (int a in novi)
+            {
+               
+                if (a < 10)
+                {
+                    brojac++;
+                    Array.Resize(ref nizRazdavjanjeBrojeva, brojac);
+                    nizRazdavjanjeBrojeva[modifikator++] = a;
                 }
-                               
+                else
+                {
+                    brojac++;
+                    int dvoznam = a / 10;
+                    int jedno = a % 10;
+
+                    Array.Resize(ref nizRazdavjanjeBrojeva, brojac);
+
+                    nizRazdavjanjeBrojeva[modifikator++] = dvoznam;
+                    brojac++;
+
+                    Array.Resize(ref nizRazdavjanjeBrojeva, brojac);
+
+
+                    nizRazdavjanjeBrojeva[modifikator++] = jedno;
+
+                  
+                }
 
             }
+            Console.WriteLine("Novi > " + string.Join(" ", novi));
+            Console.WriteLine("Rastavljeni niz > " + string.Join(" ", nizRazdavjanjeBrojeva));
 
-            SpojeniBroj = novi[0] * 10 + novi[1];
+            //uzima broj na indeksu 0 mnozi ga sa 10 te zbraja sa brojem na indeksu 1
+            SpojeniBroj = nizRazdavjanjeBrojeva[0] * 10 + nizRazdavjanjeBrojeva[1];
 
-          //  Console.WriteLine("Razdvojeni brojevi " + string.Join(" ", nizRazdavjanjeBrojeva));
-         //   Console.WriteLine(string.Join(" ", novi));
-
-            if (novi.Length == 2 && SpojeniBroj < 100)
+            //ako je niz velicine dva vraca spojeni broj
+            if (nizRazdavjanjeBrojeva.Length == 2)
             {
                 return SpojeniBroj;
             }
 
-
-
-            Console.WriteLine("Novi > " + string.Join(" ", novi));
-
-
-            return Izracunaj(novi); // privremeno
-        } 
-
-
+            return Izracunaj(nizRazdavjanjeBrojeva); // privremeno
+        }
 
 
     }

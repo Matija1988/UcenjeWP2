@@ -69,6 +69,7 @@ namespace UcenjeCS
             }
 
             KalkulacijeUNizu(niz);
+  
 
             Array.Copy(niz, noviNiz, Math.Min(niz.Length, novaVelicina));
 
@@ -132,7 +133,7 @@ namespace UcenjeCS
 
             }
 
-          //  Console.WriteLine(string.Join(" ",  noviNiz));
+          // Console.WriteLine("Razdvojeni niz " + string.Join(" ",  noviNiz));
 
             return RazdvanjanjeBrojeva(noviNiz);
         }
