@@ -107,7 +107,7 @@ namespace UcenjeCS.E12KlasaObjekt
                 }
 
         }
-        // brojim brojeve vece od 10 u primljenom nizu, ako ih ima razdvajam, ako ih nema upisujem broj iz primljenog niza
+        // brojim brojeve vece od 10 u primljenom nizu, ako ih nema upisujem broj iz primljenog niza, aki ih ima razdvajam i stavljam u niz
         int modifikator = 0;
             int brojac = 0;
             int[] nizRazdavjanjeBrojeva = new int[novi.Length + brojac];
