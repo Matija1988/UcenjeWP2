@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Dataflow;
 using System.Xml;
 
 namespace UcenjeCS.E12KlasaObjekt
@@ -35,6 +36,7 @@ namespace UcenjeCS.E12KlasaObjekt
 
         private int[] SlovaUNiz(string Imena)
         {
+       
             
             int[] niz = new int[Imena.Length];
             int i = 0;
@@ -62,50 +64,88 @@ namespace UcenjeCS.E12KlasaObjekt
 
         private int Izracunaj(int[] brojevi)
         {
-            int SpojeniBroj;
-            int VelicinaNiza = 0;
-
-            if (brojevi.Length == 2)
-            {
-                return  SpojeniBroj = brojevi[0] * 10 + brojevi[1];
-            }
-
+           
+            int suma;
 
             // dolazi rekurzivni algoritam
+            int modifikator2 = 0;
+
+         
+
+            int[] nizRazdavjanjeBrojeva = new int[brojevi.Length + 1];
+
+
+
+          
+
+            int modifikator = 0;
+           
+            int SpojeniBroj;
+
+           
+            // brojim brojeve vece od 10 u primljenom nizu, ako ih ima razdvajam, ako ih nema upisujem broj iz primljenog niza
+            foreach (int a in brojevi)
+            {
+
+                if (a >= 10)
+                {
+                    int dvoznam = a / 10;
+                    int jedno = a % 10;
+
+                    nizRazdavjanjeBrojeva[modifikator++] = dvoznam;
+                    nizRazdavjanjeBrojeva[modifikator++] = jedno;
+                               
+
+                } else
+                {
+                    nizRazdavjanjeBrojeva[modifikator++] = a; 
+                }
+
+            }
+            Console.WriteLine("Rastavljeni niz > " + string.Join(" ", nizRazdavjanjeBrojeva));
+
             int min = 0;
             int max = brojevi.Length - 1;
 
-            int[] novi = new int[brojevi.Length / 2];
 
-            
-                
-                for(int i = min; i < brojevi.Length / 2; i++) {  
 
-                int suma = brojevi[min] + brojevi[max];
-                            
+            int[] novi = new int[nizRazdavjanjeBrojeva.Length / 2 + nizRazdavjanjeBrojeva.Length % 2];
 
-                novi[i] = suma;
+            for (int i = min; i < nizRazdavjanjeBrojeva.Length / 2; i++) {
 
-                if (suma > 9)
+                if (min == max)
                 {
-                    int dvoznamenkasti = suma / 10;
-                    int jednoznameknasti = suma % 10;
 
-                    novi[VelicinaNiza++] = dvoznamenkasti;
-                    novi[VelicinaNiza++] = jednoznameknasti;
-                  //  Array.Resize(ref novi, VelicinaNiza);
+                    novi[i] = brojevi[i];
+
                 }
+                else {
 
-                 suma = brojevi[min] + brojevi[max];
+                    suma = nizRazdavjanjeBrojeva[min] + nizRazdavjanjeBrojeva[max];
 
-                min++;
-                max--;
-                
+                    novi[i] = suma;
+                     
+                    min++;
+                    max--;
                 }
+                               
 
-         //  Array.Resize(ref novi, VelicinaNiza); 
+            }
 
-         //  Console.WriteLine(string.Join(" ", novi));
+            SpojeniBroj = novi[0] * 10 + novi[1];
+
+          //  Console.WriteLine("Razdvojeni brojevi " + string.Join(" ", nizRazdavjanjeBrojeva));
+         //   Console.WriteLine(string.Join(" ", novi));
+
+            if (novi.Length == 2 && SpojeniBroj < 100)
+            {
+                return SpojeniBroj;
+            }
+
+
+
+            Console.WriteLine("Novi > " + string.Join(" ", novi));
+
 
             return Izracunaj(novi); // privremeno
         } 

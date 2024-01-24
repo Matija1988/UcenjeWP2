@@ -29,7 +29,7 @@ namespace UcenjeCS.KlaseTestiranje
 
         private static int[] SplitTwoDigitNumberInArray(int[] stari)
         {
-            int dvoznambroj = Array.FindIndex(stari, n => n >= 10 && n <= 99);
+            int dvoznambroj = 0;
             int[] noviNiz = new int[stari.Length + 1];
 
             if (dvoznambroj == Array.FindIndex(stari, n => n >= 10 && n <= 99))
@@ -44,9 +44,6 @@ namespace UcenjeCS.KlaseTestiranje
                 int brojDvijeZnam = stari[dvoznambroj];
                 int dvoznamenkasti = brojDvijeZnam / 10;
                 int jednoznamenkasti = brojDvijeZnam % 10;
-
-
-
 
 
                 Array.Copy(stari, noviNiz, dvoznambroj);
