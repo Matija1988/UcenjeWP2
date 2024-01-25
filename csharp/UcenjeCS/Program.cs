@@ -57,9 +57,10 @@
 
 //V02LjubavniKalkulator.Izvedi();
 
-UcenjeCS.E12KlasaObjekt.Program.E04LjubavniPoziv(); 
+//UcenjeCS.E12KlasaObjekt.Program.E04LjubavniPoziv(); 
 
-
+//UcenjeCS.E14Polimorfizam.Program.Izvedi(); 
 
 //UcenjeCS.E13Nasljedivanje.Program.Izvedi(); 
 
+new UcenjeCS.E15KonzolnaAplikacija.Program();
