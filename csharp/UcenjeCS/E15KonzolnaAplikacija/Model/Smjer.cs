@@ -13,12 +13,13 @@ namespace UcenjeCS.E15KonzolnaAplikacija.Model
         public int BrojSati { get; set; }
 
         public float Cijena { get; set; }
-        public float Upisinina { get; set; }
+        public float Upisnina { get; set; }
         public bool Verificiran { get; set; }
 
         public override string ToString()
         {
-            return Naziv;
+            return Naziv + " || " + "Broj sati: " + BrojSati + " || " + "Cijena: " + Cijena + " EUR" + " || " + "Upisnina: " + Upisnina + " EUR" + " || " + "Verificiran: " + Verificiran;
+
         }
     }
 }

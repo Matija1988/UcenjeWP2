@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 using UcenjeCS.E15KonzolnaAplikacija.Model;
 
@@ -10,18 +12,20 @@ namespace UcenjeCS.E15KonzolnaAplikacija
     internal class Program
     {
         private List<Smjer> Smjerovi;
+        private List<Predavac> Predavaci;
 
         public Program() {
 
 
             Smjerovi  = new List<Smjer>();
+            Predavaci = new List<Predavac>();
             PozdravnaPoruka();
             Izbornik();
         }
 
         private void Izbornik()
         {
-            Console.WriteLine("\n" + "Izbornik" + "\n" + "****************");
+            Console.WriteLine("\n" + "Izbornik" + "\n" + "*********************");
             Console.WriteLine("1. Rad sa smjerovima");
             Console.WriteLine("2. Rad s predavacima");
             Console.WriteLine("3. Rad s polaznicima");
@@ -38,7 +42,7 @@ namespace UcenjeCS.E15KonzolnaAplikacija
             {
 
                 case 1:
-                    Console.WriteLine("Izabrali ste rad s smjerovima" + "\n" + "*********************");
+                    Console.WriteLine("\n" + "Izabrali ste rad s smjerovima" + "\n" + "*********************");
                     IzbornikRadSaSmjerovima(); 
                     break;
                 case 2:
@@ -51,9 +55,11 @@ namespace UcenjeCS.E15KonzolnaAplikacija
                     break;
                 case 4:
                     Console.WriteLine("Izabrali ste rad s grupama");
+                    IzbornikRadSGrupama(); 
                     break;
                 case 5:
                     Console.WriteLine("Izlaz iz programa");
+                    Environment.Exit(0);
                     break;
                 default:
                    Console.WriteLine("Krivi odabir");
@@ -113,17 +119,41 @@ namespace UcenjeCS.E15KonzolnaAplikacija
         private void IzbrisiSmjer()
         {
             PrikaziSmjerove();
+
+            try { 
             Smjerovi.RemoveAt(Pomocno.UcitajInt("Odaberi smjer za brisanje: ") - 1);
+            }
+            catch {
+
+                Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!! " + "Nepostoji smjer pod odabranom sifrom" + " !!!!!!!!!!!!!!!!!!!!!!");
+                Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!! " + " Provjerite ispravnost svoga unosa" + " !!!!!!!!!!!!!!!!!!!!!!!!");
+                IzbrisiSmjer(); 
+                
+            }
             IzbornikRadSaSmjerovima();
         }
 
         private void UrediSmjer()
         {
             PrikaziSmjerove();
+
+            try { 
             var s = Smjerovi[Pomocno.UcitajInt("Odaberi smjer za promjenu: ") - 1];
-            s.Sifra = Pomocno.UcitajInt(s.Sifra + " Unesi promijenjenu sifru: ");
-            s.Naziv = Pomocno.UcitajString(s.Naziv + " Unesi promijenjeni naziv: ");
-            // promijeniti ostale vrijednosti
+            s.Sifra = Pomocno.UcitajInt("\n" + "_______________________________________" + "\n"  + "Stara sifra: " + s.Sifra + "\n" + "Unesi promijenjenu sifru: ");
+            s.Naziv = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Stara sifra: " + s.Naziv + "\n" +  "Unesi promijenjeni naziv: ");
+            s.BrojSati = Pomocno.UcitajInt("\n" + "_______________________________________" + "\n" + "Stara broj sati: " + s.BrojSati + "\n"+ "Unesi novi broj sati: "); 
+            s.Cijena = Pomocno.UcitajFloat("\n" + "_______________________________________" + "\n" + "Stara sifra: " + s.Cijena + "\n" + "Unesi promijenjenu cijenu: "); 
+            s.Upisnina = Pomocno.UcitajFloat("\n" + "_______________________________________" + "\n" + "Stara upisnina: " + s.Upisnina + "\n" + "Unesi novu upisninu: ");
+            s.Verificiran = Pomocno.UcitajBool("\n" + "_______________________________________" + "\n" + "Staro stranje: " + s.Verificiran + "\n" + "Novo stanje: ");
+            } 
+            catch {
+
+                Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!! " + "Nepostoji smjer pod odabranom sifrom" + " !!!!!!!!!!!!!!!!!!!!!!");
+                Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!! " + " Provjerite ispravnost svoga unosa" + " !!!!!!!!!!!!!!!!!!!!!!!!");
+                UrediSmjer();
+
+            }
+         
             IzbornikRadSaSmjerovima();
         }
 
@@ -137,31 +167,44 @@ namespace UcenjeCS.E15KonzolnaAplikacija
         {
             Smjerovi.Add(new Smjer()
             {
-                Sifra = Pomocno.UcitajInt("Unesi sifru smjera: " ),
+                Sifra = Pomocno.UcitajInt("Unesi sifru smjera: "),
                 Naziv = Pomocno.UcitajString("Unesi naziv smjera: "),
-                // Ucitati ostale vrijednosti
-                
-            });
+                BrojSati = Pomocno.UcitajInt("Broj sati: "),
+                Cijena = Pomocno.UcitajFloat("Unesi cijenu smjera: "),
+                Upisnina = Pomocno.UcitajFloat("Unesi upisninu: "),
+                Verificiran = Pomocno.UcitajBool("Verificirani tecaj: " + "\n" + "1) Verificiran" + "\n" + "2) Neverificiran" + "\n" + "Izbor: ")
+
+
+            }); 
 
             IzbornikRadSaSmjerovima();
         }
 
         private void IzbornikRadSPredavacima()
         {
-            Console.WriteLine("Izbornik smjerovi" + "\n" + "*************************");
+            Console.WriteLine("\n" + "Izbornik predavaci" + "\n" + "*************************");
             Console.WriteLine("1. Prikazi sve predavace");
             Console.WriteLine("2. Dodaj predavaca");
             Console.WriteLine("3. Uredi predavaca");
             Console.WriteLine("4. Izbrisi predavaca");
             Console.WriteLine("5. Povratak na glavni izbornik");
 
+          OdabirIzbornikRadSPredavacima();
+
+        }
+
+        private void OdabirIzbornikRadSPredavacima()
+        {
             switch (Pomocno.UcitajInt("Unesite svoj izbor: "))
             {
                 case 1:
                     Console.WriteLine("Prikazujem sve predavace" + "\n");
+                    PrikaziPredavace();
+                    IzbornikRadSPredavacima();
                     break;
                 case 2:
                     Console.WriteLine("Dodajem predavaca" + "\n");
+                    DodajNovogPredavaca(); 
                     break;
                 case 3:
                     Console.WriteLine("Uredujem predavaca" + "\n");
@@ -177,18 +220,42 @@ namespace UcenjeCS.E15KonzolnaAplikacija
                     IzbornikRadSPredavacima();
                     break;
             }
+        }
 
+        private void PrikaziPredavace ()
+        {
+            var i = 0;
+            Predavaci.ForEach(p => { Console.WriteLine(++i + ". " + p); });
+        }
+
+        private void DodajNovogPredavaca ()
+        {
+            Predavaci.Add(new Predavac()
+            {
+                Sifra = Pomocno.UcitajInt("Unesi sifru: "),
+                Ime = Pomocno.UcitajString("Unesi ime predavaca: "),
+                Prezime = Pomocno.UcitajString("Unesi prezime predavaca: "),
+                Oib = Pomocno.UcitajOIB("OIB: ")
+
+            }); 
+
+            IzbornikRadSPredavacima(); 
         }
 
         private void IzbornikRadSPolaznicima()
         {
-            Console.WriteLine("Izbornik polaznici" + "\n" + "**************");
+            Console.WriteLine("\n" + "Izbornik polaznici" + "\n" + "**************");
             Console.WriteLine("1. Prikazi sve polaznike");
             Console.WriteLine("2. Dodaj polaznika");
             Console.WriteLine("3. Uredi polaznika");
             Console.WriteLine("4. Izbrisi polaznika");
             Console.WriteLine("5. Povratak na glavni izbornik");
 
+            OdabirRadSPolaznicima();
+        }
+
+        private void OdabirRadSPolaznicima()
+        {
             switch (Pomocno.UcitajInt("Unesite svoj izbor: "))
             {
                 case 1:
@@ -202,6 +269,44 @@ namespace UcenjeCS.E15KonzolnaAplikacija
                     break;
                 case 4:
                     Console.WriteLine("Izbrisi polaznika");
+                    break;
+                case 5:
+                    Izbornik();
+                    break;
+                default:
+                    Console.WriteLine("Krivi unos");
+                    IzbornikRadSPolaznicima();
+                    break;
+            }
+        }
+
+        private void IzbornikRadSGrupama()
+        {
+            Console.WriteLine("\n" + "Izbornik grupe" + "\n" + "**************");
+            Console.WriteLine("1. Prikazi sve grupe");
+            Console.WriteLine("2. Dodaj grupu");
+            Console.WriteLine("3. Uredi grupu");
+            Console.WriteLine("4. Izbrisi grupu");
+            Console.WriteLine("5. Povratak na glavni izbornik");
+
+            OdabirRadSGrupama();
+        }
+
+        private void OdabirRadSGrupama ()
+        {
+            switch (Pomocno.UcitajInt("Unesite svoj izbor: "))
+            {
+                case 1:
+                    Console.WriteLine("Prikazujem sve grupe");
+                    break;
+                case 2:
+                    Console.WriteLine("Dodajem grupu");
+                    break;
+                case 3:
+                    Console.WriteLine("Uredujem grupu");
+                    break;
+                case 4:
+                    Console.WriteLine("Izbrisi grupu");
                     break;
                 case 5:
                     Izbornik();
