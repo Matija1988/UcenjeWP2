@@ -108,29 +108,39 @@ namespace UcenjeCS.E15KonzolnaAplikacija
         internal static string UcitajOIB (string v)
         {
             string oib;
-            bool prolaz = false; 
+            
+           
             while (true)
             {
+                
                 Console.Write(v);
                 oib = Console.ReadLine();
-                          
+                bool prolaz = true;
                 foreach (char c in oib)
                 {
                     if(!char.IsNumber(c) && !char.IsDigit(c) && !char.IsControl(c))
                     {
                         Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!! UNOSITE SAMO BROJEVE !!!!!!!!!!!!!!!!!!!!!!!");
-                        prolaz = false;
+                        prolaz = false; 
                         break; 
                     }
+                  
                 }
 
-                if (oib.Trim().Length == 0 || oib.Length != 11 && prolaz == true)
+                
+
+                if (oib.Length == 11 && prolaz == true)
                 {
-                    Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!! " + "Obavezan unos" + "!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                   
+                    return oib;
+                } else
+                {
+                    Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!! " + "Obavezan unos " + "!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                     Console.WriteLine("!!!!!!!!!!!!!!! " + "Provjerite ispravnost svog unosa" + " !!!!!!!!!!!!!!!!");
-                    continue;
+                    
                 }
-                return oib;
+
+                
             }
         }
     }

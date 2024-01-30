@@ -13,6 +13,7 @@ namespace UcenjeCS.E15KonzolnaAplikacija
     {
         private List<Smjer> Smjerovi;
         private List<Predavac> Predavaci;
+        private List<Polaznik> Polaznici;
 
         public Program() {
 
@@ -125,7 +126,7 @@ namespace UcenjeCS.E15KonzolnaAplikacija
             }
             catch {
 
-                Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!! " + "Nepostoji smjer pod odabranom sifrom" + " !!!!!!!!!!!!!!!!!!!!!!");
+                Console.WriteLine("!!!!!!!!!!!!!!!!!!!!! " + "Ne postoji smjer pod odabranom sifrom" + " !!!!!!!!!!!!!!!!!!!!!!");
                 Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!! " + " Provjerite ispravnost svoga unosa" + " !!!!!!!!!!!!!!!!!!!!!!!!");
                 IzbrisiSmjer(); 
                 
@@ -148,7 +149,7 @@ namespace UcenjeCS.E15KonzolnaAplikacija
             } 
             catch {
 
-                Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!! " + "Nepostoji smjer pod odabranom sifrom" + " !!!!!!!!!!!!!!!!!!!!!!");
+                Console.WriteLine("!!!!!!!!!!!!!!!!!!!!! " + "Ne postoji smjer pod odabranom sifrom" + " !!!!!!!!!!!!!!!!!!!!!!");
                 Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!! " + " Provjerite ispravnost svoga unosa" + " !!!!!!!!!!!!!!!!!!!!!!!!");
                 UrediSmjer();
 
@@ -198,19 +199,21 @@ namespace UcenjeCS.E15KonzolnaAplikacija
             switch (Pomocno.UcitajInt("Unesite svoj izbor: "))
             {
                 case 1:
-                    Console.WriteLine("Prikazujem sve predavace" + "\n");
+                    Console.WriteLine("\n"+"Prikazujem sve predavace" + "\n");
                     PrikaziPredavace();
                     IzbornikRadSPredavacima();
                     break;
                 case 2:
-                    Console.WriteLine("Dodajem predavaca" + "\n");
+                    Console.WriteLine("\n"+"Dodajem predavaca" + "\n");
                     DodajNovogPredavaca(); 
                     break;
                 case 3:
-                    Console.WriteLine("Uredujem predavaca" + "\n");
+                    Console.WriteLine("\n" + "Uredujem predavaca" + "\n");
+                    UrediPredavaca(); 
                     break;
                 case 4:
-                    Console.WriteLine("Izbrisi predavaca" + "\n");
+                    Console.WriteLine("\n" + "Brisem predavaca" + "\n");
+                    IzbrisiPredavaca(); 
                     break;
                 case 5:
                     Izbornik();
@@ -222,7 +225,44 @@ namespace UcenjeCS.E15KonzolnaAplikacija
             }
         }
 
-        private void PrikaziPredavace ()
+        private void IzbrisiPredavaca ()
+        {
+            try { 
+            Predavaci.RemoveAt(Pomocno.UcitajInt("Izbrisi predavaca: ") -1);
+            } catch
+            {
+                Console.WriteLine("!!!!!!!!!!!!!!!!!!!! " + "Ne postoji predavac pod odabranom sifrom" + " !!!!!!!!!!!!!!!!!!!!");
+                Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!! " + " Provjerite ispravnost svoga unosa" + " !!!!!!!!!!!!!!!!!!!!!!!!");
+                IzbrisiPredavaca();
+            }
+            IzbornikRadSPredavacima();
+        }
+
+        private void UrediPredavaca()
+        {
+            PrikaziPredavace();
+
+            try
+            {
+                var p = Predavaci[Pomocno.UcitajInt("Odaberi predavaca za izmjene: ") - 1];
+                p.Sifra = Pomocno.UcitajInt("\n" + "_______________________________________" + "\n"  + "Stara sifra: " + p.Sifra + "\n" + "Unesi promijenjenu sifru: ");
+                p.Ime = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Staro ime: " + p.Ime + "\n" + "Unesi promijenjeno ime: ");
+                p.Prezime = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Staro prezime: " + p.Prezime + "\n" + "Unesi promijenjeno prezime: ");
+                p.Oib = Pomocno.UcitajOIB("\n" + "_______________________________________" + "\n" + "Stari OIB: " + p.Oib + "\n" + "Unesi promijenjeni OIB: ");
+                p.Email = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Stari email: " + p.Email + "\n" + "Unesi promijenjeni email: ");
+                
+
+            } catch 
+            {
+
+                Console.WriteLine("!!!!!!!!!!!!!!!!!!! " + "Ne postoji predavac pod odabranom sifrom" + " !!!!!!!!!!!!!!!!!!!!!");
+                Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!! " + " Provjerite ispravnost svoga unosa" + " !!!!!!!!!!!!!!!!!!!!!!!!");
+                UrediPredavaca();
+            }
+            IzbornikRadSPredavacima();
+        }
+
+        private void PrikaziPredavace()
         {
             var i = 0;
             Predavaci.ForEach(p => { Console.WriteLine(++i + ". " + p); });
@@ -235,7 +275,8 @@ namespace UcenjeCS.E15KonzolnaAplikacija
                 Sifra = Pomocno.UcitajInt("Unesi sifru: "),
                 Ime = Pomocno.UcitajString("Unesi ime predavaca: "),
                 Prezime = Pomocno.UcitajString("Unesi prezime predavaca: "),
-                Oib = Pomocno.UcitajOIB("OIB: ")
+                Oib = Pomocno.UcitajOIB("OIB: "),
+                Email = Pomocno.UcitajString("Email: ") 
 
             }); 
 
