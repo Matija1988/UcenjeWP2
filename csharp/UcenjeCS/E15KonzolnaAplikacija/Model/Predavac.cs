@@ -12,7 +12,7 @@ namespace UcenjeCS.E15KonzolnaAplikacija.Model
 
         public override string ToString ()
         {
-            return Ime + " || " + Prezime + " || " + Oib + " || " + Email + " || " + IBAN;
+            return  Ime + " " +  Prezime + " || " + "OIB: " + Oib + " || " + "Email: " + Email + " || " + "IBAN: " + IBAN;
         }
 
     }

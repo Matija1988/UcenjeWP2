@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,7 +25,12 @@ namespace UcenjeCS.E15KonzolnaAplikacija.Model
 
         public override string ToString ()
         {
-            return Smjer.Naziv + " || " + Naziv + " || " + Predavac.Ime + " " + Predavac.Prezime + " || " + "Maksimalno plaznika " + MaksPolaznika + " || " + "Datum pocetka " + DatumPocetka + "\n";
+
+
+            return new StringBuilder(Smjer.Naziv).Append(" || " + Naziv + " || " + Predavac.Ime + " " + Predavac.Prezime + " || " + "Maksimalno polaznika: " + MaksPolaznika + " || " + "Datum pocetka: " + DatumPocetka).ToString(); 
         }
+        // new StringBuilder(Smjer.Naziv).Append(" || ").Append(Naziv).Append(" || ")
+               // .Append (Predavac.Ime).Append (" ").Append (Predavac.Prezime).Append (" || ").Append ("Maksimalno polaznika: ").Append (MaksPolaznika).Append (" || ").Append ("Datum pocetka: ").Append (DatumPocetka).ToString ();
+        // Smjer.Naziv + " || " + Naziv + " || " + Predavac.Ime + " " + Predavac.Prezime + " || " + "Maksimalno plaznika: " + MaksPolaznika + " || " + "Datum pocetka: " + DatumPocetka + "\n";
     }
 }

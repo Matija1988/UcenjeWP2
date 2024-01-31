@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
@@ -133,7 +134,9 @@ namespace UcenjeCS.E15KonzolnaAplikacija
 
         private void Izbornik()
         {
-            Console.WriteLine("\n" + "Izbornik" + "\n" + "*********************");
+            Console.WriteLine("\n" + "Izbornik" + 
+                              "\n" +
+                              "*****************************************************************");
             Console.WriteLine("1. Rad sa smjerovima");
             Console.WriteLine("2. Rad s predavacima");
             Console.WriteLine("3. Rad s polaznicima");
@@ -150,7 +153,9 @@ namespace UcenjeCS.E15KonzolnaAplikacija
             {
 
                 case 1:
-                    Console.WriteLine("\n" + "Izabrali ste rad s smjerovima" + "\n" + "*********************");
+                    Console.WriteLine("\n" + "Izabrali ste rad s smjerovima" + 
+                                      "\n" +
+                                      "*****************************************************************");
                     IzbornikRadSaSmjerovima(); 
                     break;
                 case 2:
@@ -181,7 +186,9 @@ namespace UcenjeCS.E15KonzolnaAplikacija
 
         private void IzbornikRadSaSmjerovima()
         {
-            Console.WriteLine("\n" + "Izbornik smjerovi" + "\n" + "*******************");
+            Console.WriteLine("\n" + "Izbornik smjerovi" + 
+                              "\n" +
+                              "*****************************************************************");
             Console.WriteLine("1. Prikazi sve smjerove");
             Console.WriteLine("2. Dodaj smjer");
             Console.WriteLine("3. Uredi smjer");
@@ -258,12 +265,29 @@ namespace UcenjeCS.E15KonzolnaAplikacija
 
             try { 
             var s = Smjerovi[Pomocno.UcitajInt("Odaberi smjer za promjenu: ") - 1];
-            s.Sifra = Pomocno.UcitajInt("\n" + "_______________________________________" + "\n"  + "Stara sifra: " + s.Sifra + "\n" + "Unesi promijenjenu sifru: ");
-            s.Naziv = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Stara sifra: " + s.Naziv + "\n" +  "Unesi promijenjeni naziv: ");
-            s.BrojSati = Pomocno.UcitajInt("\n" + "_______________________________________" + "\n" + "Stara broj sati: " + s.BrojSati + "\n"+ "Unesi novi broj sati: "); 
-            s.Cijena = Pomocno.UcitajFloat("\n" + "_______________________________________" + "\n" + "Stara sifra: " + s.Cijena + "\n" + "Unesi promijenjenu cijenu: "); 
-            s.Upisnina = Pomocno.UcitajFloat("\n" + "_______________________________________" + "\n" + "Stara upisnina: " + s.Upisnina + "\n" + "Unesi novu upisninu: ");
-            s.Verificiran = Pomocno.UcitajBool("\n" + "_______________________________________" + "\n" + "Staro stranje: " + s.Verificiran + "\n" + "Novo stanje: ");
+
+                int sifra = Pomocno.UcitajInt("\n" + "_______________________________________" + "\n" + "Stara sifra: " + s.Sifra + "\n" + "Nova sifra: ");
+                string naziv = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Stari naziv: " + s.Naziv + "\n" + "Novi naziv: ");
+                int brojSati = Pomocno.UcitajInt("\n" + "_______________________________________" + "\n" + "Stari broj sati: " + s.BrojSati + "\n" + "Novi broj sati: ");
+                float cijena = Pomocno.UcitajFloat("\n" + "_______________________________________" + "\n" + "Stara cijena: " + s.Cijena + "\n" + "Nova cijena: ");
+                float upisnina = Pomocno.UcitajFloat("\n" + "_______________________________________" + "\n" + "Stara upisnina: " + s.Upisnina + "\n" + "Nova upisnina: ");
+                bool verificiran = Pomocno.UcitajBool("\n" + "_______________________________________" + "\n" + "Prijasnja verifikacija: " + s.Verificiran + "\n" + "Nova verifikacija: 1) DA / 2) NE | ");
+
+                bool potvrda = Pomocno.UcitajBool("\n" + "Promijeniti informacije polaznika " + "\n" +
+                                                  "\n" + "Prijasnji unos: " + s + "\n" +
+                                                  "Novi unos: " + naziv + " || " + "Novi broj sati: " + brojSati + " || " + "Nova cijena: " + cijena + " || " + "Nova upisnina: " + upisnina + " || " + "Verificiran: " + verificiran + "\n" +
+                                                  "1) DA / 2) NE | ");
+
+                if (potvrda == true)
+                {
+
+                    s.Sifra = sifra;
+                    s.Naziv = naziv;
+                    s.BrojSati = brojSati;
+                    s.Cijena = cijena;
+                    s.Upisnina = upisnina;
+                    s.Verificiran = verificiran;
+                }
             } 
             catch {
 
@@ -284,9 +308,18 @@ namespace UcenjeCS.E15KonzolnaAplikacija
         }
         private void DodajNoviSmjer()
         {
+            int sifra = Pomocno.UcitajInt("Unesi sifru smjera: ");
+
+            // provjera ID
+
+                Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!!!! " + " Ova sifra se koristi " + " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!!!! " + " Unesite drugu sifru " + " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                
+           
             Smjerovi.Add(new Smjer()
             {
-                Sifra = Pomocno.UcitajInt("Unesi sifru smjera: "),
+              
+                Sifra = sifra,
                 Naziv = Pomocno.UcitajString("Unesi naziv smjera: "),
                 BrojSati = Pomocno.UcitajInt("Broj sati: "),
                 Cijena = Pomocno.UcitajFloat("Unesi cijenu smjera: "),
@@ -294,14 +327,16 @@ namespace UcenjeCS.E15KonzolnaAplikacija
                 Verificiran = Pomocno.UcitajBool("Verificirani tecaj: " + "\n" + "1) Verificiran" + "\n" + "2) Neverificiran" + "\n" + "Izbor: ")
 
 
-            }); 
-
+            });
+            
             IzbornikRadSaSmjerovima();
         }
 
         private void IzbornikRadSPredavacima()
         {
-            Console.WriteLine("\n" + "Izbornik predavaci" + "\n" + "*************************");
+            Console.WriteLine("\n" + "Izbornik predavaci" + 
+                              "\n" +
+                              "*****************************************************************");
             Console.WriteLine("1. Prikazi sve predavace");
             Console.WriteLine("2. Dodaj predavaca");
             Console.WriteLine("3. Uredi predavaca");
@@ -373,12 +408,29 @@ namespace UcenjeCS.E15KonzolnaAplikacija
             try
             {
                 var p = Predavaci[Pomocno.UcitajInt("Odaberi predavaca za izmjene: ") - 1];
-                p.Sifra = Pomocno.UcitajInt("\n" + "_______________________________________" + "\n"  + "Stara sifra: " + p.Sifra + "\n" + "Unesi promijenjenu sifru: ");
-                p.Ime = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Staro ime: " + p.Ime + "\n" + "Unesi promijenjeno ime: ");
-                p.Prezime = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Staro prezime: " + p.Prezime + "\n" + "Unesi promijenjeno prezime: ");
-                p.Oib = Pomocno.UcitajOIB("\n" + "_______________________________________" + "\n" + "Stari OIB: " + p.Oib + "\n" + "Unesi promijenjeni OIB: ");
-                p.Email = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Stari email: " + p.Email + "\n" + "Unesi promijenjeni email: ");
-                p.IBAN = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Stari IBAN: " + p.IBAN + "\n" + "Unesi novi IBAN: ");
+
+                int sifra = Pomocno.UcitajInt("\n" + "_______________________________________" + "\n" + "Stara sifra: " + p.Sifra + "\n" + "Nova sifra: ");
+                string ime = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Staro ime: " + p.Ime + "\n" + "Novo ime: ");
+                string prezime = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Staro prezime: " + p.Prezime + "\n" + "Novo prezime: ");
+                string oib = Pomocno.UcitajOIB("\n" + "_______________________________________" + "\n" + "Stari OIB: " + p.Oib + "\n" + "Novi OIB: ");
+                string email = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Stari email: " + p.Email + "\n" + "Novi email: ");
+                string iban = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Stari IBAN: " + p.IBAN + "\n" + "Novi IBAN: ");
+
+                bool potvrda = Pomocno.UcitajBool("\n" + "Promijeniti informacije polaznika " + "\n" +
+                                                  "\n" + "Prijasnji unos: " + p + "\n" +
+                                                  "Novi unos: " + ime + " || " + "Novo prezime: " + prezime + " || " + "Novi OIB: " + oib + " || " + "Novi emial: " + email + " || " + "Novi IBAN: " + iban + "\n" +
+                                                  "1) DA / 2) NE | ");
+
+                if (potvrda == true)
+                {
+                    p.Sifra = sifra;
+                    p.Ime = ime;
+                    p.Prezime = prezime;
+                    p.Oib = oib;
+                    p.Email = email;
+                    p.IBAN = iban;
+
+                }
 
             } catch 
             {
@@ -414,7 +466,9 @@ namespace UcenjeCS.E15KonzolnaAplikacija
 
         private void IzbornikRadSPolaznicima()
         {
-            Console.WriteLine("\n" + "Izbornik polaznici" + "\n" + "***********************");
+            Console.WriteLine("\n" + "Izbornik polaznici" + 
+                              "\n" +
+                              "*****************************************************************");
             Console.WriteLine("1. Prikazi sve polaznike");
             Console.WriteLine("2. Dodaj polaznika");
             Console.WriteLine("3. Uredi polaznika");
@@ -480,14 +534,36 @@ namespace UcenjeCS.E15KonzolnaAplikacija
 
             try
             {
-                var polaznik = Polaznici[Pomocno.UcitajInt("Odaberi polaznika za izmjenu: ") - 1];
-                polaznik.Sifra = Pomocno.UcitajInt("\n" + "_______________________________________" + "\n" + "Stara sifra: " + polaznik.Sifra + "\n" + "Unesi promijenjenu sifru: ");
-                polaznik.Ime = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Staro ime: " + polaznik.Ime + "\n" + "Unesi promijenjeno ime: ");
-                polaznik.Prezime = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Staro prezime: " + polaznik.Prezime + "\n" + "Unesi promijenjeno prezime: ");
-                polaznik.Oib = Pomocno.UcitajOIB("\n" + "_______________________________________" + "\n" + "Stari OIB: " + polaznik.Oib + "\n" + "Unesi promijenjeni OIB: ");
-                polaznik.BrojUgovora = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Stari broj ugovora: " + polaznik.BrojUgovora + "\n" + "Unesi promijenjeni broj ugovora: ");
 
-            } catch
+                int a = Pomocno.UcitajInt("Odaberi polaznika za izmjenu: ") - 1;
+
+                var polaznik = Polaznici[a];
+
+                int sifra = Pomocno.UcitajInt("\n" + "_______________________________________" + "\n" + "Stara sifra: " + polaznik.Sifra + "\n" + "Nova sifra: ");
+                string ime = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Staro ime: " + polaznik.Ime + "\n" + "Novo ime: ");
+                string prezime = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Staro prezime: " + polaznik.Prezime + "\n" + "Novo prezime: ");
+                string oib = Pomocno.UcitajOIB("\n" + "_______________________________________" + "\n" + "Stari OIB: " + polaznik.Oib + "\n" + "Novi OIB: ");
+                string email = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Stari email: " + polaznik.Email + "\n" + "Novi email: ");
+                string brojUgovora = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Stari broj ugovora: " + polaznik.BrojUgovora + "\n" + "Novi broj ugovora: ");
+
+                bool potvrda = Pomocno.UcitajBool("\n" + "Promijeniti informacije polaznika " + "\n" +
+                                                  "\n" + "Prijasnji unos: " + polaznik + "\n" +
+                                                  "Novi unos: " + ime + " " + prezime + " || " + oib + " || " + email + " || " + brojUgovora + "\n" + 
+                                                  "1) DA / 2) NE | "); 
+
+                if(potvrda == true) { 
+
+                polaznik.Sifra = sifra;
+                polaznik.Ime = ime;
+                polaznik.Prezime = prezime;
+                polaznik.Oib = oib;
+                polaznik.BrojUgovora = brojUgovora;
+
+                }
+
+
+            }
+            catch
             {
 
                 Console.WriteLine("!!!!!!!!!!!!!!!!!!! " + "Ne postoji polaznik pod odabranom sifrom" + " !!!!!!!!!!!!!!!!!!!!!");
@@ -523,7 +599,9 @@ namespace UcenjeCS.E15KonzolnaAplikacija
 
         private void IzbornikRadSGrupama()
         {
-            Console.WriteLine("\n" + "Izbornik grupe" + "\n" + "**************");
+            Console.WriteLine("\n" + "Izbornik grupe" + 
+                              "\n" + 
+                              "*****************************************************************");
             Console.WriteLine("1. Prikazi sve grupe");
             Console.WriteLine("2. Dodaj grupu");
             Console.WriteLine("3. Uredi grupu");
@@ -633,13 +711,15 @@ namespace UcenjeCS.E15KonzolnaAplikacija
             int i = Pomocno.UcitajInt("Odaberi redni broj grupe: ");
             var g = Grupe[i - 1];
 
-            int sifra = Pomocno.UcitajInt("\n" + "_______________________________________" + "\n" + "Stara sifra: " + g.Sifra + "\n" + "Unesi promijenjenu sifru: ");
+            int sifra    = Pomocno.UcitajInt("\n" + "------------------------------------------------------------------------------" + 
+                                             "\n" + "Stara sifra: " + g.Sifra + "\n" + "Nova sifra: ");
 
-            string naziv = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Stari naziv: " + g.Naziv + "\n" + "Unesi novi naziv: ");
+            string naziv = Pomocno.UcitajString("\n" + "------------------------------------------------------------------------------" +    
+                                                "\n" + "Stari naziv: " + g.Naziv + "\n" + "Novi naziv: ");
 
             var predavac = PostaviPredavaca(); 
 
-            Console.WriteLine("\n" + "_______________________________________" + "\n" + "Trenutni smjer: {0}", g.Smjer.Naziv);
+            Console.WriteLine("\n" + "------------------------------------------------------------------------------" + "\n" + "Trenutni smjer: {0}", g.Smjer.Naziv);
 
             var smjer = PostaviSmjer();
 
@@ -659,7 +739,14 @@ namespace UcenjeCS.E15KonzolnaAplikacija
            
             var polaznici = PostaviPolaznike();
 
-            bool potvrda = Pomocno.UcitajBool("\n" + "Prihvati izmjene " + "\n" + "1) DA / 2) NE | ");
+            int maksimalnoPolaznika = Pomocno.UcitajInt("Maksimalno plaznika: ");
+            DateTime dateTime = Pomocno.UcitajDatum("Novi datum pocetka: ");
+
+            bool potvrda = Pomocno.UcitajBool("\n" + "Prihvati izmjene: " + "\n" + "\n" +
+                                              "Stari unos: " + g + "\n" +
+                                              "Novi unos: " + smjer.Naziv + " || " + "Nova grupa: " +  naziv + " || " + "Novi predavac: " + predavac.Ime + " " + predavac.Prezime +  " || " +
+                                              "Maksimalno polaznika: " + maksimalnoPolaznika + " || " + "Novi datum pocetka: " + dateTime + "\n" + 
+                                              "1) DA / 2) NE | ") ;
 
             if(potvrda== true) {  
 
