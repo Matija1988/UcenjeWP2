@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
@@ -142,6 +143,52 @@ namespace UcenjeCS.E15KonzolnaAplikacija
 
                 
             }
+        }
+
+        internal static DateTime UcitajDatum (string v)
+        {
+            while (true)
+            {
+                try
+                {
+                    Console.Write(v);
+                    return DateTime.Parse(Console.ReadLine());
+
+                }
+                catch (Exception ex){
+                    Console.WriteLine("!!!!!!!!!!!!!!! " + "Provjerite ispravnost svog unosa" + " !!!!!!!!!!!!!!!!");
+
+                }
+            }
+        }
+
+        internal static int UcitajRasponBrojeva (string poruka, int pocetakNiza, int krajNiza)
+        {
+            int b;
+
+            while (true)
+            {
+                Console.Write(poruka);
+                try
+                {
+                    b = int.Parse(Console.ReadLine());
+                    if(b >= pocetakNiza && b <= krajNiza)
+                    {
+                        return b;
+                    }
+                    Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! POGRESKA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                    Console.WriteLine("!!!!!!!!!!!!!!! " + "Provjerite ispravnost svog unosa" + " !!!!!!!!!!!!!!!!");
+
+                } catch 
+                {
+
+                    Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! POGRESKA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                    Console.WriteLine("!!!!!!!!!!!!!!! " + "Provjerite ispravnost svog unosa" + " !!!!!!!!!!!!!!!!");
+
+                }
+
+            }
+
         }
     }
 }

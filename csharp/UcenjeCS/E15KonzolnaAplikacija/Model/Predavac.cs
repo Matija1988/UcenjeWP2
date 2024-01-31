@@ -10,5 +10,10 @@ namespace UcenjeCS.E15KonzolnaAplikacija.Model
     {
         public string IBAN { get; set; }
 
+        public override string ToString ()
+        {
+            return Ime + " || " + Prezime + " || " + Oib + " || " + Email + " || " + IBAN;
+        }
+
     }
 }
