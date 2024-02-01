@@ -118,7 +118,7 @@ namespace UcenjeCS.E15KonzolnaAplikacija
 
             Smjerovi.Add(new Smjer()
             {
-                Sifra = 1,
+                Sifra = 2,
                 Naziv = "Java programiranje",
                 BrojSati = 225,
                 Cijena = 1235,
@@ -170,6 +170,7 @@ namespace UcenjeCS.E15KonzolnaAplikacija
                     Console.WriteLine("Izabrali ste rad s grupama");
                     IzbornikRadSGrupama(); 
                     break;
+                  
                 case 5:
                     Console.WriteLine("Izlaz iz programa");
                     Environment.Exit(0);
@@ -182,7 +183,15 @@ namespace UcenjeCS.E15KonzolnaAplikacija
 
         }
 
-       
+        private void UcitajUkupanBrojPolaznika(List<Grupa> Grupe)
+        {
+            int a = 0;
+         
+            Grupe.ForEach(Grupa => { Console.WriteLine("Trenutno nastavu pohada " + Grupa.Polaznici.Count() + " polaznika u " + ++a + " grupe"); });
+
+            IzbornikRadSGrupama();
+
+        }
 
         private void IzbornikRadSaSmjerovima()
         {
@@ -251,8 +260,8 @@ namespace UcenjeCS.E15KonzolnaAplikacija
             }
             catch {
 
-                Console.WriteLine("!!!!!!!!!!!!!!!!!!!!! " + "Ne postoji smjer pod odabranom sifrom" + " !!!!!!!!!!!!!!!!!!!!!!");
-                Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!! " + " Provjerite ispravnost svoga unosa" + " !!!!!!!!!!!!!!!!!!!!!!!!");
+                Console.WriteLine("\n" + "!!!!!!!!!!!!!!!!!!!!! " + "Ne postoji smjer pod odabranom sifrom" + " !!!!!!!!!!!!!!!!!!!!!!");
+                Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!! " + " Provjerite ispravnost svoga unosa" + " !!!!!!!!!!!!!!!!!!!!!!!!" + "\n");
                 IzbrisiSmjer(); 
                 
             }
@@ -264,9 +273,20 @@ namespace UcenjeCS.E15KonzolnaAplikacija
             PrikaziSmjerove();
 
             try { 
-            var s = Smjerovi[Pomocno.UcitajInt("Odaberi smjer za promjenu: ") - 1];
+            var s = Smjerovi[Pomocno.UcitajInt("\n" + "Odaberi smjer za promjenu: ") - 1];
 
                 int sifra = Pomocno.UcitajInt("\n" + "_______________________________________" + "\n" + "Stara sifra: " + s.Sifra + "\n" + "Nova sifra: ");
+
+
+                Smjerovi.ForEach(s => {
+                    if (s.Sifra == sifra)
+                    {
+                        Console.WriteLine("\n" + "!!!!!!!!!!!!!!!!!!!!! POSTOJI SMJER SA UNESENOM SIFROM !!!!!!!!!!!!!!!!!!!!!");
+                        DodajNoviSmjer();
+                    }
+                });
+
+
                 string naziv = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Stari naziv: " + s.Naziv + "\n" + "Novi naziv: ");
                 int brojSati = Pomocno.UcitajInt("\n" + "_______________________________________" + "\n" + "Stari broj sati: " + s.BrojSati + "\n" + "Novi broj sati: ");
                 float cijena = Pomocno.UcitajFloat("\n" + "_______________________________________" + "\n" + "Stara cijena: " + s.Cijena + "\n" + "Nova cijena: ");
@@ -308,14 +328,23 @@ namespace UcenjeCS.E15KonzolnaAplikacija
         }
         private void DodajNoviSmjer()
         {
-            int sifra = Pomocno.UcitajInt("Unesi sifru smjera: ");
+            PrikaziSmjerove();
 
-            // provjera ID
+            int sifra = Pomocno.UcitajInt("\n" + "Unesi sifru smjera: ");
 
-                Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!!!! " + " Ova sifra se koristi " + " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!!!! " + " Unesite drugu sifru " + " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                
-           
+
+
+            Smjerovi.ForEach(s =>
+            {
+                if (s.Sifra == sifra)
+                {
+                    Console.WriteLine("\n" + "!!!!!!!!!!!!!!!!!!!!! POSTOJI SMJER SA UNESENOM SIFROM !!!!!!!!!!!!!!!!!!!!!");
+                    DodajNoviSmjer();
+                }
+            });
+
+
+
             Smjerovi.Add(new Smjer()
             {
               
@@ -331,6 +360,8 @@ namespace UcenjeCS.E15KonzolnaAplikacija
             
             IzbornikRadSaSmjerovima();
         }
+
+       
 
         private void IzbornikRadSPredavacima()
         {
@@ -410,6 +441,15 @@ namespace UcenjeCS.E15KonzolnaAplikacija
                 var p = Predavaci[Pomocno.UcitajInt("Odaberi predavaca za izmjene: ") - 1];
 
                 int sifra = Pomocno.UcitajInt("\n" + "_______________________________________" + "\n" + "Stara sifra: " + p.Sifra + "\n" + "Nova sifra: ");
+
+                Predavaci.ForEach(p => {
+                    if (p.Sifra == sifra)
+                    {
+                        Console.WriteLine("\n" + "!!!!!!!!!!!!!!!!!!!!! POSTOJI SMJER SA UNESENOM SIFROM !!!!!!!!!!!!!!!!!!!!!");
+                        DodajNovogPredavaca();
+                    }
+                });
+
                 string ime = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Staro ime: " + p.Ime + "\n" + "Novo ime: ");
                 string prezime = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Staro prezime: " + p.Prezime + "\n" + "Novo prezime: ");
                 string oib = Pomocno.UcitajOIB("\n" + "_______________________________________" + "\n" + "Stari OIB: " + p.Oib + "\n" + "Novi OIB: ");
@@ -450,9 +490,25 @@ namespace UcenjeCS.E15KonzolnaAplikacija
 
         private void DodajNovogPredavaca ()
         {
+            PrikaziPredavace();
+
+            int sifra = Pomocno.UcitajInt("Unesi sifru: ");
+
+
+            Predavaci.ForEach(p => {
+                if (p.Sifra == sifra)
+                {
+                    Console.WriteLine("\n" + "!!!!!!!!!!!!!!!!!!!!! POSTOJI SMJER SA UNESENOM SIFROM !!!!!!!!!!!!!!!!!!!!!");
+                    DodajNovogPredavaca();
+                }
+            });
+
+
+          
+
             Predavaci.Add(new Predavac()
             {
-                Sifra = Pomocno.UcitajInt("Unesi sifru: "),
+                Sifra = sifra,
                 Ime = Pomocno.UcitajString("Unesi ime predavaca: "),
                 Prezime = Pomocno.UcitajString("Unesi prezime predavaca: "),
                 Oib = Pomocno.UcitajOIB("OIB: "),
@@ -463,6 +519,8 @@ namespace UcenjeCS.E15KonzolnaAplikacija
 
             IzbornikRadSPredavacima(); 
         }
+
+      
 
         private void IzbornikRadSPolaznicima()
         {
@@ -540,6 +598,12 @@ namespace UcenjeCS.E15KonzolnaAplikacija
                 var polaznik = Polaznici[a];
 
                 int sifra = Pomocno.UcitajInt("\n" + "_______________________________________" + "\n" + "Stara sifra: " + polaznik.Sifra + "\n" + "Nova sifra: ");
+                if (ProvjeriSifrePolaznika(Polaznici, sifra) == true)
+                {
+
+                    UrediPolaznika();
+
+                }
                 string ime = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Staro ime: " + polaznik.Ime + "\n" + "Novo ime: ");
                 string prezime = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Staro prezime: " + polaznik.Prezime + "\n" + "Novo prezime: ");
                 string oib = Pomocno.UcitajOIB("\n" + "_______________________________________" + "\n" + "Stari OIB: " + polaznik.Oib + "\n" + "Novi OIB: ");
@@ -577,9 +641,19 @@ namespace UcenjeCS.E15KonzolnaAplikacija
 
         private void DodajNovogPolaznika ()
         {
+            PrikaziPolaznike();
+
+            int sifra = Pomocno.UcitajInt("Sifra: ");
+
+            if (ProvjeriSifrePolaznika(Polaznici, sifra) == true) { 
+            
+            DodajNovogPolaznika();
+            
+            }
+
             Polaznici.Add(new Polaznik() 
             {
-                Sifra = Pomocno.UcitajInt("Sifra: "),
+                Sifra = sifra,
                 Ime = Pomocno.UcitajString("Ime: "),
                 Prezime = Pomocno.UcitajString("Prezime: "), 
                 Oib = Pomocno.UcitajOIB("OIB: "),
@@ -589,6 +663,22 @@ namespace UcenjeCS.E15KonzolnaAplikacija
             });
 
             IzbornikRadSPolaznicima(); 
+        }
+
+        private bool ProvjeriSifrePolaznika (List<Polaznik> polaznici, int sifra)
+        {
+            foreach (Polaznik polaznik in Polaznici)
+            {
+                if (polaznik.Sifra.Equals(sifra))
+                {
+                    Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!! " + " Unesena sifra se koristi " + " !!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                    Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! " + " Unesite drugu sifru" + " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                    return true;
+
+                }
+
+            }
+            return false;
         }
 
         private void PrikaziPolaznike ()
@@ -608,7 +698,12 @@ namespace UcenjeCS.E15KonzolnaAplikacija
             Console.WriteLine("4. Izbrisi grupu");
             Console.WriteLine("5. Prikazi sve polaznike grupe");
             Console.WriteLine("6. Izbrisi polaznika iz grupe");
-            Console.WriteLine("7. Povratak na glavni izbornik");
+
+            Console.WriteLine("7. Ukupno polaznika na svim grupama");
+            Console.WriteLine("8. Ukupan iznos prihoda po smjerovima");
+            Console.WriteLine("9. Prosjecan iznos prihoda po polazniku");
+
+            Console.WriteLine("10. Povratak na glavni izbornik");
 
             OdabirRadSGrupama();
         }
@@ -644,6 +739,15 @@ namespace UcenjeCS.E15KonzolnaAplikacija
                     IzbrisiPolaznikaIzGrupe(); 
                     break;
                 case 7:
+                    Console.WriteLine("Ukupan broj polaznika na svim grupama");
+                    UcitajUkupanBrojPolaznika(Grupe);
+
+                    break;
+                case 8:
+                    Console.WriteLine("Ukupan iznos prihoda po smjerovima");
+                    IznosPrihodaPoSmjerovima(); 
+                    break;
+                case 10:
                     Izbornik();
                     break;
                 default:
@@ -651,6 +755,32 @@ namespace UcenjeCS.E15KonzolnaAplikacija
                     IzbornikRadSPolaznicima();
                     break;
             }
+
+        }
+
+        private void IznosPrihodaPoSmjerovima ()
+        {
+            PrikaziSmjerove();
+
+
+            int b = 1;
+            int i = Pomocno.UcitajInt("\n" + "Odaberi redni broj smjera: ");
+            var s = Smjerovi[i - 1];
+
+            float ukupno = 0; 
+
+           foreach(Smjer smjer in Smjerovi)
+            {
+                b++;
+                ukupno = s.Cijena * b; 
+            }
+
+
+
+            Console.WriteLine("Ukupno: "  + ukupno);
+
+           IzbornikRadSGrupama();
+
         }
 
         private void PrikaziSvePolaznikeOdabraneGrupe ()
@@ -714,6 +844,11 @@ namespace UcenjeCS.E15KonzolnaAplikacija
             int sifra    = Pomocno.UcitajInt("\n" + "------------------------------------------------------------------------------" + 
                                              "\n" + "Stara sifra: " + g.Sifra + "\n" + "Nova sifra: ");
 
+            while(ProvjeraSifreGrupe(Grupe, sifra) == true) 
+            {
+                UrediGrupu();
+            }
+
             string naziv = Pomocno.UcitajString("\n" + "------------------------------------------------------------------------------" +    
                                                 "\n" + "Stari naziv: " + g.Naziv + "\n" + "Novi naziv: ");
 
@@ -762,11 +897,19 @@ namespace UcenjeCS.E15KonzolnaAplikacija
             IzbornikRadSGrupama();
         }
 
-        private void DodajNovuGrupu ()
+        private void DodajNovuGrupu()
         {
+
+            int sifra = Pomocno.UcitajInt("Unesi sifru grupe: ");
+
+           if(ProvjeraSifreGrupe(Grupe, sifra))
+            {
+                DodajNovuGrupu();
+            }
+
             Grupe.Add(new Grupa()
             {
-                Sifra = Pomocno.UcitajInt("Unesi sifru grupe: "),
+                Sifra = sifra,
                 Naziv = Pomocno.UcitajString("Unesi naziv grupe: "),
                 Predavac = PostaviPredavaca(),
                 Smjer = PostaviSmjer(),
@@ -779,6 +922,22 @@ namespace UcenjeCS.E15KonzolnaAplikacija
             });
 
             IzbornikRadSGrupama(); 
+        }
+
+        private bool ProvjeraSifreGrupe (List<Grupa> grupe, int sifra)
+        {
+            foreach (Grupa grupa in Grupe)
+            {
+                if (grupa.Sifra.Equals(sifra))
+                {
+                    Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!! " + " Unesena sifra se koristi " + " !!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                    Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! " + " Unesite drugu sifru" + " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                    return true;
+
+                }
+
+            }
+            return false;
         }
 
         private List<Polaznik> PostaviPolaznike ()
@@ -819,6 +978,8 @@ namespace UcenjeCS.E15KonzolnaAplikacija
         {
             var i = 0;
             Grupe.ForEach(g => { Console.WriteLine(++i + ". " + g); });
+
+            
         }
 
         private void PozdravnaPoruka()

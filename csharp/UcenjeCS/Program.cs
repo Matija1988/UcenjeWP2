@@ -63,4 +63,6 @@
 
 //UcenjeCS.E13Nasljedivanje.Program.Izvedi(); 
 
-new UcenjeCS.E15KonzolnaAplikacija.Program();
+//new UcenjeCS.E15KonzolnaAplikacija.Program();
+
+new UcenjeCS.E15KonzolnaAplikacijaPreustroj.Izbornik();

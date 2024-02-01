@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UcenjeCS.E15KonzolnaAplikacija.Model
+namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj.Model
 {
     internal class Grupa : Entitet
 
@@ -27,8 +26,8 @@ namespace UcenjeCS.E15KonzolnaAplikacija.Model
         {
 
 
-            return new StringBuilder(Smjer.Naziv).Append(" || " + Naziv + " || " + Predavac.Ime + " " + Predavac.Prezime + " || " + "Maksimalno polaznika: " + MaksPolaznika + " || " + "Datum pocetka: " + DatumPocetka).ToString(); 
+            return new StringBuilder(Smjer.Naziv).Append(" || " + Naziv + " || " + Predavac.Ime + " " + Predavac.Prezime + " || " + "Maksimalno polaznika: " + MaksPolaznika + " || " + "Datum pocetka: " + DatumPocetka).ToString();
         }
-       
+        
     }
 }

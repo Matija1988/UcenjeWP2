@@ -40,7 +40,20 @@ namespace UcenjeCS.E15KonzolnaAplikacija
                 try
             {
                 int a = int.Parse(Console.ReadLine());
-                    return a;
+
+                    if(a == 0)
+                    {
+                        a++;
+                       
+                    }
+
+                    if (a <= -1)
+                    {
+                        Console.WriteLine("\n" + "!!!!!!!!!! KRIVI UNOS - KORISTITE SAMO POZITIVNE BROJEVE !!!!!!!!!!");
+                        continue;
+                    }
+
+                    if(a > 0)  return a;
 
                 } catch
             {
@@ -162,6 +175,8 @@ namespace UcenjeCS.E15KonzolnaAplikacija
             }
         }
 
+
+
         internal static int UcitajRasponBrojeva (string poruka, int pocetakNiza, int krajNiza)
         {
             int b;
@@ -190,5 +205,9 @@ namespace UcenjeCS.E15KonzolnaAplikacija
             }
 
         }
-    }
+
+
+
+       
+     }
 }
