@@ -21,6 +21,11 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
         { 
             
             Polaznici = new List<Polaznik>();
+
+            if(Pomocno.dev)
+            {
+                TestniPodaci(); 
+            }
         
         }
         public void IzbornikRadSPolaznicima ()
@@ -99,13 +104,13 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
 
                 var polaznik = Polaznici[a];
 
-                int sifra = Pomocno.UcitajInt("\n" + "_______________________________________" + "\n" + "Stara sifra: " + polaznik.Sifra + "\n" + "Nova sifra: ");
-                if (ProvjeriSifrePolaznika(Polaznici, sifra) == true)
-                {
+                //int sifra = Pomocno.UcitajInt("\n" + "_______________________________________" + "\n" + "Stara sifra: " + polaznik.Sifra + "\n" + "Nova sifra: ");
+                //if (ProvjeriSifrePolaznika(Polaznici, sifra) == true)
+                //{
 
-                    UrediPolaznika();
+                //    UrediPolaznika();
 
-                }
+                //}
                 string ime = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Staro ime: " + polaznik.Ime + "\n" + "Novo ime: ");
                 string prezime = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Staro prezime: " + polaznik.Prezime + "\n" + "Novo prezime: ");
                 string oib = Pomocno.UcitajOIB("\n" + "_______________________________________" + "\n" + "Stari OIB: " + polaznik.Oib + "\n" + "Novi OIB: ");
@@ -120,7 +125,7 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
                 if (potvrda == true)
                 {
 
-                    polaznik.Sifra = sifra;
+                   // polaznik.Sifra = sifra;
                     polaznik.Ime = ime;
                     polaznik.Prezime = prezime;
                     polaznik.Oib = oib;
@@ -185,10 +190,31 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
             return false;
         }
 
-        private void PrikaziPolaznike ()
+        public void PrikaziPolaznike ()
         {
             var i = 0;
             Polaznici.ForEach(polaznik => { Console.WriteLine(++i + ". " + polaznik); });
+        }
+
+        private void TestniPodaci ()
+        {
+            Polaznici.Add(new Polaznik
+            {
+                Sifra = 1,
+                Ime = "Ana",
+                Prezime = "Gal",
+                Email = "agal@gmail.com",
+                Oib = "33736472822"
+            });
+
+            Polaznici.Add(new Polaznik
+            {
+                Sifra = 2,
+                Ime = "Marija",
+                Prezime = "Zimska",
+                Email = "mzimska@gmail.com",
+                Oib = "33736472821"
+            });
         }
     }
 }

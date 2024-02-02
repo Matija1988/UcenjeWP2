@@ -18,6 +18,12 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
         public ObradaPredavac ()
         {
             Predavaci = new List<Predavac> ();
+
+            if (Pomocno.dev)
+            {
+                TestniPodaci();
+            }
+
         }
 
         public void IzbornikRadSPredavacima ()
@@ -101,15 +107,15 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
             {
                 var p = Predavaci[Pomocno.UcitajInt("Odaberi predavaca za izmjene: ") - 1];
 
-                int sifra = Pomocno.UcitajInt("\n" + "_______________________________________" + "\n" + "Stara sifra: " + p.Sifra + "\n" + "Nova sifra: ");
+                //int sifra = Pomocno.UcitajInt("\n" + "_______________________________________" + "\n" + "Stara sifra: " + p.Sifra + "\n" + "Nova sifra: ");
 
-                Predavaci.ForEach(p => {
-                    if (p.Sifra == sifra)
-                    {
-                        Console.WriteLine("\n" + "!!!!!!!!!!!!!!!!!!!!! POSTOJI SMJER SA UNESENOM SIFROM !!!!!!!!!!!!!!!!!!!!!");
-                        DodajNovogPredavaca();
-                    }
-                });
+                //Predavaci.ForEach(p => {
+                //    if (p.Sifra == sifra)
+                //    {
+                //        Console.WriteLine("\n" + "!!!!!!!!!!!!!!!!!!!!! POSTOJI PREDAVAC SA UNESENOM SIFROM !!!!!!!!!!!!!!!!!!!!!");
+                //        DodajNovogPredavaca();
+                //    }
+                //});
 
                 string ime = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Staro ime: " + p.Ime + "\n" + "Novo ime: ");
                 string prezime = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Staro prezime: " + p.Prezime + "\n" + "Novo prezime: ");
@@ -124,7 +130,7 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
 
                 if (potvrda == true)
                 {
-                    p.Sifra = sifra;
+                  //  p.Sifra = sifra;
                     p.Ime = ime;
                     p.Prezime = prezime;
                     p.Oib = oib;
@@ -144,7 +150,7 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
             IzbornikRadSPredavacima();
         }
 
-        private void PrikaziPredavace ()
+        public void PrikaziPredavace ()
         {
             var i = 0;
             Predavaci.ForEach(p => { Console.WriteLine(++i + ". " + p); });
@@ -160,7 +166,7 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
             Predavaci.ForEach(p => {
                 if (p.Sifra == sifra)
                 {
-                    Console.WriteLine("\n" + "!!!!!!!!!!!!!!!!!!!!! POSTOJI SMJER SA UNESENOM SIFROM !!!!!!!!!!!!!!!!!!!!!");
+                    Console.WriteLine("\n" + "!!!!!!!!!!!!!!!!!!!!! POSTOJI PREDAVAC SA UNESENOM SIFROM !!!!!!!!!!!!!!!!!!!!!");
                     DodajNovogPredavaca();
                 }
             });
@@ -180,6 +186,44 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
             });
 
             IzbornikRadSPredavacima();
+        }
+
+        private void TestniPodaci()
+        {
+
+            Predavaci.Add(new Predavac()
+            {
+                Sifra = 1,
+                Ime = "Immanuel",
+                Prezime = "Kant",
+                Oib = "12345678911",
+                Email = "IkantButYouCould@gmail.com",
+                IBAN = "HRE 58712353123523"
+
+            });
+
+            Predavaci.Add(new Predavac()
+            {
+                Sifra = 2,
+                Ime = "Friedrich",
+                Prezime = "Nietzsche",
+                Oib = "12345678912",
+                Email = "zaratustra@hotmail.com",
+                IBAN = "DE 97771232100001230000"
+
+            });
+
+            Predavaci.Add(new Predavac()
+            {
+                Sifra = 3,
+                Ime = "Diogen",
+                Prezime = "Prolupali",
+                Oib = "12345678913",
+                Email = "zaklanjasmisunce@yahoo.com",
+                IBAN = "samo kes na ruke"
+
+            });
+
         }
     }
 }

@@ -12,25 +12,34 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
         public ObradaPredavac ObradaPredavac { get; }
 
         public ObradaPolaznik ObradaPolaznik { get; }
+        public ObradaGrupe ObradaGrupe { get; } 
+
       
         public Izbornik() 
         
         {
+            Pomocno.dev = true; 
             ObradaSmjer = new ObradaSmjer();    
             ObradaPredavac = new ObradaPredavac();
             ObradaPolaznik = new ObradaPolaznik();
+            ObradaGrupe = new ObradaGrupe();
+
+            
 
             PozdravnaPoruka(); 
             
         }
+
         public void PozdravnaPoruka ()
         {
             Console.WriteLine("*+********************************");
             Console.WriteLine("* EDUNOVA KONZOLNA APLIKACIJA v1 *");
             Console.WriteLine("**********************************");
-
+            
             GlavniIzbornik();
-            Izbornik Izbornik = new Izbornik();
+
+           
+            
         }
         public void GlavniIzbornik ()
         {
@@ -70,10 +79,10 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
                     Console.WriteLine("Izabrali ste rad s polaznicima");
                     ObradaPolaznik.IzbornikRadSPolaznicima();
                     break;
-                //case 4:
-                //    Console.WriteLine("Izabrali ste rad s grupama");
-                //    IzbornikRadSGrupama();
-                //    break;
+                case 4:
+                    Console.WriteLine("Izabrali ste rad s grupama");
+                    ObradaGrupe.IzbornikRadSGrupama();
+                    break;
 
                 case 5:
                     Console.WriteLine("Izlaz iz programa");

@@ -28,31 +28,7 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
 
             
         }
-
-        private void TestniPodaci ()
-        {
-            
-                Smjerovi.Add(new Smjer
-                {
-                    Sifra = 1,
-                    Naziv = "Web programiranje",
-                    BrojSati = 250,
-                    Cijena = 1000,
-                    Upisnina = 50,
-                    Verificiran = true
-                });
-
-                Smjerovi.Add(new Smjer
-                {
-                    Sifra = 2,
-                    Naziv = "Java programiranje",
-                    BrojSati = 130,
-                    Cijena = 1000,
-                    Upisnina = 50,
-                    Verificiran = true
-                });
-            
-        }
+              
 
         public void IzbornikRadSaSmjerovima ()
         {
@@ -65,11 +41,16 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
             Console.WriteLine("4. Izbrisi smjer");
             Console.WriteLine("5. Povratak na glavni izbornik");
 
-            OdabirStavkeIzbornikSmjera();
+            OdabirStavkeIzbornikSmjera(GetIzbornik());
 
         }
 
-        public void OdabirStavkeIzbornikSmjera ()
+        public Izbornik GetIzbornik ()
+        {
+            return Izbornik;
+        }
+
+        public void OdabirStavkeIzbornikSmjera (Izbornik izbornik)
         {
             switch (Pomocno.UcitajInt("Unesite svoj izbor: "))
             {
@@ -93,8 +74,9 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
                     break;
                 case 5:
                     Console.WriteLine("Povratak na glavni izbornik:");
-                    Izbornik.GlavniIzbornik();
-                     break;
+                    izbornik.GlavniIzbornik();
+
+                    break;
                 default:
                     Console.WriteLine("Krivi unos!!!!!" + "\n");
                     IzbornikRadSaSmjerovima();
@@ -141,16 +123,17 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
             {
                 var s = Smjerovi[Pomocno.UcitajInt("\n" + "Odaberi smjer za promjenu: ") - 1];
 
-                int sifra = Pomocno.UcitajInt("\n" + "_______________________________________" + "\n" + "Stara sifra: " + s.Sifra + "\n" + "Nova sifra: ");
+                //int sifra = Pomocno.UcitajInt("\n" + "_______________________________________" + "\n" + "Stara sifra: " + s.Sifra + "\n" + "Nova sifra: ");
 
 
-                Smjerovi.ForEach(s => {
-                    if (s.Sifra == sifra)
-                    {
-                        Console.WriteLine("\n" + "!!!!!!!!!!!!!!!!!!!!! POSTOJI SMJER SA UNESENOM SIFROM !!!!!!!!!!!!!!!!!!!!!");
-                        DodajNoviSmjer();
-                    }
-                });
+                //Smjerovi.ForEach(s =>
+                //{
+                //    if (s.Sifra == sifra)
+                //    {
+                //        Console.WriteLine("\n" + "!!!!!!!!!!!!!!!!!!!!! POSTOJI SMJER SA UNESENOM SIFROM !!!!!!!!!!!!!!!!!!!!!");
+                //        UrediSmjer();
+                //    }
+                //});
 
 
                 string naziv = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Stari naziv: " + s.Naziv + "\n" + "Novi naziv: ");
@@ -167,7 +150,7 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
                 if (potvrda == true)
                 {
 
-                    s.Sifra = sifra;
+                 //   s.Sifra = sifra;
                     s.Naziv = naziv;
                     s.BrojSati = brojSati;
                     s.Cijena = cijena;
@@ -198,8 +181,7 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
             PrikaziSmjerove();
 
             int sifra = Pomocno.UcitajInt("\n" + "Unesi sifru smjera: ");
-
-
+                        
 
             Smjerovi.ForEach(s =>
             {
@@ -226,6 +208,31 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
             });
 
             IzbornikRadSaSmjerovima();
+        }
+
+        private void TestniPodaci ()
+        {
+
+            Smjerovi.Add(new Smjer
+            {
+                Sifra = 1,
+                Naziv = "Web programiranje",
+                BrojSati = 250,
+                Cijena = 1000,
+                Upisnina = 50,
+                Verificiran = true
+            });
+
+            Smjerovi.Add(new Smjer
+            {
+                Sifra = 2,
+                Naziv = "Java programiranje",
+                BrojSati = 130,
+                Cijena = 1000,
+                Upisnina = 50,
+                Verificiran = true
+            });
+
         }
 
     }
