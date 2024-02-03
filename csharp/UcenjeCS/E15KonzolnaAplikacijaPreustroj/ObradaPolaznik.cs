@@ -16,11 +16,18 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
 
         public Izbornik Izbornik { get; }
 
+        public ObradaPolaznik(Izbornik izbornik):this()
+        {
+            this.Izbornik = izbornik;
+        }
+
 
         public ObradaPolaznik() 
         { 
             
             Polaznici = new List<Polaznik>();
+
+          
 
             if(Pomocno.dev)
             {
@@ -42,9 +49,10 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
             OdabirRadSPolaznicima();
         }
 
+       
         private void OdabirRadSPolaznicima ()
         {
-            switch (Pomocno.UcitajInt("Unesite svoj izbor: "))
+            switch (Pomocno.UcitajInt("\n" + "Unesite svoj izbor: "))
             {
                 case 1:
                     Console.WriteLine("\n" + "Prikazujem sve polaznike" + "\n");
@@ -66,7 +74,6 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
                     break;
                 case 5:
                     Izbornik.GlavniIzbornik();
-                    
                     break;
                 default:
                     Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!! KRIVI UNOS !!!!!!!!!!!!!!!!!!!!!");
@@ -113,7 +120,7 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
                 //}
                 string ime = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Staro ime: " + polaznik.Ime + "\n" + "Novo ime: ");
                 string prezime = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Staro prezime: " + polaznik.Prezime + "\n" + "Novo prezime: ");
-                string oib = Pomocno.UcitajOIB("\n" + "_______________________________________" + "\n" + "Stari OIB: " + polaznik.Oib + "\n" + "Novi OIB: ");
+                string oib = Pomocno.UcitajOIB("\n" + "_______________________________________" + "\n" + "Stari OIB: " + polaznik.Oib + "\n" + "Novi OIB:  ");
                 string email = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Stari email: " + polaznik.Email + "\n" + "Novi email: ");
                 string brojUgovora = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Stari broj ugovora: " + polaznik.BrojUgovora + "\n" + "Novi broj ugovora: ");
 
@@ -190,6 +197,8 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
             return false;
         }
 
+       
+
         public void PrikaziPolaznike ()
         {
             var i = 0;
@@ -204,8 +213,9 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
                 Ime = "Ana",
                 Prezime = "Gal",
                 Email = "agal@gmail.com",
-                Oib = "33736472822"
-            });
+                Oib = "33736472822",
+                BrojUgovora = "WP 2 - 02"
+            }); 
 
             Polaznici.Add(new Polaznik
             {
@@ -213,7 +223,67 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
                 Ime = "Marija",
                 Prezime = "Zimska",
                 Email = "mzimska@gmail.com",
-                Oib = "33736472821"
+                Oib = "33736472821",
+                 BrojUgovora = "WP 2 - 05"
+            });
+
+            Polaznici.Add(new Polaznik
+            {
+                Sifra = 3,
+                Ime = "Marko",
+                Prezime = "Janko",
+                Email = "majan@gmail.com",
+                Oib = "12345678910",
+                BrojUgovora = "WP 2 - 10"
+            });
+
+            Polaznici.Add(new Polaznik
+            {
+                Sifra = 4,
+                Ime = "Lucija",
+                Prezime = "Perkovic",
+                Email = "lperk@gmail.com",
+                Oib = "33367832122",
+                BrojUgovora = "WP 2 - 14"
+            });
+            Polaznici.Add(new Polaznik
+            {
+                Sifra = 5,
+                Ime = "Sanja",
+                Prezime = "Lazar",
+                Email = "sanjalazar@gmail.com",
+                Oib = "79832155501",
+                BrojUgovora = "WP 2 - 15"
+            });
+
+            Polaznici.Add(new Polaznik
+            {
+                Sifra = 6,
+                Ime = "Tomislav",
+                Prezime = "Padovanski",
+                Email = "tpadovanski@gmail.com",
+                Oib = "12345678912",
+                BrojUgovora = "JP 12 - 01"
+            });
+
+            Polaznici.Add(new Polaznik
+            {
+                Sifra = 7,
+                Ime = "Tihomir",
+                Prezime = "Tihic",
+                Email = "tt@gmail.com",
+                Oib = "12345678920",
+                BrojUgovora = "JP 12 - 13"
+            });
+
+            Polaznici.Add(new Polaznik
+            {
+                Sifra = 8,
+                Ime = "Tamara",
+                Prezime = "Suvak",
+                Email = "tami@gmail.com",
+                Oib = "12345678930",
+                BrojUgovora = "JP 12 - 04"
             });
         }
     }

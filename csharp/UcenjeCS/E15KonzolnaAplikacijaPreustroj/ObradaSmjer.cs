@@ -13,12 +13,19 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
       
         private List<Smjer> Smjerovi { get; }
 
-        public Izbornik Izbornik { get; }
+        private Izbornik Izbornik { get; }
 
+
+        public ObradaSmjer(Izbornik izbornik):this() 
+        { 
+        
+            this.Izbornik = izbornik;
+
+        }
 
         public ObradaSmjer ()
         {
-           
+         
 
             Smjerovi = new List<Smjer>();
             if (Pomocno.dev)
@@ -28,7 +35,8 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
 
             
         }
-              
+        
+    
 
         public void IzbornikRadSaSmjerovima ()
         {
@@ -41,18 +49,14 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
             Console.WriteLine("4. Izbrisi smjer");
             Console.WriteLine("5. Povratak na glavni izbornik");
 
-            OdabirStavkeIzbornikSmjera(GetIzbornik());
+            OdabirStavkeIzbornikSmjera();
 
         }
 
-        public Izbornik GetIzbornik ()
-        {
-            return Izbornik;
-        }
 
-        public void OdabirStavkeIzbornikSmjera (Izbornik izbornik)
+        public void OdabirStavkeIzbornikSmjera ()
         {
-            switch (Pomocno.UcitajInt("Unesite svoj izbor: "))
+            switch (Pomocno.UcitajInt("\n" + "Unesite svoj izbor: "))
             {
                 case 1:
                     Console.WriteLine("\n" + "Prikazujem sve smjerove:" + "\n");
@@ -74,8 +78,8 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
                     break;
                 case 5:
                     Console.WriteLine("Povratak na glavni izbornik:");
-                    izbornik.GlavniIzbornik();
-
+                    Izbornik.GlavniIzbornik();
+                 
                     break;
                 default:
                     Console.WriteLine("Krivi unos!!!!!" + "\n");

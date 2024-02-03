@@ -66,6 +66,5 @@ using UcenjeCS.E15KonzolnaAplikacijaPreustroj;
 
 //new UcenjeCS.E15KonzolnaAplikacija.Program();
 
-Izbornik Izbor = new Izbornik();
 new UcenjeCS.E15KonzolnaAplikacijaPreustroj.Izbornik();
 

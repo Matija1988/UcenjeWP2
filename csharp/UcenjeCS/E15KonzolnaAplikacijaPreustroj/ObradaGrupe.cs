@@ -24,19 +24,25 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
         private ObradaSmjer ObradaSmjer { get; }
         private ObradaPredavac ObradaPredavac { get; }
 
-        public ObradaGrupe(Izbornik izbornik, ObradaPolaznik obradaPolaznik, ObradaSmjer obradaSmjer, ObradaPredavac obradaPredavac):this()
+        public ObradaGrupe(Izbornik izbornik):this()
         {
             this.Izbornik = izbornik;
-            this.ObradaPolaznik = obradaPolaznik;
-            this.ObradaSmjer = obradaSmjer;
-            this.ObradaPredavac = obradaPredavac;
-            
+            //this.ObradaPolaznik = obradaPolaznik;
+            //this.ObradaSmjer = obradaSmjer;
+            //this.ObradaPredavac = obradaPredavac;
+          
         }
 
         public ObradaGrupe ()
         {
             Grupe = new List<Grupa>();
 
+        }
+
+        public Izbornik GetIzbornik ()
+        {
+
+            return Izbornik;
         }
 
         public void IzbornikRadSGrupama ()
@@ -62,7 +68,7 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
 
         private void OdabirRadSGrupama ()
         {
-            switch (Pomocno.UcitajInt("Unesite svoj izbor: "))
+            switch (Pomocno.UcitajInt("\n" + "Unesite svoj izbor: "))
             {
                 case 1:
                     Console.WriteLine("\n" + "Prikazujem sve grupe" + "\n");

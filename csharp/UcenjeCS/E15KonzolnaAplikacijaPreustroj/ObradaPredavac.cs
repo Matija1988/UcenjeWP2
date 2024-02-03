@@ -13,7 +13,10 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
 
         public Izbornik Izbornik { get;  }
        
-
+        public ObradaPredavac(Izbornik Izbornik):this()
+        {
+            this.Izbornik = Izbornik;
+        }
     
         public ObradaPredavac ()
         {
@@ -43,7 +46,7 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
 
         private void OdabirIzbornikRadSPredavacima ()
         {
-            switch (Pomocno.UcitajInt("Unesite svoj izbor: "))
+            switch (Pomocno.UcitajInt("\n"+"Unesite svoj izbor: "))
             {
                 case 1:
                     Console.WriteLine("\n" + "Prikazujem sve predavace" + "\n");
@@ -64,7 +67,7 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
                     break;
                 case 5:
                     Console.WriteLine("Povratak na glavni izbornik");
-                    Izbornik.GlavniIzbornik();
+                   Izbornik.GlavniIzbornik();
                     
                     break;
                 default:
@@ -119,7 +122,7 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
 
                 string ime = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Staro ime: " + p.Ime + "\n" + "Novo ime: ");
                 string prezime = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Staro prezime: " + p.Prezime + "\n" + "Novo prezime: ");
-                string oib = Pomocno.UcitajOIB("\n" + "_______________________________________" + "\n" + "Stari OIB: " + p.Oib + "\n" + "Novi OIB: ");
+                string oib = Pomocno.UcitajOIB("\n" + "_______________________________________" + "\n" + "Stari OIB: " + p.Oib + "\n" + "Novi OIB:  ");
                 string email = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Stari email: " + p.Email + "\n" + "Novi email: ");
                 string iban = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Stari IBAN: " + p.IBAN + "\n" + "Novi IBAN: ");
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UcenjeCS.E15KonzolnaAplikacijaPreustroj.Model;
 
 namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
 {
@@ -12,23 +13,28 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
         public ObradaPredavac ObradaPredavac { get; }
 
         public ObradaPolaznik ObradaPolaznik { get; }
-        public ObradaGrupe ObradaGrupe { get; } 
+        public ObradaGrupe ObradaGrupe { get; }
 
-      
-        public Izbornik() 
+       
+ 
+
+        public Izbornik()
         
         {
             Pomocno.dev = true; 
-            ObradaSmjer = new ObradaSmjer();    
-            ObradaPredavac = new ObradaPredavac();
-            ObradaPolaznik = new ObradaPolaznik();
-            ObradaGrupe = new ObradaGrupe();
+            ObradaSmjer = new ObradaSmjer(this);    
+            ObradaPredavac = new ObradaPredavac(this);
+            ObradaPolaznik = new ObradaPolaznik(this);
+            ObradaGrupe = new ObradaGrupe(this);
 
-            
+           
 
             PozdravnaPoruka(); 
             
         }
+
+
+        
 
         public void PozdravnaPoruka ()
         {
@@ -95,5 +101,8 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
             }
 
         }
+
+       
+
     }
 }
