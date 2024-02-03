@@ -9,13 +9,21 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
 {
     internal class ObradaPredavac
     {
-        private List<Predavac> Predavaci;
+        public List<Predavac> Predavaci;
 
         public Izbornik Izbornik { get;  }
+
+        public ObradaGrupe ObradaGrupe { get; }
        
         public ObradaPredavac(Izbornik Izbornik):this()
         {
+           
             this.Izbornik = Izbornik;
+        }
+
+        public ObradaPredavac (ObradaGrupe obradaGrupe):this()
+        {
+            ObradaGrupe = obradaGrupe;
         }
     
         public ObradaPredavac ()

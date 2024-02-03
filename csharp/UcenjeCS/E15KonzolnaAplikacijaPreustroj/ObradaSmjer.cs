@@ -11,7 +11,7 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
     {
 
       
-        private List<Smjer> Smjerovi { get; }
+        public List<Smjer> Smjerovi { get; }
 
         private Izbornik Izbornik { get; }
 

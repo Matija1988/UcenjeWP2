@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,28 +23,35 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
 
         private ObradaPolaznik ObradaPolaznik { get; }
         private ObradaSmjer ObradaSmjer { get; }
-        private ObradaPredavac ObradaPredavac { get; }
+        private ObradaPredavac ObradaPredavac { get; set; }
 
         public ObradaGrupe(Izbornik izbornik):this()
         {
             this.Izbornik = izbornik;
-            //this.ObradaPolaznik = obradaPolaznik;
-            //this.ObradaSmjer = obradaSmjer;
-            //this.ObradaPredavac = obradaPredavac;
-          
+           
+
         }
+
+        public ObradaGrupe(ObradaPolaznik obradaPolaznik, ObradaSmjer obradaSmjer, ObradaPredavac obradaPredavac):this()
+        {
+            this.ObradaPolaznik = obradaPolaznik;
+            this.ObradaSmjer = obradaSmjer;
+            this.ObradaPredavac = obradaPredavac;
+           
+        }
+
 
         public ObradaGrupe ()
         {
             Grupe = new List<Grupa>();
+            //if(Pomocno.dev)
+            //{
+            //    TestniPodaci(); 
+            //}
 
         }
 
-        public Izbornik GetIzbornik ()
-        {
-
-            return Izbornik;
-        }
+       
 
         public void IzbornikRadSGrupama ()
         {
@@ -222,19 +230,36 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
                 DodajNovuGrupu();
             }
 
+            var s = PostaviSmjer();
+            string naziv = Pomocno.UcitajString("Unesi naziv grupe: ");
+            var p = PostaviPredavaca();
+
+            int maksPolaznika = Pomocno.UcitajInt("Maksimalan broj polaznika: ");
+            Grupe.ForEach(x => { if(x.Polaznici.Count() > maksPolaznika)
+                {
+
+                    Console.WriteLine("!!!!!!!!!!!! Grupa je popunjena! Kreirajte novu grupu !!!!!!!!!!!!");
+                    DodajNovuGrupu() ;
+
+                }
+                    
+                    });
+
             Grupe.Add(new Grupa()
             {
                 Sifra = sifra,
-                Naziv = Pomocno.UcitajString("Unesi naziv grupe: "),
-                Predavac = PostaviPredavaca(),
-                Smjer = PostaviSmjer(),
+                Naziv = naziv,
+                Predavac = p,
+                Smjer = s,
+
+                MaksPolaznika = maksPolaznika,
                 Polaznici = PostaviPolaznike(),
 
-                MaksPolaznika = Pomocno.UcitajInt("Maksimalan broj polaznika: "),
+
                 DatumPocetka = Pomocno.UcitajDatum("Unesi datum grupe u formatu dd.MM.yyyy.: ") // NAPOMENA!!!!! FORMAT RADI U SKLADU SA DATE & TIME POSTAVKAMA OPERATIVNOG SUSTAVA 
 
 
-            });
+            }); ;
 
             IzbornikRadSGrupama();
         }
@@ -258,8 +283,12 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
         private List<Polaznik> PostaviPolaznike ()
         {
             List<Polaznik> polaznici = new List<Polaznik>();
+
+             
+
             while (Pomocno.UcitajBool("Zelite li dodati polaznike? 1) DA / 2) NE | "))
             {
+                
                 polaznici.Add(PostaviPolaznika());
             }
             return polaznici;
@@ -267,26 +296,27 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
 
         private Polaznik PostaviPolaznika ()
         {
-            ObradaPolaznik.PrikaziPolaznike();
-            int i = Pomocno.UcitajRasponBrojeva("\n" + "Odaberi redni broj polaznika: ", 0, Polaznici.Count());
+           Izbornik.ObradaPolaznik.PrikaziPolaznike();
+            int i = Pomocno.UcitajRasponBrojeva("\n" + "Odaberi redni broj polaznika: ", 0,Izbornik.ObradaPolaznik.Polaznici.Count());
 
             // ako polaznik postoji, odbij unos
 
-            return Polaznici[i - 1];
+            return Izbornik.ObradaPolaznik.Polaznici[i - 1];
         }
 
         private Smjer PostaviSmjer ()
         {
-            ObradaSmjer.PrikaziSmjerove();
+            Izbornik.ObradaSmjer.PrikaziSmjerove();
             int i = Pomocno.UcitajInt("\n" + "Odaberi redni broj smjera: ");
-            return Smjerovi[i - 1];
+            return Izbornik.ObradaSmjer.Smjerovi[i - 1];
         }
 
         private Predavac PostaviPredavaca ()
         {
-            ObradaPredavac.PrikaziPredavace();
-            int i = Pomocno.UcitajRasponBrojeva("\n" + "Odaberi redni broj predavaca: ", 0, Predavaci.Count());
-            return Predavaci[i - 1];
+            Izbornik.ObradaPredavac.PrikaziPredavace();
+
+            int i = Pomocno.UcitajRasponBrojeva("\n" + "Odaberi redni broj predavaca: ", 0, Izbornik.ObradaPredavac.Predavaci.Count());
+            return Izbornik.ObradaPredavac.Predavaci[i - 1];
         }
 
         private void PrikaziGrupe ()
@@ -319,8 +349,20 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
         private void UcitajUkupanBrojPolaznika (List<Grupa> Grupe)
         {
             int a = 0;
+            int b = 0;
 
-            Grupe.ForEach(Grupa => { Console.WriteLine("Trenutno nastavu pohada " + Grupa.Polaznici.Count() + " polaznika u " + ++a + " grupe"); });
+            var p = Izbornik.ObradaPolaznik.Polaznici; 
+
+
+            Grupe.ForEach(Grupa => { Console.WriteLine("\n"+"Trenutno nastavu pohada " + Grupa.Polaznici.Count() + " polaznika u " + ++a +". " + " grupi"); });
+
+            Izbornik.ObradaPolaznik.Polaznici.ForEach(Polaznici => { ++b; });
+
+
+
+            Console.WriteLine("Sveukupno polaznika na svim grupama: " + b);
+
+
 
             IzbornikRadSGrupama();
 
@@ -328,7 +370,7 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
 
         private void IznosPrihodaPoSmjerovima ()
         {
-           ObradaSmjer.PrikaziSmjerove();
+         Izbornik.ObradaSmjer.PrikaziSmjerove();
 
 
             int b = 1;
@@ -350,6 +392,26 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
             IzbornikRadSGrupama();
 
         }
+
+        //private void TestniPodaci ()
+        //{
+        //    DateTime obj;
+
+        //    Grupe.Add(new Grupa()
+        //    {
+        //        Sifra = 1,
+        //        Naziv = "WP-2",
+        //        Predavac = Predavaci[1],
+        //        Smjer = Smjerovi[1],
+        //        MaksPolaznika = 25,
+
+        //        DatumPocetka = DateTime.Today,
+
+
+
+
+        //    });
+        //}
 
     }
 }

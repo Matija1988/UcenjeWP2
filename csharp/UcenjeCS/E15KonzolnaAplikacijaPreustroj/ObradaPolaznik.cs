@@ -10,7 +10,7 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
     
     internal class ObradaPolaznik
     {
-        private List<Polaznik> Polaznici;
+        public List<Polaznik> Polaznici;
 
        
 
