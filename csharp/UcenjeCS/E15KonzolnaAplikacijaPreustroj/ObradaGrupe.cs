@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.ComponentModel.DataAnnotations;
+using System.Xml;
 
 namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
 {
@@ -71,8 +72,9 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
             Console.WriteLine("7. Ukupno polaznika na svim grupama");
             Console.WriteLine("8. Prosjecan broj polaznika u grupama");
             Console.WriteLine("9. Ukupan iznos prihoda po smjerovima");
+            Console.WriteLine("10. Prosjecan iznos prihoda po polazniku");
 
-            Console.WriteLine("10. Povratak na glavni izbornik");
+            Console.WriteLine("11. Povratak na glavni izbornik");
 
             OdabirRadSGrupama();
         }
@@ -120,7 +122,11 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
                     Console.WriteLine("Ukupan iznos prihoda po smjerovima");
                     IznosPrihodaPoSmjerovima(Grupe);
                     break;
-                case 10:
+                    case 10:
+                    Console.WriteLine("Prosjecan iznos prihoda po polazniku");
+                    ProsjecanIznosPrihodaPoPolazniku();
+                    break;
+                case 11:
                     Izbornik.GlavniIzbornik(); 
                     break;
                 default:
@@ -585,20 +591,58 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
                   a += g.Polaznici.Count(); 
                 }
             }
-                              
-
+                            
 
             Console.WriteLine("Prihod smjera: " + priljeviSmjera * a);
-
-            
-
-          
-            
+                                  
+            if(Pomocno.UcitajBool("Zelite li nastaviti pregledavati ovaj izbornik?" + "\n" + "1) DA / 2) NE | "))
+            {
+                IznosPrihodaPoSmjerovima(grupe);
+            }
             IzbornikRadSGrupama();
 
         }
+        private void ProsjecanIznosPrihodaPoPolazniku ()
+        {
+            int a = 0;
+            int b = 0;
+            float priljeviSmjera = 0;
+            float[] niz = new float[b];
 
-      
+
+            Izbornik.ObradaPolaznik.Polaznici.ForEach(Polaznici => { ++a; });
+            
+            
+
+            for (int i = 0; i < Izbornik.ObradaSmjer.Smjerovi.Count; i++) 
+            {
+                var pS = Izbornik.ObradaSmjer.Smjerovi[i];
+                b++;
+
+                foreach (Grupa g in Grupe)
+                {
+                    if (g.Smjer.Naziv.Contains(pS.Naziv))
+                    {
+                        priljeviSmjera = pS.Upisnina + pS.Cijena;
+                        niz[i] = priljeviSmjera;
+
+                    }
+                    Console.WriteLine(priljeviSmjera);
+                }
+
+
+               
+               
+                          
+            
+            }
+
+            float prihod = priljeviSmjera * a;
+
+            IzbornikRadSGrupama();
+        }
+
+
 
         //private void TestniPodaci ()
         //{
@@ -611,6 +655,7 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
         //        Predavac = Predavaci[1],
         //        Smjer = Smjerovi[1],
         //        MaksPolaznika = 25,
+        //        Polaznici = Polaznici[1],  
 
         //        DatumPocetka = DateTime.Today,
 
