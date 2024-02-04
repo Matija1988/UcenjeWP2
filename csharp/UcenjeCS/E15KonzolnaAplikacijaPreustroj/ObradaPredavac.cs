@@ -116,6 +116,7 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
 
             try
             {
+                
                 var p = Predavaci[Pomocno.UcitajInt("Odaberi predavaca za izmjene: ") - 1];
 
                 //int sifra = Pomocno.UcitajInt("\n" + "_______________________________________" + "\n" + "Stara sifra: " + p.Sifra + "\n" + "Nova sifra: ");
@@ -128,28 +129,149 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
                 //    }
                 //});
 
-                string ime = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Staro ime: " + p.Ime + "\n" + "Novo ime: ");
-                string prezime = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Staro prezime: " + p.Prezime + "\n" + "Novo prezime: ");
-                string oib = Pomocno.UcitajOIB("\n" + "_______________________________________" + "\n" + "Stari OIB: " + p.Oib + "\n" + "Novi OIB:  ");
-                string email = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Stari email: " + p.Email + "\n" + "Novi email: ");
-                string iban = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Stari IBAN: " + p.IBAN + "\n" + "Novi IBAN: ");
+                Console.WriteLine("1) Ime");
+                Console.WriteLine("2) Prezime");
+                Console.WriteLine("3) OIB");
+                Console.WriteLine("4) Email");
+                Console.WriteLine("5) Iban");
+                Console.WriteLine("6) Uredi sve");
+                Console.WriteLine("7) Povratak na izbornik predavaci");
 
-                bool potvrda = Pomocno.UcitajBool("\n" + "Promijeniti informacije polaznika " + "\n" +
-                                                  "\n" + "Prijasnji unos: " + p + "\n" +
-                                                  "Novi unos: " + ime + " || " + "Novo prezime: " + prezime + " || " + "Novi OIB: " + oib + " || " + "Novi emial: " + email + " || " + "Novi IBAN: " + iban + "\n" +
-                                                  "1) DA / 2) NE | ");
-
-                if (potvrda == true)
+                switch (Pomocno.UcitajInt("\n"+"Odaberite stavku koju zelite promijeniti: "))
                 {
-                  //  p.Sifra = sifra;
-                    p.Ime = ime;
-                    p.Prezime = prezime;
-                    p.Oib = oib;
-                    p.Email = email;
-                    p.IBAN = iban;
 
+                    case 1:
+                        string ime = Pomocno.UcitajString("\n" + "_______________________________________" +
+                                                           "\n" + "Staro ime: " + p.Ime +
+                                                            "\n" + "Novo ime: ");
+
+                        bool potvrda = Pomocno.UcitajBool("\n" + "Promijeniti informacije polaznika " +
+                                                           "\n" +
+                                                            "\n" + "Prijasnji unos: " + p.Ime +
+                                                             "\n" + "Novi unos: " + ime + 
+                                                              "\n" + "Prihvati promjene: 1) DA / 2) NE | ");
+                        if (potvrda)
+                        {
+                            p.Ime = ime;
+                        }
+                        break;
+                    case 2:
+                        string prezime = Pomocno.UcitajString("\n" + "_______________________________________" +
+                                                            "\n" + "Staro prezime: " + p.Prezime +
+                                                             "\n" + "Novo prezime: ");
+
+                        potvrda = Pomocno.UcitajBool("\n" + "Promijeniti informacije polaznika " +
+                                                      "\n" +
+                                                       "\n" + "Prijasnji unos: " + p.Prezime +
+                                                        "\n" + "Novi unos: " + prezime + 
+                                                         "\n" + "Prihvati promjene: 1) DA / 2) NE | ");
+
+                        if (potvrda)
+                        {
+                            p.Prezime = prezime;
+                        }
+                        break;
+
+                    case 3:
+                        string oib = Pomocno.UcitajOIB("\n" + "_______________________________________" +
+                                                        "\n" + "Stari OIB: " + p.Oib +
+                                                         "\n" + "Novi OIB: ");
+
+                        potvrda = Pomocno.UcitajBool("\n" + "Promijeniti informacije polaznika " +
+                                                      "\n" +
+                                                       "\n" + "Prijasnji unos: " + p.Oib +
+                                                        "\n" + "Novi unos: " + oib + 
+                                                         "\n" + "Prihvati promjene: 1) DA / 2) NE | ");
+                        if (potvrda)
+                        {
+
+                            p.Oib = oib;
+                        }
+                        break;
+
+                    case 4:
+                        string email = Pomocno.UcitajString("\n" + "_______________________________________" +
+                                                             "\n" + "Stari email: " + p.Email +
+                                                              "\n" + "Novi email: ");
+
+                        potvrda = Pomocno.UcitajBool("\n" + "Promijeniti informacije polaznika " +
+                                                      "\n" +
+                                                       "\n" + "Prijasnji unos: " + p.Email +
+                                                        "\n" + "Novi unos: " + email + 
+                                                         "\n" + "Prihvati promjene: 1) DA / 2) NE | ");
+                        if (potvrda)
+                        {
+                            p.Email = email;
+                        }
+                        break;
+
+                    case 5:
+                        string iban = Pomocno.UcitajString("\n" + "_______________________________________" +
+                                                            "\n" + "Stari IBAN: " + p.IBAN +
+                                                             "\n" + "Novi IBAN: ");
+
+                        potvrda = Pomocno.UcitajBool("\n" + "Promijeniti informacije polaznika " +
+                                                      "\n" +
+                                                       "\n" + "Prijasnji unos: " + p.IBAN +
+                                                        "\n" + "Novi unos: " + iban + 
+                                                         "\n" + "Prihvati promjene: 1) DA / 2) NE | ");
+                        if (potvrda)
+                        {
+                            p.IBAN = iban;
+                        }
+                        break;
+
+                    case 6:
+
+                        ime = Pomocno.UcitajString("\n" + "_______________________________________" + 
+                                                    "\n" + "Staro ime: " + p.Ime + 
+                                                     "\n" + "Novo ime: ");
+
+                        prezime = Pomocno.UcitajString("\n" + 
+                                                       "_______________________________________" + 
+                                                       "\n" + "Staro prezime: " + p.Prezime + 
+                                                       "\n" + "Novo prezime: ");
+
+                        oib = Pomocno.UcitajOIB("\n" + "_______________________________________" + 
+                                                 "\n" + "Stari OIB: " + p.Oib +
+                                                  "\n" + "Novi OIB:  ");
+
+                        email = Pomocno.UcitajString("\n" + "_______________________________________" + 
+                                                      "\n" + "Stari email: " + p.Email + 
+                                                       "\n" + "Novi email: ");
+
+                        iban = Pomocno.UcitajString("\n" + "_______________________________________" + 
+                                                     "\n" + "Stari IBAN: " + p.IBAN +
+                                                      "\n" + "Novi IBAN: ");
+
+                        potvrda = Pomocno.UcitajBool("\n" + "Promijeniti informacije polaznika " + 
+                                                      "\n" +
+                                                       "\n" + "Prijasnji unos: " + p + 
+                                                        "\n" + "Novi unos: " + ime + " || " + "Novo prezime: " + prezime + " || " + "Novi OIB: " + oib + " || " + "Novi emial: " + email + " || " + "Novi IBAN: " + iban + 
+                                                         "\n" +
+                                                          "\n" + "Prihvati promjene: 1) DA / 2) NE | ");
+
+                        if (potvrda == true)
+                        {
+                            //  p.Sifra = sifra;
+                            p.Ime = ime;
+                            p.Prezime = prezime;
+                            p.Oib = oib;
+                            p.Email = email;
+                            p.IBAN = iban;
+
+                        }
+                        break;
+
+                    case 7:
+                        IzbornikRadSPredavacima();
+                        break;
+
+                        default:
+                        Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! " + "POGRESAN UNOS" + " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                        Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!! " + " Provjerite ispravnost svoga unosa" + " !!!!!!!!!!!!!!!!!!!!!!!!");
+                        break;
                 }
-
             }
             catch
             {

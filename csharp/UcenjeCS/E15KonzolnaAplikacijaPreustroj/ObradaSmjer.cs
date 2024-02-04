@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UcenjeCS.E15KonzolnaAplikacija;
 using UcenjeCS.E15KonzolnaAplikacijaPreustroj.Model;
 
 namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
@@ -138,30 +140,144 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
                 //        UrediSmjer();
                 //    }
                 //});
+                Console.WriteLine("1) Naziv smjera");
+                Console.WriteLine("2) Broj sati");
+                Console.WriteLine("3) Cijena");
+                Console.WriteLine("4) Upisnina");
+                Console.WriteLine("5) Status verifikacije");
+                Console.WriteLine("6) Uredi sve");
+                Console.WriteLine("7) Izbornik rad s predavacima");
 
+                switch (Pomocno.UcitajInt("Odaberite stavku koju zelite promijeniti: " ))
+                { 
+                    
+                    case 1:
+                        string naziv = Pomocno.UcitajString("\n" + "_______________________________________" +  
+                                                             "\n" + "Stari naziv: " + s.Naziv + 
+                                                              "\n" + "Novi naziv: ");
 
-                string naziv = Pomocno.UcitajString("\n" + "_______________________________________" + "\n" + "Stari naziv: " + s.Naziv + "\n" + "Novi naziv: ");
-                int brojSati = Pomocno.UcitajInt("\n" + "_______________________________________" + "\n" + "Stari broj sati: " + s.BrojSati + "\n" + "Novi broj sati: ");
-                float cijena = Pomocno.UcitajFloat("\n" + "_______________________________________" + "\n" + "Stara cijena: " + s.Cijena + "\n" + "Nova cijena: ");
-                float upisnina = Pomocno.UcitajFloat("\n" + "_______________________________________" + "\n" + "Stara upisnina: " + s.Upisnina + "\n" + "Nova upisnina: ");
-                bool verificiran = Pomocno.UcitajBool("\n" + "_______________________________________" + "\n" + "Prijasnja verifikacija: " + s.Verificiran + "\n" + "Nova verifikacija: 1) DA / 2) NE | ");
+                        bool potvrda = Pomocno.UcitajBool("\n" + "Promijeniti informacije polaznika " + 
+                                                           "\n" +
+                                                            "\n" + "Prijasnji unos: " + s.Naziv + 
+                                                             "\n" + "Novi unos: " + naziv + 
+                                                              "\n" + "Prihvati promjene: 1) DA / 2) NE | ");
+                        if(potvrda) 
+                        { 
+                        s.Naziv = naziv;
+                        }
+                        break;
 
-                bool potvrda = Pomocno.UcitajBool("\n" + "Promijeniti informacije polaznika " + "\n" +
-                                                  "\n" + "Prijasnji unos: " + s + "\n" +
-                                                  "Novi unos: " + naziv + " || " + "Novi broj sati: " + brojSati + " || " + "Nova cijena: " + cijena + " || " + "Nova upisnina: " + upisnina + " || " + "Verificiran: " + verificiran + "\n" +
-                                                  "1) DA / 2) NE | ");
+                    case 2:
+                        int brojSati = Pomocno.UcitajInt("\n" + "_______________________________________" + 
+                                                          "\n" + "Stari broj sati: " + s.BrojSati +
+                                                           "\n" + "Novi broj sati: ");
 
-                if (potvrda == true)
-                {
+                        potvrda = Pomocno.UcitajBool("\n" + "Promijeniti informacije polaznika " 
+                                                    + "\n" +
+                                                       "\n" + "Prijasnji unos: " + s.BrojSati +
+                                                        "\n" + "Novi unos: " + brojSati + 
+                                                         "\n" + "Prihvati promjene: 1) DA / 2) NE | ");
 
-                 //   s.Sifra = sifra;
-                    s.Naziv = naziv;
-                    s.BrojSati = brojSati;
-                    s.Cijena = cijena;
-                    s.Upisnina = upisnina;
-                    s.Verificiran = verificiran;
+                        if (potvrda)
+                        {
+                            s.BrojSati = brojSati;
+                        }
+                        break;
+
+                        case 3:
+                        float cijena = Pomocno.UcitajFloat("\n" + "_______________________________________" + 
+                                                            "\n" + "Stara cijena: " + s.Cijena +
+                                                             "\n" + "Nova cijena: ");
+
+                        potvrda = Pomocno.UcitajBool("\n" + "Promijeniti informacije polaznika " +
+                                                      "\n" +
+                                                       "\n" + "Prijasnji unos: " + s.Cijena + 
+                                                        "\n" + "Novi unos: " + cijena +
+                                                         "\n" + "Prihvati promjene: 1) DA / 2) NE | ");
+                        if(potvrda) 
+                        { 
+                            s.Cijena = cijena;
+                        }
+                        break;
+
+                        case 4:
+                        float upisnina = Pomocno.UcitajFloat("\n" + "_______________________________________" +     
+                                                              "\n" + "Stara upisnina: " + s.Upisnina + 
+                                                               "\n" + "Nova upisnina: ");
+
+                        potvrda = Pomocno.UcitajBool("\n" + "Promijeniti informacije polaznika " + 
+                                                      "\n" +
+                                                       "\n" + "Prijasnji unos: " + s.Upisnina + 
+                                                        "\n" + "Novi unos: " + upisnina + 
+                                                         "\n" + "Prihvati promjene: 1) DA / 2) NE | ");
+                        if(potvrda)
+                        {
+                            s.Upisnina = upisnina;
+                        }
+                        break;
+
+                    case 5:
+                       bool verificiran = Pomocno.UcitajBool("\n" + "_______________________________________" +     
+                                                              "\n" + "Prijasnja verifikacija: " + s.Verificiran + 
+                                                               "\n" + "Nova verifikacija: 1) DA / 2) NE | ");
+
+                        potvrda = Pomocno.UcitajBool("\n" + "Promijeniti informacije polaznika " + 
+                                                      "\n" +
+                                                       "\n" + "Prijasnji unos: " + s.Verificiran + 
+                                                        "\n" + "Novi unos: " + verificiran + 
+                                                         "\n" + "Prihvati promjene: 1) DA / 2) NE | ");
+                        if (verificiran)
+                        {
+                            s.Verificiran = verificiran;
+                        }
+                        break;
+
+                        case 6:
+                         naziv = Pomocno.UcitajString("\n" + "_______________________________________" + 
+                                                       "\n" + "Stari naziv: " + s.Naziv +
+                                                        "\n" + "Novi naziv: ");
+
+                         brojSati = Pomocno.UcitajInt("\n" + "_______________________________________" + 
+                                                       "\n" + "Stari broj sati: " + s.BrojSati + 
+                                                        "\n" + "Novi broj sati: ");
+
+                         cijena = Pomocno.UcitajFloat("\n" + "_______________________________________" + 
+                                                       "\n" + "Stara cijena: " + s.Cijena +
+                                                        "\n" + "Nova cijena: ");
+
+                         upisnina = Pomocno.UcitajFloat("\n" + "_______________________________________" + 
+                                                         "\n" + "Stara upisnina: " + s.Upisnina +
+                                                          "\n" + "Nova upisnina: ");
+
+                         verificiran = Pomocno.UcitajBool("\n" + "_______________________________________" + 
+                                                           "\n" + "Prijasnja verifikacija: " + s.Verificiran + 
+                                                            "\n" + "Nova verifikacija: 1) DA / 2) NE | ");
+
+                         potvrda = Pomocno.UcitajBool("\n" + "Promijeniti informacije polaznika " + 
+                                                       "\n" +
+                                                        "\n" + "Prijasnji unos: " + s + 
+                                                         "\n" + "Novi unos: " + naziv + " || " + "Novi broj sati: " + brojSati + " || " + "Nova cijena: " + cijena + " || " + "Nova upisnina: " + upisnina + " || " + "Verificiran: " + verificiran +
+                                                          "\n" +
+                                                           "\n" + "Prihvati promjene: 1) DA / 2) NE | ");
+
+                        if (potvrda)
+                        {
+
+                            //   s.Sifra = sifra;
+                            s.Naziv = naziv;
+                            s.BrojSati = brojSati;
+                            s.Cijena = cijena;
+                            s.Upisnina = upisnina;
+                            s.Verificiran = verificiran;
+                        }
+                        break;
+
+                    default:
+                        break;
+
                 }
-            }
+
+             }
             catch
             {
 
@@ -174,6 +290,9 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
             IzbornikRadSaSmjerovima();
         }
 
+  
+
+     
         public void PrikaziSmjerove ()
         {
             var i = 0;

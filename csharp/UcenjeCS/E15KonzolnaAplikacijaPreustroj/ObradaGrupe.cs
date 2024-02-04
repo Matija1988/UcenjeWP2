@@ -5,7 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UcenjeCS.E15KonzolnaAplikacijaPreustroj.Model;
-
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography;
 
 namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
 {
@@ -158,10 +160,197 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
         {
             PrikaziGrupe();
 
-
-
             int i = Pomocno.UcitajInt("Odaberi redni broj grupe: ");
             var g = Grupe[i - 1];
+
+
+            Console.WriteLine("1) Naziv");
+            Console.WriteLine("2) Smjer");
+            Console.WriteLine("3) Predavac");
+            Console.WriteLine("4) Maksimalno polaznika");
+            Console.WriteLine("5) Polaznici");
+            Console.WriteLine("6) Pocetak nastave");
+            Console.WriteLine("7) Uredi sve");
+            Console.WriteLine("8) Povratak na izbornik grupe");
+
+            switch (Pomocno.UcitajInt("\n" + "Odaberite stavku koju zelite promijeniti: "))
+            {
+
+                case 1:
+                    string naziv = Pomocno.UcitajString("\n" + "_______________________________________" +
+                                                       "\n" + "Stari naziv: " + g.Naziv +
+                                                        "\n" + "Novi naziv: ");
+
+                    bool potvrda = Pomocno.UcitajBool("\n" + "Promijeniti informacije grupe " +
+                                                       "\n" +
+                                                        "\n" + "Prijasnji unos: " + g.Naziv +
+                                                         "\n" + "Novi unos: " + naziv +
+                                                          "\n" + "Prihvati promjene: 1) DA / 2) NE | ");
+                    if (potvrda)
+                    {
+                        g.Naziv = naziv;
+                    }
+                    break;
+
+                case 2:
+
+                    var smjer = PostaviSmjer();
+
+                    
+                    
+
+                                  
+                    potvrda = Pomocno.UcitajBool("\n" + "Promijeniti informacije grupe " +
+                                                  "\n" +
+                                                   "\n" + "Prijasnji unos: " + g.Smjer.Naziv +
+                                                    "\n" + "Novi unos: " + smjer +
+                                                     "\n" + "Prihvati promjene: 1) DA / 2) NE | ");
+
+                    if (potvrda)
+                    {
+                        g.Smjer = smjer;
+                    }
+                    break;
+
+                case 3:
+                    Console.WriteLine("Prethodni predavac: " + g.Predavac.Ime + " " + g.Predavac.Prezime);
+                    var predavac = PostaviPredavaca();
+
+
+                    potvrda = Pomocno.UcitajBool("\n" + "Promijeniti informacije grupe " +
+                                                  "\n" +
+                                                   "\n" + "Prijasnji unos: " + g.Predavac.Ime + " " + g.Predavac.Prezime +
+                                                    "\n" + "Novi unos: " + predavac +
+                                                     "\n" + "Prihvati promjene: 1) DA / 2) NE | ");
+
+                    if (potvrda)
+                    {
+                        g.Predavac = predavac;
+                    }
+                    break;
+
+                case 4:
+
+                    int maksimalnoPolaznika = Pomocno.UcitajInt("\n" + "_______________________________________" +
+                                                                 "\n" + "Stari unos: " + g.MaksPolaznika +
+                                                                  "\n" + "Novi unos: ");
+
+                                      
+                    potvrda = Pomocno.UcitajBool("\n" + "Promijeniti informacije gruope " +
+                                                  "\n" +
+                                                   "\n" + "Prijasnji unos: " + g.MaksPolaznika +
+                                                    "\n" + "Novi unos: " + maksimalnoPolaznika +
+                                                     "\n" + "Prihvati promjene: 1) DA / 2) NE | ");
+                    if (potvrda)
+                    {
+                        g.MaksPolaznika = maksimalnoPolaznika;
+                    }
+                    break;
+
+                case 5:
+
+                    int b = 1;
+
+                    Console.WriteLine("\n" + "Trenutni polaznici: " + "\n");
+                    Console.WriteLine("------------------------------------------------------------------------------");
+
+
+                    foreach (Polaznik polaznik in g.Polaznici)
+                    {
+
+                        Console.WriteLine("{0}. {1}", b++, polaznik);
+
+                    }
+                    Console.WriteLine("-------------------------------------------------------------------------------");
+
+                  
+
+                    var polaznici = PridodajPolaznike(PostaviPolaznike(), g);
+                                      
+
+                    potvrda = Pomocno.UcitajBool("\n" + "Promijeniti informacije grupe " +
+                                                  "\n" +
+                                                   "\n" + "Prihvati promjene: 1) DA / 2) NE | ");
+                    if (potvrda)
+                    {
+                       g.Polaznici = polaznici;
+                    }
+                    break;
+
+                case 6:
+
+                    DateTime dateTime = Pomocno.UcitajDatum("Novi datum pocetka: ");
+
+                    potvrda = Pomocno.UcitajBool("\n" + "Promijeniti informacije grupe " +
+                                                  "\n" + "Stari datum pocetka " + g.DatumPocetka +
+                                                   "\n" + "Novi datum pocetka" + dateTime +
+                                                    "\n" + "Prihvati promjene: 1) DA / 2) NE | ");
+                    if (potvrda)
+                    {
+                        g.DatumPocetka = dateTime;
+                    }
+
+
+
+                    break;
+
+                case 7:
+
+                    naziv = Pomocno.UcitajString("\n" + "_______________________________________" +
+                                                  "\n" + "Staro ime: " + g.Naziv +
+                                                   "\n" + "Novo ime: ");
+
+                    Console.WriteLine("\n" + "_______________________________________" +
+                                       "\n" + "Stari smjer: " + g.Smjer +
+                                        "\n" + "Novi smjer: ");
+                    smjer = PostaviSmjer();
+
+
+                    Console.WriteLine("\n" + "_______________________________________" +
+                                       "\n" + "Stari predavac: " + g.Predavac +
+                                        "\n" + "Novi predavac: ");
+                    predavac = PostaviPredavaca();
+
+                    maksimalnoPolaznika = Pomocno.UcitajInt("\n" + "_______________________________________" +
+                                                                 "\n" + "Stari unos: " + g.MaksPolaznika +
+                                                                  "\n" + "Novi unos: ");
+
+                    Console.WriteLine("\n" + "_______________________________________" +
+                                       "\n" + "Stari polaznici: " + g.Predavac +
+                                        "\n" + "Novi polaznici: ");
+                    polaznici = PostaviPolaznike();
+
+                    dateTime = Pomocno.UcitajDatum("Novi datum pocetka: ");
+
+
+                     potvrda = Pomocno.UcitajBool("\n" + "Prihvati izmjene: " + 
+                                                       "\n" +   
+                                                        "\n" + "Stari unos: " + g + 
+                                                         "\n" + "Novi unos: " + smjer.Naziv + " || " + "Nova grupa: " + naziv + " || " + "Novi predavac: " + predavac.Ime + " " + predavac.Prezime + " || " +
+                                                                "Maksimalno polaznika: " + maksimalnoPolaznika + " || " + "Novi datum pocetka: " + dateTime + 
+                                                           "\n" + "Prihvati promjene 1) DA / 2) NE | ");
+
+                    if (potvrda == true)
+                    {
+                        //  p.Sifra = sifra;
+                        g.Naziv = naziv;
+                        g.Predavac = predavac;
+                        g.Smjer = smjer;
+                        g.MaksPolaznika = maksimalnoPolaznika;
+                        g.Polaznici = polaznici;
+                        g.DatumPocetka = dateTime;
+
+
+                    }
+
+                    IzbornikRadSGrupama();
+                    break;
+
+                default:
+                    Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! " + "POGRESAN UNOS" + " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                    Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!! " + " Provjerite ispravnost svoga unosa" + " !!!!!!!!!!!!!!!!!!!!!!!!");
+                    break;
+            }
 
             //int sifra = Pomocno.UcitajInt("\n" + "------------------------------------------------------------------------------" +
             //                                 "\n" + "Stara sifra: " + g.Sifra + "\n" + "Nova sifra: ");
@@ -170,55 +359,19 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
             //{
             //    UrediGrupu();
             //}
-
-            string naziv = Pomocno.UcitajString("\n" + "------------------------------------------------------------------------------" +
-                                                "\n" + "Stari naziv: " + g.Naziv + "\n" + "Novi naziv: ");
-
-            var predavac = PostaviPredavaca();
-
-            Console.WriteLine("\n" + "------------------------------------------------------------------------------" + "\n" + "Trenutni smjer: {0}", g.Smjer.Naziv);
-
-            var smjer = PostaviSmjer();
-
-            int b = 1;
-
-            Console.WriteLine("\n" + "Trenutni polaznici: " + "\n");
-            Console.WriteLine("------------------------------------------------------------------------------");
-
-
-            foreach (Polaznik polaznik in g.Polaznici)
-            {
-
-                Console.WriteLine("{0}. {1}", b++, polaznik);
-
-            }
-            Console.WriteLine("-------------------------------------------------------------------------------");
-
-            var polaznici = PostaviPolaznike();
-
-            int maksimalnoPolaznika = Pomocno.UcitajInt("Maksimalno plaznika: ");
-            DateTime dateTime = Pomocno.UcitajDatum("Novi datum pocetka: ");
-
-            bool potvrda = Pomocno.UcitajBool("\n" + "Prihvati izmjene: " + "\n" + "\n" +
-                                              "Stari unos: " + g + "\n" +
-                                              "Novi unos: " + smjer.Naziv + " || " + "Nova grupa: " + naziv + " || " + "Novi predavac: " + predavac.Ime + " " + predavac.Prezime + " || " +
-                                              "Maksimalno polaznika: " + maksimalnoPolaznika + " || " + "Novi datum pocetka: " + dateTime + "\n" +
-                                              "1) DA / 2) NE | ");
-
-            if (potvrda == true)
-            {
-
-              //  g.Sifra = sifra;
-                g.Naziv = naziv;
-                g.Predavac = predavac;
-                g.Smjer = smjer;
-
-                g.Polaznici = polaznici;
-            }
-
+                  
 
             IzbornikRadSGrupama();
         }
+
+        private List<Polaznik> PridodajPolaznike (List<Polaznik> polazniks, Grupa g)
+        {
+            var p = polazniks.Concat((IEnumerable<Polaznik>)g);
+
+            return p.ToList();
+        }
+
+      
 
         private void DodajNovuGrupu ()
         {
@@ -372,25 +525,35 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
         {
          Izbornik.ObradaSmjer.PrikaziSmjerove();
 
+         //   int odabir = Pomocno.UcitajInt("Odaberi smjer: ");
+           // var s = Smjerovi[odabir - 1];
+            var g = Grupe;
 
-            int b = 1;
-            int i = Pomocno.UcitajInt("\n" + "Odaberi redni broj smjera: ");
-            var s = Smjerovi[i - 1];
+            var prihodi = KakluliarajPrihode(Grupe);
 
-            float ukupno = 0;
-
-            foreach (Smjer smjer in Smjerovi)
+            foreach(var prihod in prihodi)
             {
-                b++;
-                ukupno = s.Cijena * b;
+                Console.WriteLine($"Smjer ID: {prihod.GrupaID} || Prihod: {prihod.prihod}");
             }
 
 
-
-            Console.WriteLine("Ukupno: " + ukupno);
-
             IzbornikRadSGrupama();
 
+        }
+
+        static IEnumerable<(int GrupaID, float prihod)> KakluliarajPrihode (List<Grupa> Grupe)
+        {
+            var gru = Grupe.GroupBy(g => g.Smjer.Sifra);
+
+            foreach(var g in gru)
+            {
+
+                int gruID = g.Key; 
+                float ukupniPrihod = g.Sum(g => g.Smjer.Cijena);
+
+
+                yield return (gruID, ukupniPrihod);
+            }
         }
 
         //private void TestniPodaci ()
