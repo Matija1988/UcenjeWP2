@@ -161,7 +161,7 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
             PrikaziGrupe();
 
             int i = Pomocno.UcitajInt("Odaberi redni broj grupe: ");
-            var g = Grupe[i - 1];
+            var grupa = Grupe[i - 1];
 
 
             Console.WriteLine("1) Naziv");
@@ -178,17 +178,17 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
 
                 case 1:
                     string naziv = Pomocno.UcitajString("\n" + "_______________________________________" +
-                                                       "\n" + "Stari naziv: " + g.Naziv +
+                                                       "\n" + "Stari naziv: " + grupa.Naziv +
                                                         "\n" + "Novi naziv: ");
 
                     bool potvrda = Pomocno.UcitajBool("\n" + "Promijeniti informacije grupe " +
                                                        "\n" +
-                                                        "\n" + "Prijasnji unos: " + g.Naziv +
+                                                        "\n" + "Prijasnji unos: " + grupa.Naziv +
                                                          "\n" + "Novi unos: " + naziv +
                                                           "\n" + "Prihvati promjene: 1) DA / 2) NE | ");
                     if (potvrda)
                     {
-                        g.Naziv = naziv;
+                        grupa.Naziv = naziv;
                     }
                     break;
 
@@ -202,48 +202,48 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
                                   
                     potvrda = Pomocno.UcitajBool("\n" + "Promijeniti informacije grupe " +
                                                   "\n" +
-                                                   "\n" + "Prijasnji unos: " + g.Smjer.Naziv +
+                                                   "\n" + "Prijasnji unos: " + grupa.Smjer.Naziv +
                                                     "\n" + "Novi unos: " + smjer +
                                                      "\n" + "Prihvati promjene: 1) DA / 2) NE | ");
 
                     if (potvrda)
                     {
-                        g.Smjer = smjer;
+                        grupa.Smjer = smjer;
                     }
                     break;
 
                 case 3:
-                    Console.WriteLine("Prethodni predavac: " + g.Predavac.Ime + " " + g.Predavac.Prezime);
+                    Console.WriteLine("Prethodni predavac: " + grupa.Predavac.Ime + " " + grupa.Predavac.Prezime);
                     var predavac = PostaviPredavaca();
 
 
                     potvrda = Pomocno.UcitajBool("\n" + "Promijeniti informacije grupe " +
                                                   "\n" +
-                                                   "\n" + "Prijasnji unos: " + g.Predavac.Ime + " " + g.Predavac.Prezime +
+                                                   "\n" + "Prijasnji unos: " + grupa.Predavac.Ime + " " + grupa.Predavac.Prezime +
                                                     "\n" + "Novi unos: " + predavac +
                                                      "\n" + "Prihvati promjene: 1) DA / 2) NE | ");
 
                     if (potvrda)
                     {
-                        g.Predavac = predavac;
+                        grupa.Predavac = predavac;
                     }
                     break;
 
                 case 4:
 
                     int maksimalnoPolaznika = Pomocno.UcitajInt("\n" + "_______________________________________" +
-                                                                 "\n" + "Stari unos: " + g.MaksPolaznika +
+                                                                 "\n" + "Stari unos: " + grupa.MaksPolaznika +
                                                                   "\n" + "Novi unos: ");
 
                                       
                     potvrda = Pomocno.UcitajBool("\n" + "Promijeniti informacije gruope " +
                                                   "\n" +
-                                                   "\n" + "Prijasnji unos: " + g.MaksPolaznika +
+                                                   "\n" + "Prijasnji unos: " + grupa.MaksPolaznika +
                                                     "\n" + "Novi unos: " + maksimalnoPolaznika +
                                                      "\n" + "Prihvati promjene: 1) DA / 2) NE | ");
                     if (potvrda)
                     {
-                        g.MaksPolaznika = maksimalnoPolaznika;
+                        grupa.MaksPolaznika = maksimalnoPolaznika;
                     }
                     break;
 
@@ -255,7 +255,7 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
                     Console.WriteLine("------------------------------------------------------------------------------");
 
 
-                    foreach (Polaznik polaznik in g.Polaznici)
+                    foreach (Polaznik polaznik in grupa.Polaznici)
                     {
 
                         Console.WriteLine("{0}. {1}", b++, polaznik);
@@ -265,7 +265,7 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
 
                   
 
-                    var polaznici = PridodajPolaznike(PostaviPolaznike(), g);
+                    var polaznici = PostaviPolaznike(grupa);
                                       
 
                     potvrda = Pomocno.UcitajBool("\n" + "Promijeniti informacije grupe " +
@@ -273,7 +273,7 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
                                                    "\n" + "Prihvati promjene: 1) DA / 2) NE | ");
                     if (potvrda)
                     {
-                       g.Polaznici = polaznici;
+                       grupa.Polaznici = polaznici;
                     }
                     break;
 
@@ -282,12 +282,12 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
                     DateTime dateTime = Pomocno.UcitajDatum("Novi datum pocetka: ");
 
                     potvrda = Pomocno.UcitajBool("\n" + "Promijeniti informacije grupe " +
-                                                  "\n" + "Stari datum pocetka " + g.DatumPocetka +
+                                                  "\n" + "Stari datum pocetka " + grupa.DatumPocetka +
                                                    "\n" + "Novi datum pocetka" + dateTime +
                                                     "\n" + "Prihvati promjene: 1) DA / 2) NE | ");
                     if (potvrda)
                     {
-                        g.DatumPocetka = dateTime;
+                        grupa.DatumPocetka = dateTime;
                     }
 
 
@@ -297,35 +297,35 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
                 case 7:
 
                     naziv = Pomocno.UcitajString("\n" + "_______________________________________" +
-                                                  "\n" + "Staro ime: " + g.Naziv +
+                                                  "\n" + "Staro ime: " + grupa.Naziv +
                                                    "\n" + "Novo ime: ");
 
                     Console.WriteLine("\n" + "_______________________________________" +
-                                       "\n" + "Stari smjer: " + g.Smjer +
+                                       "\n" + "Stari smjer: " + grupa.Smjer +
                                         "\n" + "Novi smjer: ");
                     smjer = PostaviSmjer();
 
 
                     Console.WriteLine("\n" + "_______________________________________" +
-                                       "\n" + "Stari predavac: " + g.Predavac +
+                                       "\n" + "Stari predavac: " + grupa.Predavac +
                                         "\n" + "Novi predavac: ");
                     predavac = PostaviPredavaca();
 
                     maksimalnoPolaznika = Pomocno.UcitajInt("\n" + "_______________________________________" +
-                                                                 "\n" + "Stari unos: " + g.MaksPolaznika +
+                                                                 "\n" + "Stari unos: " + grupa.MaksPolaznika +
                                                                   "\n" + "Novi unos: ");
 
                     Console.WriteLine("\n" + "_______________________________________" +
-                                       "\n" + "Stari polaznici: " + g.Predavac +
+                                       "\n" + "Stari polaznici: " + grupa.Predavac +
                                         "\n" + "Novi polaznici: ");
-                    polaznici = PostaviPolaznike();
+                    polaznici = PostaviPolaznike(grupa);
 
                     dateTime = Pomocno.UcitajDatum("Novi datum pocetka: ");
 
 
                      potvrda = Pomocno.UcitajBool("\n" + "Prihvati izmjene: " + 
                                                        "\n" +   
-                                                        "\n" + "Stari unos: " + g + 
+                                                        "\n" + "Stari unos: " + grupa + 
                                                          "\n" + "Novi unos: " + smjer.Naziv + " || " + "Nova grupa: " + naziv + " || " + "Novi predavac: " + predavac.Ime + " " + predavac.Prezime + " || " +
                                                                 "Maksimalno polaznika: " + maksimalnoPolaznika + " || " + "Novi datum pocetka: " + dateTime + 
                                                            "\n" + "Prihvati promjene 1) DA / 2) NE | ");
@@ -333,12 +333,12 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
                     if (potvrda == true)
                     {
                         //  p.Sifra = sifra;
-                        g.Naziv = naziv;
-                        g.Predavac = predavac;
-                        g.Smjer = smjer;
-                        g.MaksPolaznika = maksimalnoPolaznika;
-                        g.Polaznici = polaznici;
-                        g.DatumPocetka = dateTime;
+                        grupa.Naziv = naziv;
+                        grupa.Predavac = predavac;
+                        grupa.Smjer = smjer;
+                        grupa.MaksPolaznika = maksimalnoPolaznika;
+                        grupa.Polaznici = polaznici;
+                        grupa.DatumPocetka = dateTime;
 
 
                     }
@@ -364,9 +364,13 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
             IzbornikRadSGrupama();
         }
 
-        private List<Polaznik> PridodajPolaznike (List<Polaznik> polazniks, Grupa g)
+        private List<Polaznik> PridodajPolaznike (List<Polaznik> polazniks)
         {
-            var p = polazniks.Concat((IEnumerable<Polaznik>)g);
+
+            List<Polaznik> p = new List<Polaznik>();
+
+
+            
 
             return p.ToList();
         }
@@ -375,8 +379,10 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
 
         private void DodajNovuGrupu ()
         {
+            
 
             int sifra = Pomocno.UcitajInt("Unesi sifru grupe: ");
+            
 
             if (ProvjeraSifreGrupe(Grupe, sifra))
             {
@@ -397,6 +403,8 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
                 }
                     
                     });
+
+            
 
             Grupe.Add(new Grupa()
             {
@@ -437,12 +445,39 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
         {
             List<Polaznik> polaznici = new List<Polaznik>();
 
-             
 
             while (Pomocno.UcitajBool("Zelite li dodati polaznike? 1) DA / 2) NE | "))
             {
+             
+                    polaznici.Add(PostaviPolaznika());
+                           
+            }
+            return polaznici;
+        }
+
+
+        private List<Polaznik> PostaviPolaznike (Grupa grupa)
+        {
+            List<Polaznik> polaznici = new List<Polaznik>();
+
+          
+
+            while (Pomocno.UcitajBool("Zelite li dodati polaznike? 1) DA / 2) NE | "))
+            {
+                if(grupa.Polaznici.Count == 0)
+                {
+                    polaznici.Add(PostaviPolaznika());
+                    return polaznici;
+                } else
+                {
+                    polaznici = grupa.Polaznici;
+                    
+                    polaznici.Add(PostaviPolaznika());
+              
+                    return polaznici;
+                }
                 
-                polaznici.Add(PostaviPolaznika());
+                
             }
             return polaznici;
         }
@@ -450,6 +485,7 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
         private Polaznik PostaviPolaznika ()
         {
            Izbornik.ObradaPolaznik.PrikaziPolaznike();
+
             int i = Pomocno.UcitajRasponBrojeva("\n" + "Odaberi redni broj polaznika: ", 0,Izbornik.ObradaPolaznik.Polaznici.Count());
 
             // ako polaznik postoji, odbij unos
