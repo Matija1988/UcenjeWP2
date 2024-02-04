@@ -351,8 +351,8 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
                 Sifra = 2,
                 Naziv = "Java programiranje",
                 BrojSati = 130,
-                Cijena = 1000,
-                Upisnina = 50,
+                Cijena = 1023,
+                Upisnina = 51,
                 Verificiran = true
             });
 
