@@ -24,9 +24,15 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj.Model
 
         public override string ToString ()
         {
-
+            try { 
 
             return new StringBuilder(Smjer.Naziv).Append(" || " + Naziv + " || " + Predavac.Ime + " " + Predavac.Prezime + " || " + "Maksimalno polaznika: " + MaksPolaznika + " || " + "Datum pocetka: " + DatumPocetka).ToString();
+
+            } catch
+            {
+                Console.WriteLine("Problem u ispisu grupa. Pogledati - String override u klasi Grupe!");
+                return null;
+            }
         }
         
     }

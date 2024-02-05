@@ -10,17 +10,18 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.ComponentModel.DataAnnotations;
 using System.Xml;
+using System.Reflection.Metadata.Ecma335;
 
 namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
 {
     internal class ObradaGrupe
 
     {
-
+        public List<Polaznik> Polaznici { get; }
         public List<Grupa> Grupe {  get;  }
 
         public List<Smjer> Smjerovi { get; }    
-        public List<Polaznik> Polaznici { get; }
+       
         public List<Predavac> Predavaci {  get; }   
 
         private Izbornik Izbornik { get; }
@@ -48,10 +49,10 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
         public ObradaGrupe ()
         {
             Grupe = new List<Grupa>();
-            //if(Pomocno.dev)
-            //{
-            //    TestniPodaci(); 
-            //}
+            if (Pomocno.dev)
+            {
+                TestniPodaci();
+            }
 
         }
 
@@ -402,7 +403,7 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
 
                 }
                     
-                    });
+             });
 
             
 
@@ -448,7 +449,7 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
 
             while (Pomocno.UcitajBool("Zelite li dodati polaznike? 1) DA / 2) NE | "))
             {
-             
+                    // treba osmisliti kako odbiti vec postojeci unos               
                     polaznici.Add(PostaviPolaznika());
                            
             }
@@ -459,15 +460,40 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
         private List<Polaznik> PostaviPolaznike (Grupa grupa)
         {
             List<Polaznik> polaznici = new List<Polaznik>();
-
-          
+            
+            List<Polaznik> duplikati = new List<Polaznik>();
 
             while (Pomocno.UcitajBool("Zelite li dodati polaznike? 1) DA / 2) NE | "))
             {
                 if(grupa.Polaznici.Count == 0)
                 {
-                    polaznici.Add(PostaviPolaznika());
+                   
+
+                    polaznici.ForEach(p => {
+
+                        duplikati.ForEach(g => {
+                        
+                        if(p.Sifra == g.Sifra)
+                            {
+                                Console.WriteLine("!!!!!!!!!!! POLAZNIK SE VEC NALAZI U GRUPI !!!!!!!!!!!!!");
+                                PostaviPolaznike();
+                            } else
+                            {
+                               
+                                polaznici.Add(PostaviPolaznika());
+                                duplikati = polaznici;
+                                
+                            }
+                            
+                        });
+                    
+                    
+                    });
+
+
                     return polaznici;
+
+
                 } else
                 {
                     polaznici = grupa.Polaznici;
@@ -485,26 +511,53 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
         private Polaznik PostaviPolaznika ()
         {
            Izbornik.ObradaPolaznik.PrikaziPolaznike();
+                     
 
-            int i = Pomocno.UcitajRasponBrojeva("\n" + "Odaberi redni broj polaznika: ", 0,Izbornik.ObradaPolaznik.Polaznici.Count());
+            var i = Izbornik.ObradaPolaznik.Polaznici[Pomocno.UcitajRasponBrojeva("\n" + "Odaberi redni broj polaznika: ", 0,Izbornik.ObradaPolaznik.Polaznici.Count()) - 1];
+                       
+
+            var grupa = Grupe;
+
+            grupa.ForEach(g => { if (g.Polaznici.Contains(i)) 
+                {
+
+                    Console.WriteLine("!!!!!!!!!!! POLAZNIK SE VEC NALAZI U GRUPI !!!!!!!!!!!!!");
+                    PostaviPolaznika();
+
+                } });
+            
+               
+            
 
             // ako polaznik postoji, odbij unos
 
-            return Izbornik.ObradaPolaznik.Polaznici[i - 1];
+            return i;
         }
 
         private Smjer PostaviSmjer ()
         {
             Izbornik.ObradaSmjer.PrikaziSmjerove();
+
+            try {
+                
             int i = Pomocno.UcitajInt("\n" + "Odaberi redni broj smjera: ");
-            return Izbornik.ObradaSmjer.Smjerovi[i - 1];
+                return Izbornik.ObradaSmjer.Smjerovi[i - 1];
+
+            } catch  
+            {
+                Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! " + "POGRESAN UNOS" + " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!! " + " Provjerite ispravnost svoga unosa" + " !!!!!!!!!!!!!!!!!!!!!!!!");
+                PostaviSmjer();
+                return null; 
+            }
+            
         }
 
         private Predavac PostaviPredavaca ()
         {
             Izbornik.ObradaPredavac.PrikaziPredavace();
 
-            int i = Pomocno.UcitajRasponBrojeva("\n" + "Odaberi redni broj predavaca: ", 0, Izbornik.ObradaPredavac.Predavaci.Count());
+            int i = Pomocno.UcitajRasponBrojeva("\n" + "Odaberi redni broj predavaca: ", 1, Izbornik.ObradaPredavac.Predavaci.Count());
             return Izbornik.ObradaPredavac.Predavaci[i - 1];
         }
 
@@ -537,44 +590,82 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
 
         private void UcitajUkupanBrojPolaznika (List<Grupa> Grupe)
         {
-            int a = 0;
-            int b = 0;
-
-            var p = Izbornik.ObradaPolaznik.Polaznici;
-
-            Console.WriteLine();
-            Grupe.ForEach(Grupa => { Console.WriteLine("Trenutno nastavu pohada " + Grupa.Polaznici.Count() + " polaznika u " + ++a +". " + " grupi"); });
-
-            Izbornik.ObradaPolaznik.Polaznici.ForEach(Polaznici => { ++b; });
 
 
 
-            Console.WriteLine("\n"+ "Sveukupno polaznika na svim grupama: " + b);
-
-
-
+            VratiBrojPolaznikaUGrupi(Grupe);
+                       
             IzbornikRadSGrupama();
 
         }
 
         private void ProsjecanBrojPolaznikaUGrupama(List<Grupa> grupa)
         {
-            int a = 0;
-            int b = 0;
+            float a = 0;
+            float b = 0;
 
-            int aritmetickiProsjek = 0;
+            float aritmetickiProsjek = 0;
 
+            var polaznik = Izbornik.ObradaPolaznik.Polaznici; 
+
+
+            try { 
             Izbornik.ObradaPolaznik.Polaznici.ForEach(Polaznici => { ++a; });
-            Grupe.ForEach(Grupe => {  ++b; });
-            Console.WriteLine("Prosjek polaznika po svim grupama: " + (aritmetickiProsjek = a /b));
+
+                
+                                
+
+            Console.WriteLine("Prosjek polaznika po svim grupama: " + (aritmetickiProsjek = VratiBrojPolaznikaUGrupi(grupa) / VratiBrojGrupa(grupa)));
+
+            } catch
+            {
+                Console.WriteLine("!!!!!!!!!!!! TRENUTNO NEMA POLAZNIKA DODIJELJENIH GRUPI !!!!!!!!!!!!!");
+            }
 
             IzbornikRadSGrupama();
+        }
+
+        private float VratiBrojGrupa(List<Grupa> grupa) 
+        {             
+            float a = 0;
+
+            grupa.ForEach(Grupa => { a++; });
+
+            Console.WriteLine("Broj grupa: " + a.ToString());
+
+            return a;
+        }
+
+        private float VratiBrojPolaznikaUGrupi(List<Grupa> grupa)
+        {
+            float a = 0;
+
+
+            for(int i = 0; i < Izbornik.ObradaPolaznik.Polaznici.Count; i++)
+            {
+                var polaznik = Izbornik.ObradaPolaznik.Polaznici[i];
+
+                grupa.ForEach( g => 
+                { 
+                    if(g.Polaznici.Contains(polaznik)) 
+                    { 
+                        a++;
+                    }
+
+                });
+
+            }
+            Console.WriteLine("Broj polaznika u grupama: " + a.ToString());
+
+            return a;
         }
 
         private void IznosPrihodaPoSmjerovima (List<Grupa> grupe)
         {
 
             Izbornik.ObradaSmjer.PrikaziSmjerove();
+
+            try { 
 
             int odabirSmjera = Pomocno.UcitajInt("\n" + "Odaberi smjer za prikaz statistike: ");
 
@@ -586,7 +677,7 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
 
             foreach (Grupa g in grupe)
             {
-                if (g.Smjer.Naziv.Contains(smjer.Naziv))
+                if (g.Smjer.Naziv.Contains(smjer.Naziv) && g.Polaznici != null)
                 {
                   a += g.Polaznici.Count(); 
                 }
@@ -594,8 +685,15 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
                             
 
             Console.WriteLine("Prihod smjera: " + priljeviSmjera * a);
-                                  
-            if(Pomocno.UcitajBool("Zelite li nastaviti pregledavati ovaj izbornik?" + "\n" + "1) DA / 2) NE | "))
+
+            } catch
+            {
+                Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! " + "POGRESAN UNOS" + " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!! " + " Provjerite ispravnost svoga unosa" + " !!!!!!!!!!!!!!!!!!!!!!!!");
+            }
+
+
+            if (Pomocno.UcitajBool("Zelite li nastaviti pregledavati ovaj izbornik?" + "\n" + "1) DA / 2) NE | "))
             {
                 IznosPrihodaPoSmjerovima(grupe);
             }
@@ -604,66 +702,69 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
         }
         private void ProsjecanIznosPrihodaPoPolazniku ()
         {
-            int a = 0;
-            int b = 0;
-            float priljeviSmjera = 0;
-            float[] niz = new float[b];
-
-
-            Izbornik.ObradaPolaznik.Polaznici.ForEach(Polaznici => { ++a; });
+           
             
-            
+            List<float> floats = new List<float>();
 
-            for (int i = 0; i < Izbornik.ObradaSmjer.Smjerovi.Count; i++) 
+            // u izradi. Ne razlikuje grupe u smjerovima.
+            Console.WriteLine(VratiPriljeveSmjera().ToString());
+
+            for ( int i = 0; i < Izbornik.ObradaSmjer.Smjerovi.Count; i++)
             {
-                var pS = Izbornik.ObradaSmjer.Smjerovi[i];
-                b++;
-
-                foreach (Grupa g in Grupe)
-                {
-                    if (g.Smjer.Naziv.Contains(pS.Naziv))
-                    {
-                        priljeviSmjera = pS.Upisnina + pS.Cijena;
-                        niz[i] = priljeviSmjera;
-
-                    }
-                    Console.WriteLine(priljeviSmjera);
-                }
-
-
-               
-               
-                          
-            
+                float[] niz = new float[i];
+                var smjer = Izbornik.ObradaSmjer.Smjerovi[i];
+                VratiBrojPolaznikaUGrupi(Grupe);
+                float priljevi = (smjer.Cijena + smjer.Upisnina) * VratiBrojPolaznikaUGrupi(Grupe);
+                floats.Add( priljevi );
+                Console.WriteLine(priljevi + "");
             }
-
-            float prihod = priljeviSmjera * a;
 
             IzbornikRadSGrupama();
         }
 
+        private float[] VratiPriljeveSmjera()
+        {
+            var smjerovi = Izbornik.ObradaSmjer.Smjerovi; 
+            float[] niz = new float[smjerovi.Count];
+
+            smjerovi.ForEach(smjer => 
+            {
+                int i = 0;
+                float priljev = smjer.Cijena + smjer.Upisnina;
+                niz[i++] = priljev;
+            
+            
+            
+            });
 
 
-        //private void TestniPodaci ()
-        //{
-        //    DateTime obj;
-
-        //    Grupe.Add(new Grupa()
-        //    {
-        //        Sifra = 1,
-        //        Naziv = "WP-2",
-        //        Predavac = Predavaci[1],
-        //        Smjer = Smjerovi[1],
-        //        MaksPolaznika = 25,
-        //        Polaznici = Polaznici[1],  
-
-        //        DatumPocetka = DateTime.Today,
+            return niz; 
+        }
 
 
 
+        private void TestniPodaci ()
+        {
+            DateTime obj;
 
-        //    });
-        //}
+            //List<Polaznik> privremenaListaPolaznika = Izbornik.ObradaPolaznik.Polaznici.Take(5).ToList();
+            
+
+            //Grupe.Add(new Grupa()
+            //{
+            //    Sifra = 1,
+            //    Naziv = "WP-2",
+            //    Predavac = Predavaci[1],
+            //    Smjer = Smjerovi[1],
+            //    MaksPolaznika = 25,
+            //    Polaznici = privremenaListaPolaznika,
+            //    DatumPocetka = DateTime.Today,
+
+
+
+
+            //});
+        }
 
     }
 }

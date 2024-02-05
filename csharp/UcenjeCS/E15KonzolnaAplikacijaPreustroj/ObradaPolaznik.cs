@@ -305,7 +305,7 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
             IzbornikRadSPolaznicima();
         }
 
-        private bool ProvjeriSifrePolaznika (List<Polaznik> polaznici, int sifra)
+        public bool ProvjeriSifrePolaznika (List<Polaznik> polaznici, int sifra)
         {
             foreach (Polaznik polaznik in Polaznici)
             {
