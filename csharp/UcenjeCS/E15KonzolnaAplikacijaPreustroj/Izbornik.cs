@@ -33,9 +33,6 @@ namespace UcenjeCS.E15KonzolnaAplikacijaPreustroj
             
         }
 
-
-        
-
         public void PozdravnaPoruka ()
         {
             Console.WriteLine("*+********************************");

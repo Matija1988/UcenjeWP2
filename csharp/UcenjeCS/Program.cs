@@ -66,5 +66,11 @@ using UcenjeCS.E15KonzolnaAplikacijaPreustroj;
 
 //new UcenjeCS.E15KonzolnaAplikacija.Program();
 
-new UcenjeCS.E15KonzolnaAplikacijaPreustroj.Izbornik();
+//new UcenjeCS.E15KonzolnaAplikacijaPreustroj.Izbornik();
+
+//new UcenjeCS.E16Lambda.Program();
+
+//new UcenjeCS.E17Delegati.Program();
+
+new UcenjeCS.E18Ekstenzije.Program();
 
